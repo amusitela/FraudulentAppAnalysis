@@ -1,0 +1,955 @@
+{% block content %}
+{% load static %}
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>静态分析报告</title>
+    <meta name="description" content="Report">
+    {% if host_os == 'windows' %}
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    {% else %}
+    <style>
+        @media print {
+            body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+
+            .page-break-avoid {
+                page-break-inside: avoid;
+            }
+            
+            .content {
+                width: 100%;
+                overflow: visible;
+            }
+        }
+
+        .content {
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+
+        .avoid-page-break {
+            page-break-inside: avoid;
+        }
+    </style>
+    {% endif %}
+    <link rel="stylesheet" href="{{base_url}}{% static 'others/css/pdf_report.css' %}">
+    <link rel="stylesheet" href="{{base_url}}{% static 'adminlte/plugins/fontawesome-free/css/all.min.css' %}">
+  </head>
+
+  <body bgcolor="FFFFFF">
+    <article id="cover">
+      <div class="page-break-avoid">
+        <div class="header">
+          <div class="htext">安卓静态分析报告</div>
+        </div>
+        </br></br></br>
+        <div class="app">
+          <img class="center" id="icon" src="{% if icon_path %}{{dwd_dir}}{{icon_path}}{% else %}{{base_url}}{% static 'img/no_icon.png' %}{% endif %}" alt="app_icon"/>
+        </div>
+        <div class="center">
+          <h1><i class="fab fa-android"></i> {% if app_name %}{{ app_name }}{% else %}{{ file_name }}{% endif %} {% if version_name %} ({{version_name}}){% endif %}</h1>
+        </div>
+        </br></br></br></br></br>
+        <div class="container">
+          <table class="basic no_border">
+            <tr class="no_border">
+              <td class="no_border"><h3>文件名称:</h3></td>
+              <td class="no_border"><h3>{{file_name}}</h3></td>
+            </tr>
+            <tr>
+              <td class="no_border"><h3>包名:</h3></td>
+              <td class="no_border"><h3>{{ package_name }}</h3></td>
+            </tr>
+            <tr>
+              <td class="no_border"><h3>扫描时间:</h3></td>
+              <td class="no_border"><h3>{{ timestamp }}</h3></td>
+            </tr>
+            {% if app_type not in 'so' %}
+            {% if static_type %}
+            <tr>
+              <td class="no_border"><h3>分析结果:</h3></td>
+              <td class="no_border"><h3>
+                  {% if static_type == '涉诈' %}
+                      <span class="danger">{{ static_type }}</span>
+                  {% elif static_type == '涉黄' %}
+                      <span class="danger">{{ static_type }}</span>
+                  {% elif static_type == '涉赌' %}
+                      <span class="danger">{{ static_type }}</span>
+                  {% elif static_type == '黑产' %}
+                      <span class="warning">{{ static_type }}</span>
+                  {% elif static_type == '安全' %}
+                      <span class="success">{{ static_type }}</span>
+                  {% endif %}
+              </h3></td>
+          </tr>
+          
+            {% endif %}
+            {% endif %}
+            {% if trackers|key:"trackers" %}
+            <tr>
+              <td class="no_border"><h3>跟踪器检测:</h3></td>
+              <td class="no_border"><h3><span {% if trackers.detected_trackers > 0 %} class="warning" {% endif %}>{{ trackers.detected_trackers }}/{{ trackers.total_trackers }}</span></h3></td>
+            </tr>
+            {% endif %}
+            {% if virus_total and virus_total.items|length > 9 and 'request successfully queued' not in virus_total.verbose_msg %}
+            <tr>
+              <td class="no_border"><h3>病毒检测:</h3></td>
+              <td class="no_border"><h3><span class="{% if virus_total.positives > 0 %}danger{% else %}success{% endif %}"> {{ virus_total.positives }}/{{ virus_total.total }}</span></h3></td>
+            </tr>
+            {% endif %}
+          </table>
+          {% if app_type not in 'so' %}
+          </br></br>
+          </div>
+          <div class="page-break"></div>
+          <h2><i class="fas fa-chart-pie mr-1"></i> 分析结果严重性</h2>
+          <table class="basic tbl-white avoid-page-break">
+            <tr>
+              <th class="td-high"><i class="fas fa-bug"> </i> 高危</th>
+              <th class="td-warning"><i class="fas fa-exclamation-triangle"> </i> 中危</th>
+              <th class="td-info"><i class="fas fa-info"> </i> 提示</th>
+              <th class="td-success"><i class="fas fa-check"></i> 安全</th>
+              <th class="td-secondary"><i class="fab fa-searchengin"></i> 次要</th>
+            </tr>
+            <tr>
+              <td class="td-high"><h2>{{ appsec.high | length}}</h2></td>
+              <td class="td-warning"><h2>{{ appsec.warning | length}}</h2></td>
+              <td class="td-info"><h2>{{ appsec.info | length}}</h2></td>
+              <td class="td-success"><h2>{{ appsec.secure | length}}</h2></td>
+              <td class="td-secondary"><h2>{{ appsec.hotspot | length}}</h2></td>
+            </tr>
+          </table>
+        </div>
+      </article>
+      {% endif %}
+    <article id="contents">
+      <h2><i class="fas fa-box-open"></i> 文件提示</h2>
+      <h5>文件名称:</h5> {{ file_name }}</br>
+      <h5>大小: </h5> {{ size }}</br>
+      <h5>MD5:</h5> {{ md5 }}</br>
+      <h5>SHA1:</h5> {{ sha1 }}</br>
+      <h5>SHA256:</h5> {{ sha256 }}</br>
+      {% if app_type not in 'so' %}
+      <h2><i class="fas fa-info"></i> APP提示</h2>
+      <h5>App名字:</h5> {{ app_name }}</br>
+      <h5>包名:</h5> {{ package_name }}</br>
+      <h5>启动活动:</h5> {{ main_activity }}</br>
+      <h5>Target SDK:</h5> {{ target_sdk }}</br>
+      <h5>最小SDK:</h5> {{ min_sdk }}</br>
+      <h5>最大SDK:</h5> {{ max_sdk }}</br>
+      <h5>Android Version Name:</h5> {{ version_name }}</br>
+      <h5>Android Version Code:</h5> {{ version_code }}</br>
+      {% endif %}
+      {% if app_type not in 'jar,aar,so' %}
+      <h2><i class="fas fa-th-large"></i> APP组件提示 </h2>
+      <h5>活动（Activities）:</h5> {{ activities | length }}</br>
+      <h5>服务（Services）:</h5> {{ services | length }}</br>
+      <h5>接收器（Receivers）:</h5> {{ receivers | length }}</br>
+      <h5>提供者（Providers）:</h5> {{ providers | length }}</br>
+      <h5>导出活动（Exported Activities）:</h5> <span {% if exported_count.exported_activities > 0 %} class="danger" {% endif %}> {{ exported_count.exported_activities }}</span></br>
+      <h5>导出服务（Exported Services）:</h5> <span {% if exported_count.exported_services > 0 %} class="danger" {% endif %}> {{ exported_count.exported_services }}</span></br>
+      <h5>导出接收器（Exported Receivers）:</h5> <span {% if exported_count.exported_receivers > 0 %} class="danger" {% endif %}> {{ exported_count.exported_receivers }}</span></br>
+      <h5>导出提供者（Exported Providers）:</h5> <span {% if exported_count.exported_providers > 0 %} class="danger" {% endif %}> {{ exported_count.exported_providers }}</span></br>
+      {% endif %}
+      {% if app_type not in 'so' %}
+      <h2><i class="fa fa-certificate"></i> 证书提示</h2>
+      {% if certificate_analysis.certificate_info %}
+      <div class="panel-body">
+        <p class="wrapped-text">{{ certificate_analysis.certificate_info }}</p>
+      </div>
+      {% else %}
+      <span class="danger">读取代码签名证书失败或没有可用证书</span>
+      {% endif %}
+      {% endif %}
+      {% if permissions %}
+      <h2><i class="fa fa-list"></i> app 申请权限</h2>
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>权限名称</th>
+            <th>安全等级</th>
+            <th>权限内容 </th>
+            <th>权限描述</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for perm,desc in permissions.items %}
+          <tr>
+            <td>{{ perm }}</td>
+            <td>
+              {% if desc.status == 'dangerous' %}
+              <span class="danger">高危</span>
+              {% elif desc.status == 'normal' %}
+              <span class="info">提示</span>
+              {% elif desc.status == 'signatureOrSystem' %}
+              <span class="warning">警告</span>
+              {% elif desc.status == 'signature' %}
+              <span class="success">安全</span>
+              {% elif desc.status == 'unknown' %}
+              <span class="secondary">未知</span>
+              {% endif %}
+            </td>
+            <td>{{ desc.info }}</td>
+            <td>{{ desc.description }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+      {% if virus_total and virus_total.items|length > 9 and 'request successfully queued' not in virus_total.verbose_msg %}
+      <h2><i class="fas fa-spider"></i> 病毒扫描</h2>
+      <p> <h5>{{ virus_total.positives }} / {{ virus_total.total }}</h5> &nbsp; AVs found this file Malicious! </p>
+      {% if virus_total.positives %}
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>AV</th>
+            <th>发现</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for av_name,av_result in virus_total.scans.items %}
+          {% if av_result.detected == True %}
+          <tr>
+            <td>
+              {{ av_name }}
+            </td>
+            <td>
+              <span class="danger">{{ av_result.result }}</span>
+            </td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+      {% endif %}
+      {% if apkid and app_type not in 'jar,aar'%}
+      <h2><i class="fas fa-fingerprint"></i> APKID 分析</h2>
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>文件</th>
+            <th>细节</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if apkid %}
+          {% for file, details in apkid.items %}
+          <tr>
+            <td>{{file}}</td>
+            <td>
+              <table class="basic">
+                <thead>
+                  <tr>
+                    <th>发现</th>
+                    <th>细节</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for detail, idens in details.items %}
+                  <tr>
+                    <td>
+                      {% if detail == "anti_vm" %}
+                      <span class="warning">Anti-VM Code</span>
+                      {% elif detail == "anti_disassembly" %}
+                      <span class="warning">Anti Disassembly Code</span>
+                      {% elif detail == "anti_debug" %}
+                      <span class="warning">Anti Debug Code</span>
+                      {% elif detail == "compiler" %}
+                      <span class="info">Compiler</span>
+                      {% elif detail == "abnormal" %}
+                      <span class="warning">Abnormal Code</span>
+                      {% elif detail == "obfuscator" %}
+                      <span class="warning">Obfuscator</span>
+                      {% elif detail == "protector" %}
+                      <span class="info">Protector</span>
+                      {% elif detail == "packer" %}
+                      <span class="danger">Packer Found</span>
+                      {% elif detail == "dropper" %}
+                      <span class="danger">Dropper Found</span>
+                      {% elif detail == "manipulator" %}
+                      <span class="warning">Manipulator Found</span>
+                      {% else %}
+                      <span class="info">{{detail}}</span>
+                      {% endif %}
+                    </td>
+                    <td> {% for idn in idens %} {{ idn }}</br> {% endfor %}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          {% endfor %}
+          {% else %}
+          <p align="center"><strong>APKiD未启用.</strong></p>
+          {% endif %}
+        </tbody>
+      </table>
+      {% endif %}
+      {% if browsable_activities %}
+      <h2><i class="fas fa-clone"></i> BROWSABLE ACTIVITIES</h2>
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>ACTIVITY</th>
+            <th>INTENT</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for activity,intent_details in browsable_activities.items %}
+          <tr>
+            <td>{{activity}}</td>
+            <td>
+              {% if intent_details|key:"schemes" %}
+              <strong>Schemes</strong>: 
+              {% for scheme in intent_details|key:"schemes" %}
+              {{scheme}},
+              {% endfor %}
+              </br>
+              {% endif %}
+              {% if intent_details|key:"hosts" %}
+              <strong>Hosts:</strong> {% for host in intent_details|key:"hosts" %}
+              {{host}},
+              {% endfor %} 
+              </br>
+              {% endif %}
+              {% if intent_details|key:"ports" %}
+              <strong>Ports:</strong> {% for port in intent_details|key:"ports" %}
+              {{port}},
+              {% endfor %} 
+              </br>
+              {% endif %}
+              {% if intent_details|key:"mime_types" %}
+              <strong>Mime Types:</strong> {% for mime in intent_details|key:"mime_types" %}
+              {{mime}},
+              {% endfor %} 
+              </br>
+              {% endif %}
+              {% if intent_details|key:"paths" %}
+              <strong>Paths:</strong> {% for path in intent_details|key:"paths" %}
+              {{path}},
+              {% endfor %} 
+              </br>
+              {% endif %}
+              {% if intent_details|key:"path_prefixs" %}
+              <strong>Path Prefixes:</strong> {% for prefix in intent_details|key:"path_prefixs" %}
+              {{prefix}},
+              {% endfor %} 
+              </br>
+              {% endif %}
+              {% if intent_details|key:"path_patterns" %}
+              <strong>Path Patterns:</strong> {% for pattern in intent_details|key:"path_patterns" %}
+              {{pattern}},
+              {% endfor %} 
+              </br>
+              {% endif %}
+              {% endfor %}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      {% endif %}
+      {% if app_type not in 'so' %}
+      <h2><i class="fas fa-lock"></i> 网络安全 </h2>
+      {% if network_security and 'network_summary' in network_security and network_security.network_summary|length > 0 %}
+      <span class="danger">高危: </span>
+      <h5 class="description-header">{{ network_security.network_summary.high }}</h5> | 
+      <span class="warning"></i> 警告: </span>
+      <h5 class="description-header">{{ network_security.network_summary.warning }}</h5> |
+      <span class="info">提示: </span>
+      <h5 class="description-header">{{ network_security.network_summary.info }}</h5> |
+      <span class="success">安全: </span>
+      <h5 class="description-header">{{ network_security.network_summary.secure }}</h5>
+      {% endif %}</br>
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>标号</th>
+            <th>问题</th>
+            <th>严重性</th>
+            <th>描述</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if network_security and 'network_findings' in network_security %}
+          {% for item in network_security.network_findings %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+              {% for url in item.scope %}
+              {{ url }}</br>
+              {% endfor %}
+            </td>
+            <td>
+              {% if item.severity == "high" %}
+              <span class="danger">高危</span>
+              {% elif item.severity == "secure" %}
+              <span class="success">安全</span>
+              {% elif item.severity == "info" %}
+              <span class="info">提示</span>
+              {% elif item.severity == "warning" %}
+              <span class="warning">警告</span>
+              {% endif %}
+            </td>
+            <td>{{item.description }}</td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+      <h2><i class="fas fa fa-id-card"></i> 证书分析 </h2>
+      {% if certificate_analysis and 'certificate_summary' in certificate_analysis and certificate_analysis.certificate_summary|length > 0 %}
+      <span class="danger">高危: </span>
+      <h5 class="description-header">{{ certificate_analysis.certificate_summary.high }}</h5> | 
+      <span class="warning"></i> 警告: </span>
+      <h5 class="description-header">{{ certificate_analysis.certificate_summary.warning }}</h5> |
+      <span class="info">提示: </span>
+      <h5 class="description-header">{{ certificate_analysis.certificate_summary.info }}</h5>
+      {% endif %}</br>
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>标题</th>
+            <th>严重性</th>
+            <th>描述</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if certificate_analysis and 'certificate_findings' in certificate_analysis %}
+          {% for find in certificate_analysis.certificate_findings %}
+          <tr>
+            <td>{{ find.2 }}</td>
+            <td>
+              {% if find.0 == 'high' %}
+              <span class="danger">高危</span>
+              {% elif find.0 == 'secure' %}
+              <span class="success">安全</span>
+              {% elif find.0 == 'warning' %}
+              <span class="warning">警告</span>
+              {% elif find.0 == 'info' %}
+              <span class="info">提示</span>
+              {% endif %}
+            </td>
+            <td>{{ find.1 }}</td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+      <h2><i class="fas fa-search"></i> 清单分析</h2>
+      {% if manifest_analysis and 'manifest_summary' in manifest_analysis and manifest_analysis.manifest_summary|length > 0 %}
+      <span class="danger">危险: </span>
+      <h5 class="description-header">{{ manifest_analysis.manifest_summary.high }}</h5> | 
+      <span class="warning"></i> 警告: </span>
+      <h5 class="description-header">{{ manifest_analysis.manifest_summary.warning }}</h5> |
+      <span class="info">提示: </span>
+      <h5 class="description-header">{{ manifest_analysis.manifest_summary.info }}</h5> |
+      <span class="disabled">屏蔽: </span>
+      <h5 class="description-header">{{ manifest_analysis.manifest_summary.suppressed }}</h5>
+      {% endif %}</br>
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>标号</th>
+            <th>问题</th>
+            <th>严重性</th>
+            <th>描述</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if manifest_analysis and 'manifest_findings' in manifest_analysis %}
+          {% for item in manifest_analysis.manifest_findings %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{item|key:"title" | safe}}</td>
+            <td>
+              {% if item|key:"severity" == "high" %}
+              <span class="danger">高危</span>
+              {% elif item|key:"severity" == "info" %}
+              <span class="info">提示</span>
+              {% elif item|key:"severity" == "warning" %}
+              <span class="warning">警告</span>
+              {% endif %}
+            </td>
+            <td>{{item|key:"description"}}</td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+      <h2><i class="fas fa-code"></i> 代码分析</h2>
+      {% if code_analysis and 'summary' in code_analysis and code_analysis.summary|length > 0 %}
+      <span class="danger">高危: </span>
+      <h5 class="description-header">{{ code_analysis.summary.high }}</h5> | 
+      <span class="warning"></i> 警告: </span>
+      <h5 class="description-header">{{ code_analysis.summary.warning }}</h5> |
+      <span class="info">提示: </span>
+      <h5 class="description-header">{{ code_analysis.summary.info }}</h5> |
+      <span class="success">安全: </span>
+      <h5 class="description-header">{{ code_analysis.summary.secure }}</h5> |
+      <span class="disabled">屏蔽: </span>
+      <h5 class="description-header">{{ code_analysis.summary.suppressed }}</h5>
+      {% endif %}</br>
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>标号</th>
+            <th>问题</th>
+            <th>严重性</th>
+            <th>标准</th>
+            <th>文件</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if code_analysis and 'findings' in code_analysis %}
+          {% for rule, details in code_analysis.findings.items %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td width="25%">
+              {% if details.metadata|key:"ref" %}
+              <a href="{{details.metadata.ref}}" target="_blank" rel="noopener"> {{ details.metadata.description }}</a>
+              {% else %}
+              {{ details.metadata.description }}
+              {% endif %}
+            </td>
+            <td>
+              {% if details.metadata.severity == "high" %}
+              <span class="danger">高危</span>
+              {% elif details.metadata.severity == "good" %}
+              <span class="success">安全</span>
+              {% elif details.metadata.severity == "warning" %}
+              <span class="warning">警告</span>
+              {% elif details.metadata.severity == "info" %}
+              <span class="info">提示</span>
+              {% endif %}
+            </td>
+            <td>
+              {% if average_cvss %}
+              <strong>CVSS V2:</strong>
+              {{ details.metadata.cvss }}
+              {% if details.metadata.cvss > 6 %}
+              <span class="danger"> (high)</span>
+              {% elif details.metadata.cvss == 0 %}
+              <span class="info">(info)</span>
+              {% elif details.metadata.cvss >= 4 %}
+              <span class="warning"> (medium)</span>
+              {% elif details.metadata.cvss < 4 %}
+              <span class="success"> (low)</span>
+              {% endif %}
+              </br>
+              {% endif %}
+              {% if details.metadata.cwe %}<strong>CWE: </strong>{{ details.metadata.cwe }}{% endif %}
+              {% if details.metadata|key:"owasp-mobile" %}</br> <strong>OWASP 前 10 名: </strong>{{ details.metadata|key:"owasp-mobile" }}{% endif %}
+              {% if details.metadata.masvs %}</br> <strong>OWASP 移动应用安全验证标准 (MASVS): </strong>{{ details.metadata.masvs }}{% endif %}
+            </td>
+            <td style="word-break:break-all;">
+              {% for file_path in details.files %}
+              {{ file_path }}
+              <br/>
+              {% endfor %}
+            </td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+      {% endif %}
+      {% if binary_analysis %}
+      <h2><i class="fa fa-flag"></i> 共享库二进制分析 </h2>
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>标号</th>
+            <th>共享对象</th>
+            <th>NX</th>
+            <th>堆栈保护</th>
+            <th>RELRO</th>
+            <th>RPATH</th>
+            <th>运行路径</th>
+            <th>强化</th>
+            <th>符号已删除</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if not binary_analysis %}
+          未找到共享对象.
+          {% endif %}
+          {% for so in binary_analysis %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td width="20%">{{so.name | relative_path}}</td>
+            <td style="vertical-align: top;"><b>{{so.nx.is_nx}}</b>
+              <br/>
+              <span class="{% if so.nx.severity == 'high' %}高危{% elif so.nx.severity == 'warning' %}警告{% else %}提示{% endif %}">{{so.nx.severity}}</span>
+              <br/>{{so.nx.description}}</td>
+            <td style="vertical-align: top;"><b>{{so.stack_canary.has_canary}}</b>
+              <br/>
+              <span class="{% if so.stack_canary.severity == 'high' %}高危{% elif so.stack_canary.severity == 'warning' %}警告{% else %}提示{% endif %}">{{so.stack_canary.severity}}</span>
+              <br/>{{so.stack_canary.description}}</td>
+            <td style="vertical-align: top;"><b>{{so.relocation_readonly.relro}}</b>
+              <br/>
+              <span class="{% if so.relocation_readonly.severity == 'high' %}高危{% elif so.relocation_readonly.severity == 'warning' %}警告{% else %}提示{% endif %}">{{so.relocation_readonly.severity}}</span>
+              <br/>{{so.relocation_readonly.description}}</td>
+            <td style="vertical-align: top;"><b>{{so.rpath.rpath}}</b>
+              <br/>
+              <span class="{% if so.rpath.severity == 'high' %}高危{% elif so.rpath.severity == 'warning' %}警告{% else %}提示{% endif %}">{{so.rpath.severity}}</span>
+              <br/>{{so.rpath.description}}</td>
+            <td style="vertical-align: top;"><b>{{so.runpath.runpath}}</b>
+              <br/>
+              <span class="{% if so.runpath.severity == 'high' %}高危{% elif so.runpath.severity == 'warning' %}警告{% else %}提示{% endif %}">{{so.runpath.severity}}</span>
+              <br/>{{so.runpath.description}}</td>
+            <td style="vertical-align: top;"><b>{{so.fortify.is_fortified}}</b>
+              <br/>
+              <span class="{% if so.fortify.severity == 'high' %}高危{% elif so.fortify.severity == 'warning' %}警告{% else %}提示{% endif %}">{{so.fortify.severity}}</span>
+              <br/>{{so.fortify.description}}</td>
+            <td style="vertical-align: top;"><b>{{so.symbol.is_stripped}}</b>
+              <br/>
+              <span class="{% if so.symbol.severity == 'high' %}高危{% elif so.symbol.severity == 'warning' %}警告{% else %}提示{% endif %}">{{so.symbol.severity}}</span>
+              <br/>{{so.symbol.description}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+      {% if app_type not in 'so' %}
+      <h2><i class="fa fa-id-badge"></i> NIAP 分析 v1.3</h2>
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>标号</th>
+            <th>标识</th>
+            <th>要求</th>
+            <th>特征</th>
+            <th>描述</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for iden, details in niap_analysis.items %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+              <span class="{% if 'does not' in details.choice %} warning {% elif 'not in accordance' in details.choice %} danger {% else %} info {% endif %}"> {{ iden }}</span>
+            </td>
+            <td>{{ details.class }}</td>
+            <td>{{ details.description }}</td>
+            <td>{{ details.choice }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+      {% if quark %} 
+      <h2><i class="fab fa-quora"></i> QUARK </h2>
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>POTENTIAL MALICIOUS BEHAVIOUR</th>
+            <th>EVIDENCE</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in quark %}
+          <tr>
+            <td style="word-break:break-all;">
+              {{ item.crime }}
+            </td>
+            <td style="word-break:break-all;">
+              {% for api in item.register %}
+              {{api.file}} -> {{api.method}}
+              <br/>
+              {% endfor %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+      {% if malware_permissions %}
+      <h2><i class="fa fa-braille"></i> 滥用权限</h2>
+      <table id="table_ofac" class="table table-bordered table-hover table-striped avoid-page-break">
+        <thead>
+          <tr>
+            <th>类型</th>
+            <th>匹配</th>
+            <th>权限</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>恶意软件权限</td>
+            <td>{{ malware_permissions.top_malware_permissions | length}}</b>/{{malware_permissions.total_malware_permissions}}</td>
+            <td>{{ malware_permissions.top_malware_permissions | join:", "}}</td>
+          </tr>
+          <tr>
+            <td>其他一般权限</td>
+            <td>{{ malware_permissions.other_abused_permissions | length}}</b>/{{malware_permissions.total_other_permissions}}</td>
+            <td>{{ malware_permissions.other_abused_permissions | join:", "}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+      <p>
+        <h3>恶意软件权限:</h3> 被已知恶意软件广泛滥用的最高权限. 
+        <br/>
+        <h3>其他一般权限:</h3> 通常被已知恶意软件滥用的权限. 
+      </p>
+      {% endif %}
+      {% if domains %}
+      <h2><i class="fa fa-exclamation"></i> OFAC制裁国家</h2>
+      <p>此应用程序可能与以下OFAC制裁名单的国家进行通信.</p>
+      <table id="table_ofac" class="table table-bordered table-hover table-striped avoid-page-break">
+        <thead>
+          <tr>
+            <th>域</th>
+            <th>国家/地区</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for domain, details in domains.items %}
+          {% if details|key:"ofac" == True %}
+          <tr><td>{{domain}}</td>
+            <td>
+              <strong>IP: </strong>{{details|key:"geolocation"|key:"ip"}}  <br/>
+              <strong>国家: </strong>{{details|key:"geolocation"|key:"country_long"}} <br/>
+              <strong>地区: </strong>{{details|key:"geolocation"|key:"region"}} <br/>
+              <strong>城市: </strong>{{details|key:"geolocation"|key:"city"}} <br/>
+            </td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+      <h2><i class="fab fa-searchengin"></i> 域恶意软件检查</h2>
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>域</th>
+            <th>状态</th>
+            <th>地理位置</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for domain, details in domains.items %}
+          <tr><td>{{domain}}</td><td> 
+            {% if details|key:"bad" == "yes" %}
+            <span class="danger">恶意软件</span><br/>
+            <h5>URL: </h5> {{details|key:"domain_or_url"}}
+            <h5>IP: </h5> <span class="danger">{{details|key:"ip"}}</span>
+            <h5>Description: </h5> {{details|key:"desc"}}
+            {% else %}
+            <span class="warning">待确认</span><br/>
+            {% endif %}
+          </td>
+          <td>
+            {% if details|key:"geolocation" %}
+            <h5>IP: </h5> {{details|key:"geolocation"|key:"ip"}}  <br/>
+            <h5>国家: </h5> {{details|key:"geolocation"|key:"country_long"}} <br/>
+            <h5>地区: </h5> {{details|key:"geolocation"|key:"region"}} <br/>
+            <h5>城市: </h5> {{details|key:"geolocation"|key:"city"}} <br/>
+            <h5>纬度: </h5> {{details|key:"geolocation"|key:"latitude"}} <br/>
+            <h5>经度: </h5> {{details|key:"geolocation"|key:"longitude"}} <br/>
+            <h5>查看: </h5> <a target="_blank" href="http://maps.google.com/maps?q={{details|key:"geolocation"|key:"latitude"}},{{details|key:"geolocation"|key:"longitude"}}">Google Map</a>
+            {% else %}
+            没有可用的地理位置提示.
+            {% endif %}
+          </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+      {% if app_type in 'so' %}
+      {% if urls %} 
+      <h2><i class="fas fa-globe"></i> URLS </h2>
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>URL</th>
+            <th>文件</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for urldict in urls %}
+          <tr>
+            <td style="word-break:break-all;">
+              {% for u in urldict|key:"urls" %}
+              {{ u }} </br>
+              {% endfor %}
+            </td>
+            <td style="word-break:break-all;">
+              {{urldict|key:"path"}}
+            </td>
+          </tr>
+          {% endfor %} 
+        </tbody>
+      </table>
+      {% endif %}
+      {% endif %}
+      {% if firebase_urls %} 
+      <h2><i class="fas fa-database"></i> Firebase 数据库</h2>
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>数据库 URL</th>
+            <th>细节</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in firebase_urls %}
+          <tr>
+            <td>{{ item.url }}</td>
+            <td>
+              {% if item.open %}
+              <span class="danger">high</span></br>公开的Firebase DB。
+              {% else %}
+              <span class="info">info</span></br>应用程序连接到 Firebase 数据库。
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %} 
+        </tbody>
+      </table>
+      {% endif %}
+      {% if emails %}
+      <h2><i class="fas fa-envelope"></i> 邮箱</h2>
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>邮箱</th>
+            <th>文件</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for email_dict in emails %}
+          <tr>
+            <td style="word-break:break-all;">
+              {% for em in email_dict|key:"emails" %}
+              {{ em }} </br>
+              {% endfor %}
+            </td>
+            <td style="word-break:break-all;">
+              {{email_dict|key:"path"}}
+            </td>
+          </tr>
+          {% endfor %} 
+        </tbody>
+      </table>
+      {% endif %}
+      {% if trackers|key:"trackers" %}
+      <h2><i class="fas fa-user-secret"></i> TRACKERS</h2>
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>TRACKER</th>
+            <th>CATEGORIES</th>
+            <th>URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for trk in trackers|key:"trackers" %}
+          <tr>
+            <td>{{trk.name}}</td>
+            <td>{{trk.categories}}</td>
+            <td>
+              <a target="_blank" href="{{trk.url}}" rel="noopener noreferrer">{{trk.url}}</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+      {% if secrets %}
+      <h2><i class="fas fa-key"></i> 硬编码密钥</h2>
+      <table class="basic avoid-page-break">
+        <thead>
+          <tr>
+            <th>可能的密钥</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for sec in secrets %}
+          <tr>
+            <td style="word-break:break-all;">
+              {{ sec }}
+            </td>
+          </tr>
+          {% endfor %} 
+        </tbody>
+      </table>
+      {% endif %}
+      {% if app_type in 'so' %}
+      <h2><i class="fa fa-th"></i> 符号</h2>
+      <table class="basic avoid-page-break">
+        <tbody>
+          {% for val in file_analysis %}
+          <tr>
+            <td style="word-break:break-all;">
+              {{ val }}
+            </td>
+          </tr>
+          {% endfor %} 
+        </tbody>
+      </table>
+      {% endif %}
+      {% if not playstore_details.error %}
+      <h2><i class="fab fa-google-play"></i> 应用商店提示 </h2>
+      <p>                                       
+        <h5>标题：</h5> 
+        {{ playstore_details.title }}
+      </p>
+      <p>                                       
+        <h5>评分：</h5> 
+        {{ playstore_details.score }}
+        <h5>安装量：</h5> 
+        {{ playstore_details.installs }}
+        <h5>价格：</h5> 
+        {{ playstore_details.price }}
+        <h5>支持的 Android 版本：</h5> 
+        {{ playstore_details.androidVersionText }}
+        <h5>类别：</h5> 
+        {{ playstore_details.genre }}
+        <h5>应用商店网址：</h5> 
+        <a target="_blank" href="{{ playstore_details.url }}" rel="noopener noreferrer"> {{ package_name }} </a>
+      </p>
+      <p>
+        <h5>开发者提示：</h5> 
+        {{ playstore_details.developer }},  
+        {{ playstore_details.developerId }}, 
+        {{ playstore_details.developerAddress }},
+        {{ playstore_details.developerWebsite }}, 
+        {{ playstore_details.developerEmail }}
+      </p>
+      <p>
+        <h5>发布日期：</h5> 
+        {{ playstore_details.released }}
+        <h5>隐私政策：</h5> 
+        <a target="_blank" href="{{ playstore_details.privacyPolicy }}" rel="noopener noreferrer">隐私链接</a>
+      </p>
+      <p>                                       
+        <h5>描述：</h5> 
+      <p>{{ playstore_details.description }}</p>
+      </p>
+      {% endif %}
+    </article>
+    <article id="columns">
+      </br>
+      <hr>
+      <h3>报告由 好好运来来 生成{{ version }} </h3>
+      <section>
+      </section>
+    </article>
+  </body>
+</html>
+{% endblock %}

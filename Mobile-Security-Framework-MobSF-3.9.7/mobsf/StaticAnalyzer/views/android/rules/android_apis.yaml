@@ -1,0 +1,472 @@
+- id: api_native_code
+  message: 加载本地代码（共享库）
+  type: Regex
+  pattern: System\.loadLibrary\(|System\.load\(
+  input_case: exact
+  severity: info
+- id: api_get_system_service
+  message: 获取系统服务
+  type: Regex
+  pattern: getSystemService
+  input_case: exact
+  severity: info
+- id: api_get_running_app_processes
+  message: 获取正在运行的应用进程
+  type: Regex
+  pattern: getRunningAppProcesses\(
+  input_case: exact
+  severity: info
+- id: api_dexloading
+  message: 动态类和Dex加载
+  type: RegexOr
+  pattern:
+    - dalvik\.system\.DexClassLoader
+    - java\.security\.ClassLoader
+    - java\.net\.URLClassLoader
+    - java\.security\.SecureClassLoader
+    - \.loadClass\(
+    - PathClassLoader\(
+    - DexClassLoader\(
+    - InMemoryDexClassLoader\(
+  input_case: exact
+  severity: info
+- id: api_java_reflection
+  message: Java反射
+  type: RegexOr
+  pattern:
+    - java\.lang\.reflect\.Method
+    - java\.lang\.reflect\.Field
+    - Class\.forName
+  input_case: exact
+  severity: info
+- id: api_crypto
+  message: 加密
+  type: RegexOr
+  pattern:
+    - javax\.crypto
+    - kalium\.crypto
+    - bouncycastle\.crypto
+    - EncryptedFile\.FileEncryptionScheme
+    - MessageDigest\.getInstance\(
+    - Signature\.getInstance\(
+    - Cipher\.getInstance\(
+  input_case: exact
+  severity: info
+- id: api_start_activity
+  message: 启动活动
+  type: RegexOr
+  pattern:
+    - startActivity\(
+    - startActivityForResult\(
+  input_case: exact
+  severity: info
+- id: api_start_service
+  message: 启动服务
+  type: RegexOr
+  pattern:
+    - startService\(
+    - bindService\(
+  input_case: exact
+  severity: info
+- id: api_send_broadcast
+  message: 发送广播
+  type: RegexOr
+  pattern:
+    - sendBroadcast\(
+    - sendOrderedBroadcast\(
+    - sendStickyBroadcast\(
+  input_case: exact
+  severity: info
+- id: api_local_file_io
+  message: 本地文件I/O操作
+  type: RegexOr
+  pattern:
+    - OpenFileOutput
+    - OpenFileInput
+    - openFileInput
+    - openFileOutput
+    - getSharedPreferences
+    - SharedPreferences\.Editor
+    - getCacheDir
+    - getExternalStorageState
+    - openOrCreateDatabase
+    - new File\(
+    - import java\.io\.
+    - import java\.nio\.file
+    - import java\.util\.Scanner
+  input_case: exact
+  severity: info
+- id: api_ipc
+  message: 进程间通信
+  type: RegexOr
+  pattern:
+    - IRemoteService\.Stub
+    - IBinder
+    - Intent
+  input_case: exact
+  severity: info
+- id: api_web
+  message: HTTP请求、连接和会话
+  type: RegexOr
+  pattern:
+    - http\.client\.HttpClient
+    - net\.http\.AndroidHttpClient
+    - http\.impl\.client\.AbstractHttpClient
+  input_case: exact
+  severity: info
+- id: api_http_connection
+  message: HTTP连接
+  type: RegexAnd
+  pattern:
+    - HttpURLConnection|org\.apache\.http
+    - openConnection|connect|HttpRequest
+  input_case: exact
+  severity: info
+- id: api_dex_manipulate
+  message: 加载和操作Dex文件
+  type: RegexAnd
+  pattern:
+    - dalvik\.system\.PathClassLoader|dalvik\.system\.DexFile|dalvik\.system\.DexPathList
+    - loadDex|loadClass|DexClassLoader|loadDexFile
+  input_case: exact
+  severity: info
+- id: api_content_provider
+  message: 内容提供者
+  type: Regex
+  pattern: android\.content\.ContentProvider
+  input_case: exact
+  severity: info
+- id: api_obfuscation
+  message: 混淆
+  type: RegexAnd
+  pattern:
+    - utils\.AESObfuscator
+    - getObfuscator
+  input_case: exact
+  severity: info
+- id: api_os_command
+  message: 执行操作系统命令
+  type: RegexAnd
+  pattern:
+    - \.exec\(
+    - getRuntime\(
+  input_case: exact
+  severity: info
+- id: api_kill_process
+  message: 杀死进程
+  type: RegexOr
+  pattern:
+    - Process\.killProcess\(
+    - \.killBackgroundProcesses\(
+  input_case: exact
+  severity: info
+- id: api_keystore
+  message: Android密钥库
+  type: RegexAnd
+  pattern:
+    - security\.KeyStore
+    - Keystore\.getInstance\(
+  input_case: exact
+  severity: info
+- id: api_tcp_server
+  message: TCP服务器套接字
+  type: RegexAnd
+  pattern:
+    - ServerSocket
+    - net\.ServerSocket
+  input_case: exact
+  severity: info
+- id: api_tcp
+  message: TCP套接字
+  type: RegexAnd
+  pattern:
+    - Socket
+    - net\.Socket
+  input_case: exact
+  severity: info
+- id: api_udp_datagram
+  message: UDP数据报包
+  type: RegexAnd
+  pattern:
+    - DatagramPacket
+    - net\.DatagramPacket
+  input_case: exact
+  severity: info
+- id: api_udp_datagram_socket
+  message: UDP数据报套接字
+  type: RegexAnd
+  pattern:
+    - DatagramSocket
+    - net\.DatagramSocket
+  input_case: exact
+  severity: info
+- id: api_webview
+  message: WebView JavaScript接口
+  type: RegexAnd
+  pattern:
+    - addJavascriptInterface
+    - WebView
+    - android\.webkit
+  input_case: exact
+  severity: info
+- id: api_webview_get
+  message: WebView GET请求
+  type: RegexAnd
+  pattern:
+    - WebView
+    - loadData
+    - android\.webkit
+  input_case: exact
+  severity: info
+- id: api_webview_post
+  message: WebView POST请求
+  type: RegexAnd
+  pattern:
+    - WebView
+    - postUrl
+    - android\.webkit
+  input_case: exact
+  severity: info
+- id: api_notifications
+  message: Android通知
+  type: RegexAnd
+  pattern:
+    - app\.NotificationManager
+    - notify
+  input_case: exact
+  severity: info
+- id: api_get_cell
+  message: 获取小区信息
+  type: RegexAnd
+  pattern:
+    - telephony\.TelephonyManager
+    - getAllCellInfo
+  input_case: exact
+  severity: info
+- id: api_get_location
+  message: 获取小区位置
+  type: RegexAnd
+  pattern:
+    - telephony\.TelephonyManager
+    - getCellLocation
+  input_case: exact
+  severity: info
+- id: api_get_subscriber
+  message: 获取订户ID
+  type: RegexAnd
+  pattern:
+    - telephony\.TelephonyManager
+    - getSubscriberId
+  input_case: exact
+  severity: info
+- id: api_get_device
+  message: 获取设备ID、IMEI、MEID/ESN等
+  type: RegexAnd
+  pattern:
+    - telephony\.TelephonyManager
+    - getDeviceId
+    - getImei\(
+    - getMeid\(
+  input_case: exact
+  severity: info
+- id: api_get_soft
+  message: 获取软件版本、IMEI/SV等
+  type: RegexAnd
+  pattern:
+    - telephony\.TelephonyManager
+    - getDeviceSoftwareVersion
+  input_case: exact
+  severity: info
+- id: api_get_sim_serial
+  message: 获取SIM序列号
+  type: RegexAnd
+  pattern:
+    - telephony\.TelephonyManager
+    - getSimSerialNumber
+  input_case: exact
+  severity: info
+- id: api_get_sim_provider
+  message: 获取SIM提供商详细信息
+  type: RegexAnd
+  pattern:
+    - telephony\.TelephonyManager
+    - getSimOperator
+  input_case: exact
+  severity: info
+- id: api_get_sim_operator
+  message: 获取SIM运营商名称
+  type: RegexAnd
+  pattern:
+    - telephony\.TelephonyManager
+    - getSimOperatorName
+  input_case: exact
+  severity: info
+- id: api_get_phone
+  message: 获取电话号码
+  type: RegexAnd
+  pattern:
+    - telephony\.TelephonyManager
+    - getLine1Number
+  input_case: exact
+  severity: info
+- id: api_sms_call
+  message: 查询SMS、联系人等数据库
+  type: RegexAnd
+  pattern:
+    - content\.ContentResolver
+    - query
+  input_case: exact
+  severity: info
+- id: api_hide_app_icon
+  message: 隐藏应用程序图标
+  type: RegexAnd
+  pattern:
+    - \.setComponentEnabledSetting\(
+    - COMPONENT_ENABLED_STATE_DISABLED
+  input_case: exact
+  severity: info
+- id: api_send_sms
+  message: 发送短信
+  type: RegexAndOr
+  pattern:
+    - telephony\.SmsManager
+    - - sendMultipartTextMessage
+      - sendTextMessage
+      - vnd\.android-dir\/mms-sms
+  input_case: exact
+  severity: info
+- id: api_url
+  message: 连接到文件/http/https/ftp/jar的URL
+  type: RegexAndOr
+  pattern:
+    - net\.URLConnection
+    - - openConnection
+      - connect
+      - openStream
+  input_case: exact
+  severity: info
+- id: api_jar_url
+  message: JAR URL连接
+  type: RegexAndOr
+  pattern:
+    - net\.JarURLConnection
+    - - JarURLConnection
+      - 'jar:'
+  input_case: exact
+  severity: info
+- id: api_https_connection
+  message: HTTPS连接
+  type: RegexAndOr
+  pattern:
+    - javax\.net\.ssl\.HttpsURLConnection
+    - - HttpsURLConnection
+      - connect
+  input_case: exact
+  severity: info
+- id: api_clipboard
+  message: 设置或读取剪贴板数据
+  type: RegexAndOr
+  pattern:
+    - content\.ClipboardManager
+    - - CLIPBOARD_SERVICE
+      - ClipboardManager
+  input_case: exact
+  severity: info
+- id: api_base64_encode
+  message: Base64编码
+  type: RegexAndOr
+  pattern:
+    - android\.util\.Base64
+    - - \.encodeToString
+      - \.encode
+  input_case: exact
+  severity: info
+- id: api_base64_decode
+  message: Base64解码
+  type: RegexAndOr
+  pattern:
+    - android\.util\.Base64
+    - - \.decodeToString
+      - \.decode
+  input_case: exact
+  severity: info
+- id: api_message_digest
+  message: 消息摘要
+  type: RegexAndOr
+  pattern:
+    - java\.security\.MessageDigest
+    - - MessageDigestSpi
+      - MessageDigest
+  input_case: exact
+  severity: info
+- id: api_gps
+  message: GPS位置
+  type: RegexAndOr
+  pattern:
+    - android\.location
+    - - getLastKnownLocation\(
+      - requestLocationUpdates\(
+      - getLatitude\(
+      - getLongitude\(
+  input_case: exact
+  severity: info
+- id: api_installed
+  message: 获取已安装的应用程序
+  type: RegexAndOr
+  pattern:
+    - getPackageManager\(
+    - - queryIntentActivities\(
+      - getInstalledApplications\(
+      - getInstalledPackages\(
+  input_case: exact
+  severity: info
+- id: api_get_wifi
+  message: 获取WiFi详细信息
+  type: RegexAndOr
+  pattern:
+    - wifi\.WifiManager
+    - - getConnectionInfo\(
+      - getSSID\(
+      - getConfiguredNetworks\(
+      - getNetworkId\(
+      - getIpAddress\(
+      - getMacAddress\(
+  input_case: exact
+  severity: info
+- id: api_get_network
+  message: 获取网络接口信息
+  type: RegexAndOr
+  pattern:
+    - NetworkInterface
+    - - getNetworkInterfaces\(
+      - getInetAddresses\(
+      - getHostAddress\(
+  input_case: exact
+  severity: info
+- id: api_get_advertising
+  message: 获取Android广告ID
+  type: RegexAndOr
+  pattern:
+    - AdvertisingIdClient
+    - - getAdvertisingIdInfo\(
+      - getAdvertisingId\(
+  input_case: exact
+  severity: info
+- id: api_certificate_handling
+  message: 证书处理
+  type: Regex
+  pattern: \.SSLSocketFactory
+  input_case: exact
+  severity: info
+- id: api_javascript_interface_methods
+  message: JavaScript接口方法
+  type: Regex
+  pattern: \@JavascriptInterface|\@android\.webkit\.JavascriptInterface
+  input_case: exact
+  severity: info
+- id: api_passkeys
+  message: 通行密钥
+  type: Regex
+  pattern: CredentialManager\.create\(|GetPublicKeyCredentialOption\(|\.getAuthenticationResponseJson\(|CreatePublicKeyCredentialRequest\(
+  input_case: exact
+  severity: info
