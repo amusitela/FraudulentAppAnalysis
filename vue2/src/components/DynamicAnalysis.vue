@@ -40,14 +40,17 @@
       </el-dialog>
       <!-- 手动 -->
       <div v-show="active==3">
-        <div style="width: 350px; height: 600px; border: solid 2px; margin-left: 320px">虚拟机</div>
+        <div style="width: 350px; height: 600px; border: solid 2px; margin-left: 320px">
+          <img :src="imageUrl" alt="虚拟机" style="width: 100%; height: 100%;" />
+        </div>
         <div style="margin-top: 30px;">
-        <span><el-button type="warning" @click="takeScreen" style="margin-right: 30px">截 图</el-button></span>
-        <span><el-button type="primary" @click="autoCapture" style="margin-right: 30px">自动抓包</el-button></span>
-        <span><el-button type="success" @click="startCapture" style="margin-right: 30px">开始抓包</el-button></span>
-        <span><el-button type="danger" @click="endCapture" >结束抓包</el-button></span>
+          <span><el-button type="warning" @click="takeScreen" style="margin-right: 30px">截 图</el-button></span>
+          <span><el-button type="primary" @click="autoCapture" style="margin-right: 30px">自动抓包</el-button></span>
+          <span><el-button type="success" @click="startCapture" style="margin-right: 30px">开始抓包</el-button></span>
+          <span><el-button type="danger" @click="endCapture">结束抓包</el-button></span>
+        </div>
       </div>
-      </div>
+
 
 
     </div>
@@ -65,6 +68,7 @@ name: 'DynamicAnalysis',
       md5: this.$route.params.md5,
       ipAddress: '',
       dialogVisible: false,
+      imageUrl: '',
       secretKey:process.env.VUE_APP_APIKEY,
       maxAttempt:process.env.VUE_APP_MAX_ATTEMPT,
       attempts: 0,
@@ -224,6 +228,7 @@ name: 'DynamicAnalysis',
             });
           }
           else{
+            this.imageUrl = res.data.url;
             this.$message({
               message: `第${this.attempts}次截图成功`,
               type: 'success'
@@ -341,7 +346,8 @@ name: 'DynamicAnalysis',
             type: 'error'
           });
         });
-    }
+    },
+
   }
 };
 </script>

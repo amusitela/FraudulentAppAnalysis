@@ -147,7 +147,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="名单" width="200px">
+      <el-table-column label="名单" width="100px">
         <template slot-scope="scope">
           <div>{{ scope.row.result }}</div>
         </template>
@@ -156,6 +156,11 @@
       <el-table-column label="MD5" width="300px">
         <template slot-scope="scope">
           <div>{{ scope.row.md5 }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作" width="100px">
+        <template slot-scope="scope">
+          <el-button style="width: 80px;" type="danger" @click="deleteList(scope.$index, scope.row)" plain>删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -613,6 +618,34 @@ export default {
       });
     }
   },
+  deleteList(index, row) {
+    let downloadLoadingInstance;
+    downloadLoadingInstance = Loading.service({ text: "正在删除，请稍候", spinner: "el-icon-loading", background: "rgba(0, 0, 0, 0.7)", })
+      const formData = new FormData();
+      formData.append('MD5', row.md5);
+
+      axios.post('/api/v1/delete_list', formData, {
+        headers: {
+          'Authorization': process.env.VUE_APP_APIKEY,
+        }
+      })
+      .then(response => {
+        downloadLoadingInstance.close();
+        this.listData.splice(index, 1);
+        this.$message({
+          message: `删除了 ${row.apkName}`,
+          type: 'success'
+        });
+      })
+      .catch(error => {
+        downloadLoadingInstance.close();
+        console.error('错误!', error);
+        this.$message({
+          message: '删除失败',
+          type: 'error'
+        });
+      });
+    },
   getWhite(formData) {
     let downloadLoadingInstance;
     downloadLoadingInstance = Loading.service({ text: "正在查询，请稍候", spinner: "el-icon-loading", background: "rgba(0, 0, 0, 0.7)", })

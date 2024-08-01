@@ -20,6 +20,11 @@ service-identity = ">=23.1.0"
 [package.extras]
 dev = ["coverage[toml] (>=7.2.2)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "alembic"
 version = "1.13.2"
@@ -39,6 +44,11 @@ typing-extensions = ">=4"
 [package.extras]
 tz = ["backports.zoneinfo"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "altgraph"
 version = "0.17.4"
@@ -50,12 +60,17 @@ files = [
     {file = "altgraph-0.17.4.tar.gz", hash = "sha256:1b5afbb98f6c4dcadb2e2ae6ab9fa994bbb8c1d75f4fa96d340f9437ae454406"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "androguard"
 version = "4.1.2"
 description = "Androguard is a full python tool to play with Android files."
 optional = false
-python-versions = "<4.0,>=3.9"
+python-versions = ">=3.9,<4.0"
 files = [
     {file = "androguard-4.1.2-py3-none-any.whl", hash = "sha256:bb6efbbe5b010c3f0900f041b44e18e511189fd3b02307630feeea27a2e4de2c"},
     {file = "androguard-4.1.2.tar.gz", hash = "sha256:9d09390f85cd3af763ab34df565154b4e863b556347bf0b04c4b83bca21dece7"},
@@ -79,6 +94,11 @@ pydot = ">=1.4.1"
 pygments = ">=2.3.1"
 pyyaml = "*"
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "apkid"
 version = "2.1.5"
@@ -97,16 +117,26 @@ yara-python-dex = ">=1.0.1"
 dev = ["mypy", "pypandoc", "twine"]
 test = ["delayed-assert", "factory-boy", "mock", "pytest", "pytest-cov", "pytest-factoryboy", "pytest-flask", "pytest-runner", "tox"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "apkinspector"
 version = "1.3.0"
 description = "apkInspector is a tool designed to provide detailed insights into the zip structure of APK files, offering the capability to extract content and decode the AndroidManifest.xml file."
 optional = false
-python-versions = "<4.0,>=3.5"
+python-versions = ">=3.5,<4.0"
 files = [
     {file = "apkinspector-1.3.0-py3-none-any.whl", hash = "sha256:da7b17879d19af9f2c73c841abccf48037323c13a0088237719b00e8050bab46"},
     {file = "apkinspector-1.3.0.tar.gz", hash = "sha256:2a8036f8a4643a550d4d9911d03182dbef28374f9bd1724eca34f3b70cae62ee"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "apksigcopier"
@@ -121,6 +151,11 @@ files = [
 
 [package.dependencies]
 click = ">=6.0"
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "apksigtool"
@@ -140,6 +175,11 @@ click = ">=6.0"
 cryptography = "*"
 simplejson = "*"
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "arpy"
 version = "2.3.0"
@@ -149,6 +189,11 @@ python-versions = "*"
 files = [
     {file = "arpy-2.3.0.tar.gz", hash = "sha256:8302829a991cfcef2630b61e00f315db73164021cecbd7fb1fc18525f83f339c"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "asgiref"
@@ -167,6 +212,11 @@ typing-extensions = {version = ">=4", markers = "python_version < \"3.11\""}
 [package.extras]
 tests = ["mypy (>=0.800)", "pytest", "pytest-asyncio"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "asn1crypto"
 version = "1.5.1"
@@ -177,6 +227,11 @@ files = [
     {file = "asn1crypto-1.5.1-py2.py3-none-any.whl", hash = "sha256:db4e40728b728508912cbb3d44f19ce188f218e9eba635821bb4b68564f8fd67"},
     {file = "asn1crypto-1.5.1.tar.gz", hash = "sha256:13ae38502be632115abf8a24cbe5f4da52e3b5231990aff31123c805306ccb9c"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "asttokens"
@@ -196,6 +251,11 @@ six = ">=1.12.0"
 astroid = ["astroid (>=1,<2)", "astroid (>=2,<4)"]
 test = ["astroid (>=1,<2)", "astroid (>=2,<4)", "pytest"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "async-timeout"
 version = "4.0.3"
@@ -206,6 +266,11 @@ files = [
     {file = "async-timeout-4.0.3.tar.gz", hash = "sha256:4640d96be84d82d02ed59ea2b7105a0f7b33abe8703703cd0ab0bf87c427522f"},
     {file = "async_timeout-4.0.3-py3-none-any.whl", hash = "sha256:7405140ff1230c310e51dc27b3145b9092d659ce68ff733fb0cefe3ee42be028"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "attrs"
@@ -224,6 +289,11 @@ docs = ["furo", "sphinx", "sphinx-notfound-page", "zope.interface"]
 tests = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "six", "zope.interface"]
 tests-no-zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "six"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "banal"
 version = "1.0.6"
@@ -238,45 +308,55 @@ files = [
 [package.extras]
 dev = ["mypy", "wheel"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "bcrypt"
-version = "4.1.3"
+version = "4.2.0"
 description = "Modern password hashing for your software and your servers"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "bcrypt-4.1.3-cp37-abi3-macosx_10_12_universal2.whl", hash = "sha256:48429c83292b57bf4af6ab75809f8f4daf52aa5d480632e53707805cc1ce9b74"},
-    {file = "bcrypt-4.1.3-cp37-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:4a8bea4c152b91fd8319fef4c6a790da5c07840421c2b785084989bf8bbb7455"},
-    {file = "bcrypt-4.1.3-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3d3b317050a9a711a5c7214bf04e28333cf528e0ed0ec9a4e55ba628d0f07c1a"},
-    {file = "bcrypt-4.1.3-cp37-abi3-manylinux_2_28_aarch64.whl", hash = "sha256:094fd31e08c2b102a14880ee5b3d09913ecf334cd604af27e1013c76831f7b05"},
-    {file = "bcrypt-4.1.3-cp37-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:4fb253d65da30d9269e0a6f4b0de32bd657a0208a6f4e43d3e645774fb5457f3"},
-    {file = "bcrypt-4.1.3-cp37-abi3-musllinux_1_1_aarch64.whl", hash = "sha256:193bb49eeeb9c1e2db9ba65d09dc6384edd5608d9d672b4125e9320af9153a15"},
-    {file = "bcrypt-4.1.3-cp37-abi3-musllinux_1_1_x86_64.whl", hash = "sha256:8cbb119267068c2581ae38790e0d1fbae65d0725247a930fc9900c285d95725d"},
-    {file = "bcrypt-4.1.3-cp37-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:6cac78a8d42f9d120b3987f82252bdbeb7e6e900a5e1ba37f6be6fe4e3848286"},
-    {file = "bcrypt-4.1.3-cp37-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:01746eb2c4299dd0ae1670234bf77704f581dd72cc180f444bfe74eb80495b64"},
-    {file = "bcrypt-4.1.3-cp37-abi3-win32.whl", hash = "sha256:037c5bf7c196a63dcce75545c8874610c600809d5d82c305dd327cd4969995bf"},
-    {file = "bcrypt-4.1.3-cp37-abi3-win_amd64.whl", hash = "sha256:8a893d192dfb7c8e883c4576813bf18bb9d59e2cfd88b68b725990f033f1b978"},
-    {file = "bcrypt-4.1.3-cp39-abi3-macosx_10_12_universal2.whl", hash = "sha256:0d4cf6ef1525f79255ef048b3489602868c47aea61f375377f0d00514fe4a78c"},
-    {file = "bcrypt-4.1.3-cp39-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f5698ce5292a4e4b9e5861f7e53b1d89242ad39d54c3da451a93cac17b61921a"},
-    {file = "bcrypt-4.1.3-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ec3c2e1ca3e5c4b9edb94290b356d082b721f3f50758bce7cce11d8a7c89ce84"},
-    {file = "bcrypt-4.1.3-cp39-abi3-manylinux_2_28_aarch64.whl", hash = "sha256:3a5be252fef513363fe281bafc596c31b552cf81d04c5085bc5dac29670faa08"},
-    {file = "bcrypt-4.1.3-cp39-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:5f7cd3399fbc4ec290378b541b0cf3d4398e4737a65d0f938c7c0f9d5e686611"},
-    {file = "bcrypt-4.1.3-cp39-abi3-musllinux_1_1_aarch64.whl", hash = "sha256:c4c8d9b3e97209dd7111bf726e79f638ad9224b4691d1c7cfefa571a09b1b2d6"},
-    {file = "bcrypt-4.1.3-cp39-abi3-musllinux_1_1_x86_64.whl", hash = "sha256:31adb9cbb8737a581a843e13df22ffb7c84638342de3708a98d5c986770f2834"},
-    {file = "bcrypt-4.1.3-cp39-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:551b320396e1d05e49cc18dd77d970accd52b322441628aca04801bbd1d52a73"},
-    {file = "bcrypt-4.1.3-cp39-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:6717543d2c110a155e6821ce5670c1f512f602eabb77dba95717ca76af79867d"},
-    {file = "bcrypt-4.1.3-cp39-abi3-win32.whl", hash = "sha256:6004f5229b50f8493c49232b8e75726b568535fd300e5039e255d919fc3a07f2"},
-    {file = "bcrypt-4.1.3-cp39-abi3-win_amd64.whl", hash = "sha256:2505b54afb074627111b5a8dc9b6ae69d0f01fea65c2fcaea403448c503d3991"},
-    {file = "bcrypt-4.1.3-pp310-pypy310_pp73-manylinux_2_28_aarch64.whl", hash = "sha256:cb9c707c10bddaf9e5ba7cdb769f3e889e60b7d4fea22834b261f51ca2b89fed"},
-    {file = "bcrypt-4.1.3-pp310-pypy310_pp73-manylinux_2_28_x86_64.whl", hash = "sha256:9f8ea645eb94fb6e7bea0cf4ba121c07a3a182ac52876493870033141aa687bc"},
-    {file = "bcrypt-4.1.3-pp39-pypy39_pp73-manylinux_2_28_aarch64.whl", hash = "sha256:f44a97780677e7ac0ca393bd7982b19dbbd8d7228c1afe10b128fd9550eef5f1"},
-    {file = "bcrypt-4.1.3-pp39-pypy39_pp73-manylinux_2_28_x86_64.whl", hash = "sha256:d84702adb8f2798d813b17d8187d27076cca3cd52fe3686bb07a9083930ce650"},
-    {file = "bcrypt-4.1.3.tar.gz", hash = "sha256:2ee15dd749f5952fe3f0430d0ff6b74082e159c50332a1413d51b5689cf06623"},
+    {file = "bcrypt-4.2.0-cp37-abi3-macosx_10_12_universal2.whl", hash = "sha256:096a15d26ed6ce37a14c1ac1e48119660f21b24cba457f160a4b830f3fe6b5cb"},
+    {file = "bcrypt-4.2.0-cp37-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:c02d944ca89d9b1922ceb8a46460dd17df1ba37ab66feac4870f6862a1533c00"},
+    {file = "bcrypt-4.2.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1d84cf6d877918620b687b8fd1bf7781d11e8a0998f576c7aa939776b512b98d"},
+    {file = "bcrypt-4.2.0-cp37-abi3-manylinux_2_28_aarch64.whl", hash = "sha256:1bb429fedbe0249465cdd85a58e8376f31bb315e484f16e68ca4c786dcc04291"},
+    {file = "bcrypt-4.2.0-cp37-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:655ea221910bcac76ea08aaa76df427ef8625f92e55a8ee44fbf7753dbabb328"},
+    {file = "bcrypt-4.2.0-cp37-abi3-musllinux_1_1_aarch64.whl", hash = "sha256:1ee38e858bf5d0287c39b7a1fc59eec64bbf880c7d504d3a06a96c16e14058e7"},
+    {file = "bcrypt-4.2.0-cp37-abi3-musllinux_1_1_x86_64.whl", hash = "sha256:0da52759f7f30e83f1e30a888d9163a81353ef224d82dc58eb5bb52efcabc399"},
+    {file = "bcrypt-4.2.0-cp37-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:3698393a1b1f1fd5714524193849d0c6d524d33523acca37cd28f02899285060"},
+    {file = "bcrypt-4.2.0-cp37-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:762a2c5fb35f89606a9fde5e51392dad0cd1ab7ae64149a8b935fe8d79dd5ed7"},
+    {file = "bcrypt-4.2.0-cp37-abi3-win32.whl", hash = "sha256:5a1e8aa9b28ae28020a3ac4b053117fb51c57a010b9f969603ed885f23841458"},
+    {file = "bcrypt-4.2.0-cp37-abi3-win_amd64.whl", hash = "sha256:8f6ede91359e5df88d1f5c1ef47428a4420136f3ce97763e31b86dd8280fbdf5"},
+    {file = "bcrypt-4.2.0-cp39-abi3-macosx_10_12_universal2.whl", hash = "sha256:c52aac18ea1f4a4f65963ea4f9530c306b56ccd0c6f8c8da0c06976e34a6e841"},
+    {file = "bcrypt-4.2.0-cp39-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3bbbfb2734f0e4f37c5136130405332640a1e46e6b23e000eeff2ba8d005da68"},
+    {file = "bcrypt-4.2.0-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3413bd60460f76097ee2e0a493ccebe4a7601918219c02f503984f0a7ee0aebe"},
+    {file = "bcrypt-4.2.0-cp39-abi3-manylinux_2_28_aarch64.whl", hash = "sha256:8d7bb9c42801035e61c109c345a28ed7e84426ae4865511eb82e913df18f58c2"},
+    {file = "bcrypt-4.2.0-cp39-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:3d3a6d28cb2305b43feac298774b997e372e56c7c7afd90a12b3dc49b189151c"},
+    {file = "bcrypt-4.2.0-cp39-abi3-musllinux_1_1_aarch64.whl", hash = "sha256:9c1c4ad86351339c5f320ca372dfba6cb6beb25e8efc659bedd918d921956bae"},
+    {file = "bcrypt-4.2.0-cp39-abi3-musllinux_1_1_x86_64.whl", hash = "sha256:27fe0f57bb5573104b5a6de5e4153c60814c711b29364c10a75a54bb6d7ff48d"},
+    {file = "bcrypt-4.2.0-cp39-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:8ac68872c82f1add6a20bd489870c71b00ebacd2e9134a8aa3f98a0052ab4b0e"},
+    {file = "bcrypt-4.2.0-cp39-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:cb2a8ec2bc07d3553ccebf0746bbf3d19426d1c6d1adbd4fa48925f66af7b9e8"},
+    {file = "bcrypt-4.2.0-cp39-abi3-win32.whl", hash = "sha256:77800b7147c9dc905db1cba26abe31e504d8247ac73580b4aa179f98e6608f34"},
+    {file = "bcrypt-4.2.0-cp39-abi3-win_amd64.whl", hash = "sha256:61ed14326ee023917ecd093ee6ef422a72f3aec6f07e21ea5f10622b735538a9"},
+    {file = "bcrypt-4.2.0-pp310-pypy310_pp73-manylinux_2_28_aarch64.whl", hash = "sha256:39e1d30c7233cfc54f5c3f2c825156fe044efdd3e0b9d309512cc514a263ec2a"},
+    {file = "bcrypt-4.2.0-pp310-pypy310_pp73-manylinux_2_28_x86_64.whl", hash = "sha256:f4f4acf526fcd1c34e7ce851147deedd4e26e6402369304220250598b26448db"},
+    {file = "bcrypt-4.2.0-pp39-pypy39_pp73-manylinux_2_28_aarch64.whl", hash = "sha256:1ff39b78a52cf03fdf902635e4c81e544714861ba3f0efc56558979dd4f09170"},
+    {file = "bcrypt-4.2.0-pp39-pypy39_pp73-manylinux_2_28_x86_64.whl", hash = "sha256:373db9abe198e8e2c70d12b479464e0d5092cc122b20ec504097b5f2297ed184"},
+    {file = "bcrypt-4.2.0.tar.gz", hash = "sha256:cf69eaf5185fd58f268f805b505ce31f9b9fc2d64b376642164e9244540c1221"},
 ]
 
 [package.extras]
 tests = ["pytest (>=3.2.1,!=3.3.0)"]
 typecheck = ["mypy"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "beautifulsoup4"
@@ -299,6 +379,11 @@ charset-normalizer = ["charset-normalizer"]
 html5lib = ["html5lib"]
 lxml = ["lxml"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "biplist"
 version = "1.0.3"
@@ -308,6 +393,11 @@ python-versions = "*"
 files = [
     {file = "biplist-1.0.3.tar.gz", hash = "sha256:4c0549764c5fe50b28042ec21aa2e14fe1a2224e239a1dae77d9e7f3932aa4c6"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "blinker"
@@ -320,6 +410,11 @@ files = [
     {file = "blinker-1.8.2.tar.gz", hash = "sha256:8f77b09d3bf7c795e969e9486f39c2c5e9c39d4ee07424be2bc594ece9642d83"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "boltons"
 version = "21.0.0"
@@ -331,6 +426,11 @@ files = [
     {file = "boltons-21.0.0.tar.gz", hash = "sha256:65e70a79a731a7fe6e98592ecfb5ccf2115873d01dbc576079874629e5c90f13"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "bracex"
 version = "2.4"
@@ -341,6 +441,11 @@ files = [
     {file = "bracex-2.4-py3-none-any.whl", hash = "sha256:efdc71eff95eaff5e0f8cfebe7d01adf2c8637c8c92edaf63ef348c241a82418"},
     {file = "bracex-2.4.tar.gz", hash = "sha256:a27eaf1df42cf561fed58b7a8f3fdf129d1ea16a81e1fadd1d17989bc6384beb"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "brotli"
@@ -434,6 +539,11 @@ files = [
     {file = "Brotli-1.1.0.tar.gz", hash = "sha256:81de08ac11bcb85841e440c13611c00b67d3bf82698314928d0b676362546724"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "bs4"
 version = "0.0.2"
@@ -448,6 +558,11 @@ files = [
 [package.dependencies]
 beautifulsoup4 = "*"
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "certifi"
 version = "2024.7.4"
@@ -458,6 +573,11 @@ files = [
     {file = "certifi-2024.7.4-py3-none-any.whl", hash = "sha256:c198e21b1289c2ab85ee4e67bb4b4ef3ead0892059901a8d5b622f24a1101e90"},
     {file = "certifi-2024.7.4.tar.gz", hash = "sha256:5a1e7645bc0ec61a09e26c36f6106dd4cf40c6db3a1fb6352b0244e7fb057c7b"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "cffi"
@@ -523,6 +643,11 @@ files = [
 [package.dependencies]
 pycparser = "*"
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "channels"
 version = "4.1.0"
@@ -541,6 +666,11 @@ Django = ">=4.2"
 [package.extras]
 daphne = ["daphne (>=4.0.0)"]
 tests = ["async-timeout", "coverage (>=4.5,<5.0)", "pytest", "pytest-asyncio", "pytest-django"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "channels-redis"
@@ -562,6 +692,11 @@ redis = ">=4.6"
 [package.extras]
 cryptography = ["cryptography (>=1.3.0)"]
 tests = ["async-timeout", "cryptography (>=1.3.0)", "pytest", "pytest-asyncio", "pytest-timeout"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "charset-normalizer"
@@ -662,6 +797,11 @@ files = [
     {file = "charset_normalizer-3.3.2-py3-none-any.whl", hash = "sha256:3e4d1f6587322d2788836a99c69062fbb091331ec940e02d12d179c1d53e25fc"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "click"
 version = "8.1.7"
@@ -675,6 +815,11 @@ files = [
 
 [package.dependencies]
 colorama = {version = "*", markers = "platform_system == \"Windows\""}
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "click-option-group"
@@ -695,6 +840,11 @@ docs = ["Pallets-Sphinx-Themes", "m2r2", "sphinx"]
 tests = ["pytest"]
 tests-cov = ["coverage", "coveralls", "pytest", "pytest-cov"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "colorama"
 version = "0.4.6"
@@ -705,6 +855,11 @@ files = [
     {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
     {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "colorlog"
@@ -722,6 +877,11 @@ colorama = {version = "*", markers = "sys_platform == \"win32\""}
 
 [package.extras]
 development = ["black", "flake8", "mypy", "pytest", "types-colorama"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "contourpy"
@@ -786,6 +946,11 @@ mypy = ["contourpy[bokeh,docs]", "docutils-stubs", "mypy (==1.8.0)", "types-Pill
 test = ["Pillow", "contourpy[test-no-images]", "matplotlib"]
 test-no-images = ["pytest", "pytest-cov", "pytest-xdist", "wurlitzer"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "cryptography"
 version = "41.0.7"
@@ -831,6 +996,11 @@ ssh = ["bcrypt (>=3.1.5)"]
 test = ["pretend", "pytest (>=6.2.0)", "pytest-benchmark", "pytest-cov", "pytest-xdist"]
 test-randomorder = ["pytest-randomly"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "cycler"
 version = "0.12.1"
@@ -845,6 +1015,11 @@ files = [
 [package.extras]
 docs = ["ipython", "matplotlib", "numpydoc", "sphinx"]
 tests = ["pytest", "pytest-cov", "pytest-xdist"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "dataset"
@@ -865,6 +1040,11 @@ sqlalchemy = ">=1.3.2,<2.0.0"
 [package.extras]
 dev = ["PyMySQL", "coverage", "cryptography", "flake8", "pip", "psycopg2-binary", "pytest", "wheel"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "decorator"
 version = "5.1.1"
@@ -875,6 +1055,11 @@ files = [
     {file = "decorator-5.1.1-py3-none-any.whl", hash = "sha256:b8c3f85900b9dc423225913c5aace94729fe1fa9763b38939a95226f02d37186"},
     {file = "decorator-5.1.1.tar.gz", hash = "sha256:637996211036b6385ef91435e4fae22989472f9d571faba8927ba8253acbc330"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "defusedxml"
@@ -887,6 +1072,11 @@ files = [
     {file = "defusedxml-0.7.1.tar.gz", hash = "sha256:1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "distro"
 version = "1.9.0"
@@ -897,6 +1087,11 @@ files = [
     {file = "distro-1.9.0-py3-none-any.whl", hash = "sha256:7bffd925d65168f85027d8da9af6bddab658135b840670a223589bc0c8ef02b2"},
     {file = "distro-1.9.0.tar.gz", hash = "sha256:2fa77c6fd8940f116ee1d6b94a2f90b13b5ea8d019b98bc8bafdcabcdd9bdbed"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "django"
@@ -918,6 +1113,11 @@ tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "et-xmlfile"
 version = "1.1.0"
@@ -928,6 +1128,11 @@ files = [
     {file = "et_xmlfile-1.1.0-py3-none-any.whl", hash = "sha256:a2ba85d1d6a74ef63837eed693bcb89c3f752169b0e3e7ae5b16ca5e1b3deada"},
     {file = "et_xmlfile-1.1.0.tar.gz", hash = "sha256:8eb9e2bc2f8c97e37a2dc85a09ecdcdec9d8a396530a6d5a33b30b9a92da0c5c"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "exceptiongroup"
@@ -943,6 +1148,11 @@ files = [
 [package.extras]
 test = ["pytest (>=6)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "executing"
 version = "2.0.1"
@@ -957,6 +1167,11 @@ files = [
 [package.extras]
 tests = ["asttokens (>=2.1.0)", "coverage", "coverage-enable-subprocess", "ipython", "littleutils", "pytest", "rich"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "face"
 version = "22.0.0"
@@ -970,6 +1185,11 @@ files = [
 
 [package.dependencies]
 boltons = ">=20.0.0"
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "filelock"
@@ -986,6 +1206,11 @@ files = [
 docs = ["furo (>=2023.9.10)", "sphinx (>=7.2.6)", "sphinx-autodoc-typehints (>=1.25.2)"]
 testing = ["covdefaults (>=2.3)", "coverage (>=7.3.2)", "diff-cover (>=8.0.1)", "pytest (>=7.4.3)", "pytest-asyncio (>=0.21)", "pytest-cov (>=4.1)", "pytest-mock (>=3.12)", "pytest-timeout (>=2.2)", "virtualenv (>=20.26.2)"]
 typing = ["typing-extensions (>=4.8)"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "flask"
@@ -1008,6 +1233,11 @@ Werkzeug = ">=3.0.0"
 [package.extras]
 async = ["asgiref (>=3.2)"]
 dotenv = ["python-dotenv"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "fonttools"
@@ -1074,6 +1304,11 @@ ufo = ["fs (>=2.2.0,<3)"]
 unicode = ["unicodedata2 (>=15.1.0)"]
 woff = ["brotli (>=1.0.1)", "brotlicffi (>=0.8.0)", "zopfli (>=0.1.4)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "frida"
 version = "16.4.2"
@@ -1099,6 +1334,11 @@ files = [
 [package.dependencies]
 typing-extensions = {version = "*", markers = "python_version < \"3.11\""}
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "glom"
 version = "22.1.0"
@@ -1118,16 +1358,26 @@ face = ">=20.1.0"
 [package.extras]
 yaml = ["PyYAML"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "google-play-scraper"
 version = "1.2.7"
 description = "Google-Play-Scraper provides APIs to easily crawl the Google Play Store for Python without any external dependencies!"
 optional = false
-python-versions = "<4.0,>=3.7"
+python-versions = ">=3.7,<4.0"
 files = [
     {file = "google_play_scraper-1.2.7-py3-none-any.whl", hash = "sha256:a485510b09265f0096fc3813cfc26eef27e9a5c0035f99ee23f80e00de724530"},
     {file = "google_play_scraper-1.2.7.tar.gz", hash = "sha256:284f321d1b2c39e39e97e490d51bc316e1d876802360efb7e7463b5c16ed4972"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "greenlet"
@@ -1200,6 +1450,11 @@ files = [
 docs = ["Sphinx", "furo"]
 test = ["objgraph", "psutil"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "gunicorn"
 version = "22.0.0"
@@ -1221,6 +1476,11 @@ setproctitle = ["setproctitle"]
 testing = ["coverage", "eventlet", "gevent", "pytest", "pytest-cov"]
 tornado = ["tornado (>=0.2)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "h11"
 version = "0.14.0"
@@ -1231,6 +1491,11 @@ files = [
     {file = "h11-0.14.0-py3-none-any.whl", hash = "sha256:e3fe4ac4b851c468cc8363d500db52c2ead036020723024a109d37346efaa761"},
     {file = "h11-0.14.0.tar.gz", hash = "sha256:8f19fbbe99e72420ff35c00b27a34cb9937e902a8b810e2c88300c6f0a3b699d"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "h2"
@@ -1247,6 +1512,11 @@ files = [
 hpack = ">=4.0,<5"
 hyperframe = ">=6.0,<7"
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "hpack"
 version = "4.0.0"
@@ -1257,6 +1527,11 @@ files = [
     {file = "hpack-4.0.0-py3-none-any.whl", hash = "sha256:84a076fad3dc9a9f8063ccb8041ef100867b1878b25ef0ee63847a5d53818a6c"},
     {file = "hpack-4.0.0.tar.gz", hash = "sha256:fc41de0c63e687ebffde81187a948221294896f6bdc0ae2312708df339430095"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "http-tools"
@@ -1272,6 +1547,11 @@ files = [
 markupsafe = ">=2.1.3"
 mitmproxy = "10.1.5"
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "hyperframe"
 version = "6.0.1"
@@ -1282,6 +1562,11 @@ files = [
     {file = "hyperframe-6.0.1-py3-none-any.whl", hash = "sha256:0ec6bafd80d8ad2195c4f03aacba3a8265e57bc4cff261e802bf39970ed02a15"},
     {file = "hyperframe-6.0.1.tar.gz", hash = "sha256:ae510046231dc8e9ecb1a6586f63d2347bf4c8905914aa84ba585ae85f28a914"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "idna"
@@ -1294,6 +1579,11 @@ files = [
     {file = "idna-3.7.tar.gz", hash = "sha256:028ff3aadf0609c1fd278d8ea3089299412a7a8b9bd005dd08b9f8285bcb5cfc"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "ip2location"
 version = "8.10.0"
@@ -1304,6 +1594,11 @@ files = [
     {file = "IP2Location-8.10.0-py3-none-any.whl", hash = "sha256:b6573b422569581b2f40425e1e8dd5fdba1f8a75d3a1be366c1f0886fede3ba4"},
     {file = "IP2Location-8.10.0.tar.gz", hash = "sha256:f0eea26c655f701406fa9379a38a0b56cc0dc7d0c6a221d44bda5280978a75ab"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "ipython"
@@ -1343,6 +1638,11 @@ qtconsole = ["qtconsole"]
 test = ["packaging", "pickleshare", "pytest", "pytest-asyncio (<0.22)", "testpath"]
 test-extra = ["curio", "ipython[test]", "matplotlib (!=3.2.0)", "nbformat", "numpy (>=1.23)", "pandas", "trio"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "itsdangerous"
 version = "2.2.0"
@@ -1353,6 +1653,11 @@ files = [
     {file = "itsdangerous-2.2.0-py3-none-any.whl", hash = "sha256:c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef"},
     {file = "itsdangerous-2.2.0.tar.gz", hash = "sha256:e0050c0b7da1eea53ffaf149c0cfbb5c6e2e2b69c4bef22c81fa6eb73e5f6173"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "jedi"
@@ -1373,6 +1678,11 @@ docs = ["Jinja2 (==2.11.3)", "MarkupSafe (==1.1.1)", "Pygments (==2.8.1)", "alab
 qa = ["flake8 (==5.0.4)", "mypy (==0.971)", "types-setuptools (==67.2.0.1)"]
 testing = ["Django", "attrs", "colorama", "docopt", "pytest (<7.0.0)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "jinja2"
 version = "3.1.4"
@@ -1390,6 +1700,11 @@ MarkupSafe = ">=2.0"
 [package.extras]
 i18n = ["Babel (>=2.7)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "joblib"
 version = "1.4.2"
@@ -1400,6 +1715,11 @@ files = [
     {file = "joblib-1.4.2-py3-none-any.whl", hash = "sha256:06d478d5674cbc267e7496a410ee875abd68e4340feff4490bcb7afb88060ae6"},
     {file = "joblib-1.4.2.tar.gz", hash = "sha256:2382c5816b2636fbd20a09e0f4e9dad4736765fdfb7dca582943b9c1366b3f0e"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "jsonschema"
@@ -1420,6 +1740,11 @@ pyrsistent = ">=0.14.0,<0.17.0 || >0.17.0,<0.17.1 || >0.17.1,<0.17.2 || >0.17.2"
 format = ["fqdn", "idna", "isoduration", "jsonpointer (>1.13)", "rfc3339-validator", "rfc3987", "uri-template", "webcolors (>=1.11)"]
 format-nongpl = ["fqdn", "idna", "isoduration", "jsonpointer (>1.13)", "rfc3339-validator", "rfc3986-validator (>0.1.0)", "uri-template", "webcolors (>=1.11)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "kaitaistruct"
 version = "0.10"
@@ -1430,6 +1755,11 @@ files = [
     {file = "kaitaistruct-0.10-py2.py3-none-any.whl", hash = "sha256:a97350919adbf37fda881f75e9365e2fb88d04832b7a4e57106ec70119efb235"},
     {file = "kaitaistruct-0.10.tar.gz", hash = "sha256:a044dee29173d6afbacf27bcac39daf89b654dd418cfa009ab82d9178a9ae52a"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "kiwisolver"
@@ -1544,6 +1874,11 @@ files = [
     {file = "kiwisolver-1.4.5.tar.gz", hash = "sha256:e57e563a57fb22a142da34f38acc2fc1a5c864bc29ca1517a88abc963e60d6ec"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "ldap3"
 version = "2.9.1"
@@ -1557,6 +1892,11 @@ files = [
 
 [package.dependencies]
 pyasn1 = ">=0.4.6"
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "libsast"
@@ -1574,44 +1914,64 @@ pyyaml = ">=6.0"
 requests = ">=2.27.1"
 semgrep = {version = "0.117.0", markers = "sys_platform != \"win32\""}
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "lief"
-version = "0.14.1"
+version = "0.15.1"
 description = "Library to instrument executable formats"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "lief-0.14.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:7a9a94882f9af110fb01b4558a58941d2352b9a4ae3fef15570a3fab921ff462"},
-    {file = "lief-0.14.1-cp310-cp310-macosx_11_0_x86_64.whl", hash = "sha256:bcc06f24f64fa6f20372d625ce60c40a7a6f669e11bdd02c2f0b8c5c6d09a5ee"},
-    {file = "lief-0.14.1-cp310-cp310-manylinux2014_aarch64.whl", hash = "sha256:d22f804eee7f1b4a4b37e7a3d35e2003c4c054f3450d40389e54c8ac9fc2a5db"},
-    {file = "lief-0.14.1-cp310-cp310-manylinux_2_28_x86_64.manylinux_2_27_x86_64.whl", hash = "sha256:26134815adecfd7f15dfbdf12cc64df25bcf3d0db917cf115fc3b296d09be496"},
-    {file = "lief-0.14.1-cp310-cp310-win32.whl", hash = "sha256:6ca0220189698599df30b8044f43fb1fc7ba919fb9ef6047c892f9faee16393a"},
-    {file = "lief-0.14.1-cp310-cp310-win_amd64.whl", hash = "sha256:c321234b50997c217107c09e69f53518c37fac637f8735c968c258dd4c748fb2"},
-    {file = "lief-0.14.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:3ca365c704c6b6b1ce631b92fea2eddaf93d66c897a0ec4ab51e9ab9e3345920"},
-    {file = "lief-0.14.1-cp311-cp311-macosx_11_0_x86_64.whl", hash = "sha256:1f3c40eadff07a4c8fa74f1e268f9fa70b68f39b6795a00cd82160ca6782d5c3"},
-    {file = "lief-0.14.1-cp311-cp311-manylinux2014_aarch64.whl", hash = "sha256:c202ed13b641db2e1f8a24743fb0c85595b32ea92cc3c517d3f7a9977e16dcb4"},
-    {file = "lief-0.14.1-cp311-cp311-manylinux_2_28_x86_64.manylinux_2_27_x86_64.whl", hash = "sha256:fd481bfdfef04e8be4d200bca771d0d9394d9146c6cd403f9e58c80c4196a24e"},
-    {file = "lief-0.14.1-cp311-cp311-win32.whl", hash = "sha256:473e9a37beef8db8bab1a777271aa49cce44dfe35af65cb8fad576377518c0bd"},
-    {file = "lief-0.14.1-cp311-cp311-win_amd64.whl", hash = "sha256:24f687244e14d4a8307430babc5c712a1dd4e519172886ad4aeb9825f88f7569"},
-    {file = "lief-0.14.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:6df40e3750b8b26f88a6b28ac01db7338cdb6158f28363c755bf36452ce20d28"},
-    {file = "lief-0.14.1-cp312-cp312-macosx_11_0_x86_64.whl", hash = "sha256:e7f7a55db2fcf269569f9e9fa5ea752620396de17bd9d29fc8b29e176975ecdb"},
-    {file = "lief-0.14.1-cp312-cp312-manylinux2014_aarch64.whl", hash = "sha256:50795b51884b76a78c481d6d069d992561c217180bd81cf12554180389eff0a3"},
-    {file = "lief-0.14.1-cp312-cp312-manylinux_2_28_x86_64.manylinux_2_27_x86_64.whl", hash = "sha256:497b88f9c9aaae999766ba188744ee35c5f38b4b64016f7dbb7037e9bf325382"},
-    {file = "lief-0.14.1-cp312-cp312-win32.whl", hash = "sha256:08bad88083f696915f8dcda4042a3bfc514e17462924ec8984085838b2261921"},
-    {file = "lief-0.14.1-cp312-cp312-win_amd64.whl", hash = "sha256:e131d6158a085f8a72124136816fefc29405c725cd3695ce22a904e471f0f815"},
-    {file = "lief-0.14.1-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:df650fa05ca131e4dfeb42c77985e1eb239730af9944bc0aadb1dfac8576e0e8"},
-    {file = "lief-0.14.1-cp38-cp38-macosx_11_0_x86_64.whl", hash = "sha256:b4e76eeb48ca2925c6ca6034d408582615f2faa855f9bb11482e7acbdecc4803"},
-    {file = "lief-0.14.1-cp38-cp38-manylinux2014_aarch64.whl", hash = "sha256:016e4fac91303466024154dd3c4b599e8b7c52882f72038b62a2be386d98c8f9"},
-    {file = "lief-0.14.1-cp38-cp38-manylinux_2_28_x86_64.manylinux_2_27_x86_64.whl", hash = "sha256:9a5c7732a3ce53b306c8180ab64fdfb36d8cd9df91aedd9e2b4dad9faf47492b"},
-    {file = "lief-0.14.1-cp38-cp38-win32.whl", hash = "sha256:7030c22a4446ea2ac673fd50128e9c639121c0a4dae11ca1cd8cc20d62d26e7e"},
-    {file = "lief-0.14.1-cp38-cp38-win_amd64.whl", hash = "sha256:4a35ceeee74bb9bb4c7171f4bca814576a3aa6dec16a0a9469e5743db0a9ba0c"},
-    {file = "lief-0.14.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:abb15e4de34e70661fd35e87e2634abf0ae57a8c8ac78d02ad4259f5a5817e26"},
-    {file = "lief-0.14.1-cp39-cp39-macosx_11_0_x86_64.whl", hash = "sha256:33d062340c709c1a33539d221ea3cb764cbb8d7c9ee8aae28bf9797bc8715a0b"},
-    {file = "lief-0.14.1-cp39-cp39-manylinux2014_aarch64.whl", hash = "sha256:66deb1b26de43acb2fd0b2fc5e6be70093eaaa93797332cc4613e163164c77e7"},
-    {file = "lief-0.14.1-cp39-cp39-manylinux_2_28_x86_64.manylinux_2_27_x86_64.whl", hash = "sha256:c1c15bd3e5b15da6dcc0ba75d5549f15bfbf9214c0d8e3938f85877a40c352d9"},
-    {file = "lief-0.14.1-cp39-cp39-win32.whl", hash = "sha256:ebcbe4eadd33d8cf2c6015f44d6c9b72f81388af745938e633c4bb90262b2036"},
-    {file = "lief-0.14.1-cp39-cp39-win_amd64.whl", hash = "sha256:2db3eb282a35daf51f89c6509226668a08fb6a6d1f507dd549dd9f077585db11"},
+    {file = "lief-0.15.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:a80246b96501b2b1d4927ceb3cb817eda9333ffa9e07101358929a6cffca5dae"},
+    {file = "lief-0.15.1-cp310-cp310-macosx_11_0_x86_64.whl", hash = "sha256:84bf310710369544e2bb82f83d7fdab5b5ac422651184fde8bf9e35f14439691"},
+    {file = "lief-0.15.1-cp310-cp310-manylinux_2_28_x86_64.whl", hash = "sha256:8fb58efb77358291109d2675d5459399c0794475b497992d0ecee18a4a46a207"},
+    {file = "lief-0.15.1-cp310-cp310-manylinux_2_33_aarch64.whl", hash = "sha256:d5852a246361bbefa4c1d5930741765a2337638d65cfe30de1b7d61f9a54b865"},
+    {file = "lief-0.15.1-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:12e53dc0253c303df386ae45487a2f0078026602b36d0e09e838ae1d4dbef958"},
+    {file = "lief-0.15.1-cp310-cp310-win32.whl", hash = "sha256:38b9cee48f42c355359ad7e3ff18bf1ec95e518238e4e8fb25657a49169dbf4c"},
+    {file = "lief-0.15.1-cp310-cp310-win_amd64.whl", hash = "sha256:ddf2ebd73766169594d631b35f84c49ef42871de552ad49f36002c60164d0aca"},
+    {file = "lief-0.15.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:20508c52de0dffcee3242253541609590167a3e56150cbacb506fdbb822206ef"},
+    {file = "lief-0.15.1-cp311-cp311-macosx_11_0_x86_64.whl", hash = "sha256:0750c892fd3b7161a3c2279f25fe1844427610c3a5a4ae23f65674ced6f93ea5"},
+    {file = "lief-0.15.1-cp311-cp311-manylinux_2_28_x86_64.whl", hash = "sha256:a8634ea79d6d9862297fadce025519ab25ff01fcadb333cf42967c6295f0d057"},
+    {file = "lief-0.15.1-cp311-cp311-manylinux_2_33_aarch64.whl", hash = "sha256:1e11e046ad71fe8c81e1a8d1d207fe2b99c967d33ce79c3d3915cb8f5ecacf52"},
+    {file = "lief-0.15.1-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:674b620cdf1d686f52450fd97c1056d4c92e55af8217ce85a1b2efaf5b32140b"},
+    {file = "lief-0.15.1-cp311-cp311-win32.whl", hash = "sha256:dbdcd70fd23c90017705b7fe6c716f0a69c01d0d0ea7a2ff653d83dc4a61fefb"},
+    {file = "lief-0.15.1-cp311-cp311-win_amd64.whl", hash = "sha256:e9b96a37bf11ca777ff305d85d957eabad2a92a6e577b6e2fb3ab79514e5a12e"},
+    {file = "lief-0.15.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:1a96f17c2085ef38d12ad81427ae8a5d6ad76f0bc62a1e1f5fe384255cd2cc94"},
+    {file = "lief-0.15.1-cp312-cp312-macosx_11_0_x86_64.whl", hash = "sha256:d780af1762022b8e01b613253af490afea3864fbd6b5a49c6de7cea8fde0443d"},
+    {file = "lief-0.15.1-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:d0f10d80202de9634a16786b53ba3a8f54ae8b9a9e124a964d83212444486087"},
+    {file = "lief-0.15.1-cp312-cp312-manylinux_2_33_aarch64.whl", hash = "sha256:864f17ecf1736296e6d5fc38b11983f9d19a5e799f094e21e20d58bfb1b95b80"},
+    {file = "lief-0.15.1-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:c2ec738bcafee8a569741f4a749f0596823b12f10713306c7d0cbbf85759f51c"},
+    {file = "lief-0.15.1-cp312-cp312-win32.whl", hash = "sha256:db38619edf70e27fb3686b8c0f0bec63ad494ac88ab51660c5ecd2720b506e41"},
+    {file = "lief-0.15.1-cp312-cp312-win_amd64.whl", hash = "sha256:28bf0922de5fb74502a29cc47930d3a052df58dc23ab6519fa590e564f194a60"},
+    {file = "lief-0.15.1-cp313-cp313-manylinux_2_28_x86_64.whl", hash = "sha256:0616e6048f269d262ff93d67c497ebff3c1d3965ffb9427b0f2b474764fd2e8c"},
+    {file = "lief-0.15.1-cp313-cp313-manylinux_2_33_aarch64.whl", hash = "sha256:6a08b2e512a80040429febddc777768c949bcd53f6f580e902e41ec0d9d936b8"},
+    {file = "lief-0.15.1-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:fcd489ff80860bcc2b2689faa330a46b6d66f0ee3e0f6ef9e643e2b996128a06"},
+    {file = "lief-0.15.1-cp313-cp313-win32.whl", hash = "sha256:0d10e5b22e86bbf2d1e3877b604ffd8860c852b6bc00fca681fe1432f5018fe9"},
+    {file = "lief-0.15.1-cp313-cp313-win_amd64.whl", hash = "sha256:5af7dcb9c3f44baaf60875df6ba9af6777db94776cc577ee86143bcce105ba2f"},
+    {file = "lief-0.15.1-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:f9757ff0c7c3d6f66e5fdcc6a9df69680fad0dc2707d64a3428f0825dfce1a85"},
+    {file = "lief-0.15.1-cp38-cp38-macosx_11_0_x86_64.whl", hash = "sha256:8ac3cd099be2580d0e15150b1d2f5095c38f150af89993ddf390d7897ee8135f"},
+    {file = "lief-0.15.1-cp38-cp38-manylinux_2_28_x86_64.whl", hash = "sha256:4dedeab498c312a29b58f16b739895f65fa54b2a21b8d98b111e99ad3f7e30a8"},
+    {file = "lief-0.15.1-cp38-cp38-manylinux_2_33_aarch64.whl", hash = "sha256:b9217578f7a45f667503b271da8481207fb4edda8d4a53e869fb922df6030484"},
+    {file = "lief-0.15.1-cp38-cp38-musllinux_1_2_x86_64.whl", hash = "sha256:82e6308ad8bd4bc7eadee3502ede13a5bb398725f25513a0396c8dba850f58a1"},
+    {file = "lief-0.15.1-cp38-cp38-win32.whl", hash = "sha256:dde1c8f8ebe0ee9db4f2302c87ae3cacb9898dc412e0d7da07a8e4e834ac5158"},
+    {file = "lief-0.15.1-cp38-cp38-win_amd64.whl", hash = "sha256:a079a76bca23aa73c850ab5beb7598871a1bf44662658b952cead2b5ddd31bee"},
+    {file = "lief-0.15.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:785a3aa14575f046ed9c8d44ea222ea14c697cd03b5331d1717b5b0cf4f72466"},
+    {file = "lief-0.15.1-cp39-cp39-macosx_11_0_x86_64.whl", hash = "sha256:d7044553cf07c8a2ab6e21874f07585610d996ff911b9af71dc6085a89f59daa"},
+    {file = "lief-0.15.1-cp39-cp39-manylinux_2_28_x86_64.whl", hash = "sha256:13285c3ff5ef6de2421d85684c954905af909db0ad3472e33c475e5f0f657dcf"},
+    {file = "lief-0.15.1-cp39-cp39-manylinux_2_33_aarch64.whl", hash = "sha256:932f880ee8a130d663a97a9099516d8570b1b303af7816e70a02f9931d5ef4c2"},
+    {file = "lief-0.15.1-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:de9453f94866e0f2c36b6bd878625880080e7e5800788f5cbc06a76debf283b9"},
+    {file = "lief-0.15.1-cp39-cp39-win32.whl", hash = "sha256:4e47324736d6aa559421720758de4ce12d04fb56bdffa3dcc051fe8cdd42ed17"},
+    {file = "lief-0.15.1-cp39-cp39-win_amd64.whl", hash = "sha256:382a189514c0e6ebfb41e0db6106936c7ba94d8400651276add2899ff3570585"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "loguru"
@@ -1630,6 +1990,11 @@ win32-setctime = {version = ">=1.0.0", markers = "sys_platform == \"win32\""}
 
 [package.extras]
 dev = ["Sphinx (==7.2.5)", "colorama (==0.4.5)", "colorama (==0.4.6)", "exceptiongroup (==1.1.3)", "freezegun (==1.1.0)", "freezegun (==1.2.2)", "mypy (==v0.910)", "mypy (==v0.971)", "mypy (==v1.4.1)", "mypy (==v1.5.1)", "pre-commit (==3.4.0)", "pytest (==6.1.2)", "pytest (==7.4.0)", "pytest-cov (==2.12.1)", "pytest-cov (==4.1.0)", "pytest-mypy-plugins (==1.9.3)", "pytest-mypy-plugins (==3.0.0)", "sphinx-autobuild (==2021.3.14)", "sphinx-rtd-theme (==1.3.0)", "tox (==3.27.1)", "tox (==4.11.0)"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "lxml"
@@ -1789,6 +2154,11 @@ html5 = ["html5lib"]
 htmlsoup = ["BeautifulSoup4"]
 source = ["Cython (>=3.0.10)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "macholib"
 version = "1.16.3"
@@ -1802,6 +2172,11 @@ files = [
 
 [package.dependencies]
 altgraph = ">=0.17"
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "mako"
@@ -1821,6 +2196,11 @@ MarkupSafe = ">=0.9.2"
 babel = ["Babel"]
 lingua = ["lingua"]
 testing = ["pytest"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "markupsafe"
@@ -1891,6 +2271,11 @@ files = [
     {file = "MarkupSafe-2.1.5.tar.gz", hash = "sha256:d283d37a890ba4c1ae73ffadf8046435c76e7bc2247bbb63c00bd1a709c6544b"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "matplotlib"
 version = "3.9.1"
@@ -1943,6 +2328,11 @@ python-dateutil = ">=2.7"
 [package.extras]
 dev = ["meson-python (>=0.13.1)", "numpy (>=1.25)", "pybind11 (>=2.6)", "setuptools (>=64)", "setuptools_scm (>=7)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "matplotlib-inline"
 version = "0.1.7"
@@ -1956,6 +2346,11 @@ files = [
 
 [package.dependencies]
 traitlets = "*"
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "mitmproxy"
@@ -1999,6 +2394,11 @@ zstandard = ">=0.11,<0.23"
 [package.extras]
 dev = ["build (>=0.10.0)", "click (>=7.0,<8.2)", "hypothesis (>=5.8,<7)", "pdoc (>=4.0.0)", "pyinstaller (==6.1.0)", "pytest (>=6.1.0,<8)", "pytest-asyncio (>=0.17,<0.22)", "pytest-cov (>=2.7.1,<4.2)", "pytest-timeout (>=1.3.3,<2.3)", "pytest-xdist (>=2.1.0,<3.4)", "requests (>=2.9.1,<3)", "tox (>=3.5,<5)", "wheel (>=0.36.2,<0.42)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "mitmproxy-macos"
 version = "0.4.1"
@@ -2008,6 +2408,11 @@ python-versions = ">=3.10"
 files = [
     {file = "mitmproxy_macos-0.4.1-py3-none-any.whl", hash = "sha256:3720561fc8788f2ac71a063780dfb28e3353f216f978b04f8a0aa865835af97b"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "mitmproxy-rs"
@@ -2027,6 +2432,11 @@ files = [
 mitmproxy_macos = {version = "0.4.1", markers = "sys_platform == \"darwin\""}
 mitmproxy_windows = {version = "0.4.1", markers = "os_name == \"nt\""}
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "mitmproxy-windows"
 version = "0.4.1"
@@ -2036,6 +2446,11 @@ python-versions = ">=3.10"
 files = [
     {file = "mitmproxy_windows-0.4.1-py3-none-any.whl", hash = "sha256:1a9c8e024d1b2e5544cc81bfb95bf2e713260191e64523e1c5b3bef98ad960ab"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "msgpack"
@@ -2102,6 +2517,11 @@ files = [
     {file = "msgpack-1.0.8.tar.gz", hash = "sha256:95c02b0e27e706e48d0e5426d1710ca78e0f0628d6e89d5b5a5b91a5f12274f3"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "mutf8"
 version = "1.0.6"
@@ -2127,6 +2547,11 @@ files = [
 [package.extras]
 test = ["pytest", "pytest-benchmark"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "networkx"
 version = "3.3"
@@ -2145,59 +2570,69 @@ doc = ["myst-nb (>=1.0)", "numpydoc (>=1.7)", "pillow (>=9.4)", "pydata-sphinx-t
 extra = ["lxml (>=4.6)", "pydot (>=2.0)", "pygraphviz (>=1.12)", "sympy (>=1.10)"]
 test = ["pytest (>=7.2)", "pytest-cov (>=4.0)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "numpy"
-version = "2.0.0"
+version = "2.0.1"
 description = "Fundamental package for array computing in Python"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "numpy-2.0.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:04494f6ec467ccb5369d1808570ae55f6ed9b5809d7f035059000a37b8d7e86f"},
-    {file = "numpy-2.0.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:2635dbd200c2d6faf2ef9a0d04f0ecc6b13b3cad54f7c67c61155138835515d2"},
-    {file = "numpy-2.0.0-cp310-cp310-macosx_14_0_arm64.whl", hash = "sha256:0a43f0974d501842866cc83471bdb0116ba0dffdbaac33ec05e6afed5b615238"},
-    {file = "numpy-2.0.0-cp310-cp310-macosx_14_0_x86_64.whl", hash = "sha256:8d83bb187fb647643bd56e1ae43f273c7f4dbcdf94550d7938cfc32566756514"},
-    {file = "numpy-2.0.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:79e843d186c8fb1b102bef3e2bc35ef81160ffef3194646a7fdd6a73c6b97196"},
-    {file = "numpy-2.0.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6d7696c615765091cc5093f76fd1fa069870304beaccfd58b5dcc69e55ef49c1"},
-    {file = "numpy-2.0.0-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:b4c76e3d4c56f145d41b7b6751255feefae92edbc9a61e1758a98204200f30fc"},
-    {file = "numpy-2.0.0-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:acd3a644e4807e73b4e1867b769fbf1ce8c5d80e7caaef0d90dcdc640dfc9787"},
-    {file = "numpy-2.0.0-cp310-cp310-win32.whl", hash = "sha256:cee6cc0584f71adefe2c908856ccc98702baf95ff80092e4ca46061538a2ba98"},
-    {file = "numpy-2.0.0-cp310-cp310-win_amd64.whl", hash = "sha256:ed08d2703b5972ec736451b818c2eb9da80d66c3e84aed1deeb0c345fefe461b"},
-    {file = "numpy-2.0.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:ad0c86f3455fbd0de6c31a3056eb822fc939f81b1618f10ff3406971893b62a5"},
-    {file = "numpy-2.0.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:e7f387600d424f91576af20518334df3d97bc76a300a755f9a8d6e4f5cadd289"},
-    {file = "numpy-2.0.0-cp311-cp311-macosx_14_0_arm64.whl", hash = "sha256:34f003cb88b1ba38cb9a9a4a3161c1604973d7f9d5552c38bc2f04f829536609"},
-    {file = "numpy-2.0.0-cp311-cp311-macosx_14_0_x86_64.whl", hash = "sha256:b6f6a8f45d0313db07d6d1d37bd0b112f887e1369758a5419c0370ba915b3871"},
-    {file = "numpy-2.0.0-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:5f64641b42b2429f56ee08b4f427a4d2daf916ec59686061de751a55aafa22e4"},
-    {file = "numpy-2.0.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a7039a136017eaa92c1848152827e1424701532ca8e8967fe480fe1569dae581"},
-    {file = "numpy-2.0.0-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:46e161722e0f619749d1cd892167039015b2c2817296104487cd03ed4a955995"},
-    {file = "numpy-2.0.0-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:0e50842b2295ba8414c8c1d9d957083d5dfe9e16828b37de883f51fc53c4016f"},
-    {file = "numpy-2.0.0-cp311-cp311-win32.whl", hash = "sha256:2ce46fd0b8a0c947ae047d222f7136fc4d55538741373107574271bc00e20e8f"},
-    {file = "numpy-2.0.0-cp311-cp311-win_amd64.whl", hash = "sha256:fbd6acc766814ea6443628f4e6751d0da6593dae29c08c0b2606164db026970c"},
-    {file = "numpy-2.0.0-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:354f373279768fa5a584bac997de6a6c9bc535c482592d7a813bb0c09be6c76f"},
-    {file = "numpy-2.0.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:4d2f62e55a4cd9c58c1d9a1c9edaedcd857a73cb6fda875bf79093f9d9086f85"},
-    {file = "numpy-2.0.0-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:1e72728e7501a450288fc8e1f9ebc73d90cfd4671ebbd631f3e7857c39bd16f2"},
-    {file = "numpy-2.0.0-cp312-cp312-macosx_14_0_x86_64.whl", hash = "sha256:84554fc53daa8f6abf8e8a66e076aff6ece62de68523d9f665f32d2fc50fd66e"},
-    {file = "numpy-2.0.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:c73aafd1afca80afecb22718f8700b40ac7cab927b8abab3c3e337d70e10e5a2"},
-    {file = "numpy-2.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:49d9f7d256fbc804391a7f72d4a617302b1afac1112fac19b6c6cec63fe7fe8a"},
-    {file = "numpy-2.0.0-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:0ec84b9ba0654f3b962802edc91424331f423dcf5d5f926676e0150789cb3d95"},
-    {file = "numpy-2.0.0-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:feff59f27338135776f6d4e2ec7aeeac5d5f7a08a83e80869121ef8164b74af9"},
-    {file = "numpy-2.0.0-cp312-cp312-win32.whl", hash = "sha256:c5a59996dc61835133b56a32ebe4ef3740ea5bc19b3983ac60cc32be5a665d54"},
-    {file = "numpy-2.0.0-cp312-cp312-win_amd64.whl", hash = "sha256:a356364941fb0593bb899a1076b92dfa2029f6f5b8ba88a14fd0984aaf76d0df"},
-    {file = "numpy-2.0.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:e61155fae27570692ad1d327e81c6cf27d535a5d7ef97648a17d922224b216de"},
-    {file = "numpy-2.0.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:4554eb96f0fd263041baf16cf0881b3f5dafae7a59b1049acb9540c4d57bc8cb"},
-    {file = "numpy-2.0.0-cp39-cp39-macosx_14_0_arm64.whl", hash = "sha256:903703372d46bce88b6920a0cd86c3ad82dae2dbef157b5fc01b70ea1cfc430f"},
-    {file = "numpy-2.0.0-cp39-cp39-macosx_14_0_x86_64.whl", hash = "sha256:3e8e01233d57639b2e30966c63d36fcea099d17c53bf424d77f088b0f4babd86"},
-    {file = "numpy-2.0.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:1cde1753efe513705a0c6d28f5884e22bdc30438bf0085c5c486cdaff40cd67a"},
-    {file = "numpy-2.0.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:821eedb7165ead9eebdb569986968b541f9908979c2da8a4967ecac4439bae3d"},
-    {file = "numpy-2.0.0-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:9a1712c015831da583b21c5bfe15e8684137097969c6d22e8316ba66b5baabe4"},
-    {file = "numpy-2.0.0-cp39-cp39-musllinux_1_2_aarch64.whl", hash = "sha256:9c27f0946a3536403efb0e1c28def1ae6730a72cd0d5878db38824855e3afc44"},
-    {file = "numpy-2.0.0-cp39-cp39-win32.whl", hash = "sha256:63b92c512d9dbcc37f9d81b123dec99fdb318ba38c8059afc78086fe73820275"},
-    {file = "numpy-2.0.0-cp39-cp39-win_amd64.whl", hash = "sha256:3f6bed7f840d44c08ebdb73b1825282b801799e325bcbdfa6bc5c370e5aecc65"},
-    {file = "numpy-2.0.0-pp39-pypy39_pp73-macosx_10_9_x86_64.whl", hash = "sha256:9416a5c2e92ace094e9f0082c5fd473502c91651fb896bc17690d6fc475128d6"},
-    {file = "numpy-2.0.0-pp39-pypy39_pp73-macosx_14_0_x86_64.whl", hash = "sha256:17067d097ed036636fa79f6a869ac26df7db1ba22039d962422506640314933a"},
-    {file = "numpy-2.0.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:38ecb5b0582cd125f67a629072fed6f83562d9dd04d7e03256c9829bdec027ad"},
-    {file = "numpy-2.0.0-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:cef04d068f5fb0518a77857953193b6bb94809a806bd0a14983a8f12ada060c9"},
-    {file = "numpy-2.0.0.tar.gz", hash = "sha256:cf5d1c9e6837f8af9f92b6bd3e86d513cdc11f60fd62185cc49ec7d1aba34864"},
+    {file = "numpy-2.0.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:0fbb536eac80e27a2793ffd787895242b7f18ef792563d742c2d673bfcb75134"},
+    {file = "numpy-2.0.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:69ff563d43c69b1baba77af455dd0a839df8d25e8590e79c90fcbe1499ebde42"},
+    {file = "numpy-2.0.1-cp310-cp310-macosx_14_0_arm64.whl", hash = "sha256:1b902ce0e0a5bb7704556a217c4f63a7974f8f43e090aff03fcf262e0b135e02"},
+    {file = "numpy-2.0.1-cp310-cp310-macosx_14_0_x86_64.whl", hash = "sha256:f1659887361a7151f89e79b276ed8dff3d75877df906328f14d8bb40bb4f5101"},
+    {file = "numpy-2.0.1-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:4658c398d65d1b25e1760de3157011a80375da861709abd7cef3bad65d6543f9"},
+    {file = "numpy-2.0.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4127d4303b9ac9f94ca0441138acead39928938660ca58329fe156f84b9f3015"},
+    {file = "numpy-2.0.1-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:e5eeca8067ad04bc8a2a8731183d51d7cbaac66d86085d5f4766ee6bf19c7f87"},
+    {file = "numpy-2.0.1-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:9adbd9bb520c866e1bfd7e10e1880a1f7749f1f6e5017686a5fbb9b72cf69f82"},
+    {file = "numpy-2.0.1-cp310-cp310-win32.whl", hash = "sha256:7b9853803278db3bdcc6cd5beca37815b133e9e77ff3d4733c247414e78eb8d1"},
+    {file = "numpy-2.0.1-cp310-cp310-win_amd64.whl", hash = "sha256:81b0893a39bc5b865b8bf89e9ad7807e16717f19868e9d234bdaf9b1f1393868"},
+    {file = "numpy-2.0.1-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:75b4e316c5902d8163ef9d423b1c3f2f6252226d1aa5cd8a0a03a7d01ffc6268"},
+    {file = "numpy-2.0.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:6e4eeb6eb2fced786e32e6d8df9e755ce5be920d17f7ce00bc38fcde8ccdbf9e"},
+    {file = "numpy-2.0.1-cp311-cp311-macosx_14_0_arm64.whl", hash = "sha256:a1e01dcaab205fbece13c1410253a9eea1b1c9b61d237b6fa59bcc46e8e89343"},
+    {file = "numpy-2.0.1-cp311-cp311-macosx_14_0_x86_64.whl", hash = "sha256:a8fc2de81ad835d999113ddf87d1ea2b0f4704cbd947c948d2f5513deafe5a7b"},
+    {file = "numpy-2.0.1-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:5a3d94942c331dd4e0e1147f7a8699a4aa47dffc11bf8a1523c12af8b2e91bbe"},
+    {file = "numpy-2.0.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:15eb4eca47d36ec3f78cde0a3a2ee24cf05ca7396ef808dda2c0ddad7c2bde67"},
+    {file = "numpy-2.0.1-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:b83e16a5511d1b1f8a88cbabb1a6f6a499f82c062a4251892d9ad5d609863fb7"},
+    {file = "numpy-2.0.1-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:1f87fec1f9bc1efd23f4227becff04bd0e979e23ca50cc92ec88b38489db3b55"},
+    {file = "numpy-2.0.1-cp311-cp311-win32.whl", hash = "sha256:36d3a9405fd7c511804dc56fc32974fa5533bdeb3cd1604d6b8ff1d292b819c4"},
+    {file = "numpy-2.0.1-cp311-cp311-win_amd64.whl", hash = "sha256:08458fbf403bff5e2b45f08eda195d4b0c9b35682311da5a5a0a0925b11b9bd8"},
+    {file = "numpy-2.0.1-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:6bf4e6f4a2a2e26655717a1983ef6324f2664d7011f6ef7482e8c0b3d51e82ac"},
+    {file = "numpy-2.0.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:7d6fddc5fe258d3328cd8e3d7d3e02234c5d70e01ebe377a6ab92adb14039cb4"},
+    {file = "numpy-2.0.1-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:5daab361be6ddeb299a918a7c0864fa8618af66019138263247af405018b04e1"},
+    {file = "numpy-2.0.1-cp312-cp312-macosx_14_0_x86_64.whl", hash = "sha256:ea2326a4dca88e4a274ba3a4405eb6c6467d3ffbd8c7d38632502eaae3820587"},
+    {file = "numpy-2.0.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:529af13c5f4b7a932fb0e1911d3a75da204eff023ee5e0e79c1751564221a5c8"},
+    {file = "numpy-2.0.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6790654cb13eab303d8402354fabd47472b24635700f631f041bd0b65e37298a"},
+    {file = "numpy-2.0.1-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:cbab9fc9c391700e3e1287666dfd82d8666d10e69a6c4a09ab97574c0b7ee0a7"},
+    {file = "numpy-2.0.1-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:99d0d92a5e3613c33a5f01db206a33f8fdf3d71f2912b0de1739894668b7a93b"},
+    {file = "numpy-2.0.1-cp312-cp312-win32.whl", hash = "sha256:173a00b9995f73b79eb0191129f2455f1e34c203f559dd118636858cc452a1bf"},
+    {file = "numpy-2.0.1-cp312-cp312-win_amd64.whl", hash = "sha256:bb2124fdc6e62baae159ebcfa368708867eb56806804d005860b6007388df171"},
+    {file = "numpy-2.0.1-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:bfc085b28d62ff4009364e7ca34b80a9a080cbd97c2c0630bb5f7f770dae9414"},
+    {file = "numpy-2.0.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:8fae4ebbf95a179c1156fab0b142b74e4ba4204c87bde8d3d8b6f9c34c5825ef"},
+    {file = "numpy-2.0.1-cp39-cp39-macosx_14_0_arm64.whl", hash = "sha256:72dc22e9ec8f6eaa206deb1b1355eb2e253899d7347f5e2fae5f0af613741d06"},
+    {file = "numpy-2.0.1-cp39-cp39-macosx_14_0_x86_64.whl", hash = "sha256:ec87f5f8aca726117a1c9b7083e7656a9d0d606eec7299cc067bb83d26f16e0c"},
+    {file = "numpy-2.0.1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:1f682ea61a88479d9498bf2091fdcd722b090724b08b31d63e022adc063bad59"},
+    {file = "numpy-2.0.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8efc84f01c1cd7e34b3fb310183e72fcdf55293ee736d679b6d35b35d80bba26"},
+    {file = "numpy-2.0.1-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:3fdabe3e2a52bc4eff8dc7a5044342f8bd9f11ef0934fcd3289a788c0eb10018"},
+    {file = "numpy-2.0.1-cp39-cp39-musllinux_1_2_aarch64.whl", hash = "sha256:24a0e1befbfa14615b49ba9659d3d8818a0f4d8a1c5822af8696706fbda7310c"},
+    {file = "numpy-2.0.1-cp39-cp39-win32.whl", hash = "sha256:f9cf5ea551aec449206954b075db819f52adc1638d46a6738253a712d553c7b4"},
+    {file = "numpy-2.0.1-cp39-cp39-win_amd64.whl", hash = "sha256:e9e81fa9017eaa416c056e5d9e71be93d05e2c3c2ab308d23307a8bc4443c368"},
+    {file = "numpy-2.0.1-pp39-pypy39_pp73-macosx_10_9_x86_64.whl", hash = "sha256:61728fba1e464f789b11deb78a57805c70b2ed02343560456190d0501ba37b0f"},
+    {file = "numpy-2.0.1-pp39-pypy39_pp73-macosx_14_0_x86_64.whl", hash = "sha256:12f5d865d60fb9734e60a60f1d5afa6d962d8d4467c120a1c0cda6eb2964437d"},
+    {file = "numpy-2.0.1-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:eacf3291e263d5a67d8c1a581a8ebbcfd6447204ef58828caf69a5e3e8c75990"},
+    {file = "numpy-2.0.1-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:2c3a346ae20cfd80b6cfd3e60dc179963ef2ea58da5ec074fd3d9e7a1e7ba97f"},
+    {file = "numpy-2.0.1.tar.gz", hash = "sha256:485b87235796410c3519a699cfe1faab097e509e90ebb05dcd098db2ae87e7b3"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "openpyxl"
@@ -2213,6 +2648,11 @@ files = [
 [package.dependencies]
 et-xmlfile = "*"
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "openstep-parser"
 version = "1.5.4"
@@ -2223,6 +2663,11 @@ files = [
     {file = "openstep_parser-1.5.4-py3-none-any.whl", hash = "sha256:56d7d25f6bfb1b17ce6c522f2467cf114f70b0c910693a07d4513109e19e9b18"},
     {file = "openstep_parser-1.5.4.tar.gz", hash = "sha256:f03c7fd9c78ac718c470cb0f667c1f09fa7f58786314f77fef8767302abe1658"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "oscrypto"
@@ -2238,6 +2683,11 @@ files = [
 [package.dependencies]
 asn1crypto = ">=1.5.1"
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "packaging"
 version = "21.3"
@@ -2251,6 +2701,11 @@ files = [
 
 [package.dependencies]
 pyparsing = ">=2.0.2,<3.0.5 || >3.0.5"
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "pandas"
@@ -2325,6 +2780,11 @@ sql-other = ["SQLAlchemy (>=2.0.0)", "adbc-driver-postgresql (>=0.8.0)", "adbc-d
 test = ["hypothesis (>=6.46.1)", "pytest (>=7.3.2)", "pytest-xdist (>=2.2.0)"]
 xml = ["lxml (>=4.9.2)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "paramiko"
 version = "3.4.0"
@@ -2346,6 +2806,11 @@ all = ["gssapi (>=1.4.1)", "invoke (>=2.0)", "pyasn1 (>=0.1.7)", "pywin32 (>=2.1
 gssapi = ["gssapi (>=1.4.1)", "pyasn1 (>=0.1.7)", "pywin32 (>=2.1.8)"]
 invoke = ["invoke (>=2.0)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "parso"
 version = "0.8.4"
@@ -2360,6 +2825,11 @@ files = [
 [package.extras]
 qa = ["flake8 (==5.0.4)", "mypy (==0.971)", "types-setuptools (==67.2.0.1)"]
 testing = ["docopt", "pytest"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "passlib"
@@ -2378,6 +2848,11 @@ bcrypt = ["bcrypt (>=3.1.0)"]
 build-docs = ["cloud-sptheme (>=1.10.1)", "sphinx (>=1.6)", "sphinxcontrib-fulltoc (>=1.2.0)"]
 totp = ["cryptography"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "pdfkit"
 version = "1.0.0"
@@ -2390,6 +2865,11 @@ files = [
     {file = "pdfkit-1.0.0.tar.gz", hash = "sha256:992f821e1e18fc8a0e701ecae24b51a2d598296a180caee0a24c0af181da02a9"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "peewee"
 version = "3.17.6"
@@ -2399,6 +2879,11 @@ python-versions = "*"
 files = [
     {file = "peewee-3.17.6.tar.gz", hash = "sha256:cea5592c6f4da1592b7cff8eaf655be6648a1f5857469e30037bf920c03fb8fb"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "pexpect"
@@ -2413,6 +2898,11 @@ files = [
 
 [package.dependencies]
 ptyprocess = ">=0.5"
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "pillow"
@@ -2511,6 +3001,11 @@ tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "pa
 typing = ["typing-extensions"]
 xmp = ["defusedxml"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "prompt-toolkit"
 version = "3.0.47"
@@ -2525,32 +3020,42 @@ files = [
 [package.dependencies]
 wcwidth = "*"
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "protobuf"
-version = "4.25.3"
+version = "4.25.4"
 description = ""
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "protobuf-4.25.3-cp310-abi3-win32.whl", hash = "sha256:d4198877797a83cbfe9bffa3803602bbe1625dc30d8a097365dbc762e5790faa"},
-    {file = "protobuf-4.25.3-cp310-abi3-win_amd64.whl", hash = "sha256:209ba4cc916bab46f64e56b85b090607a676f66b473e6b762e6f1d9d591eb2e8"},
-    {file = "protobuf-4.25.3-cp37-abi3-macosx_10_9_universal2.whl", hash = "sha256:f1279ab38ecbfae7e456a108c5c0681e4956d5b1090027c1de0f934dfdb4b35c"},
-    {file = "protobuf-4.25.3-cp37-abi3-manylinux2014_aarch64.whl", hash = "sha256:e7cb0ae90dd83727f0c0718634ed56837bfeeee29a5f82a7514c03ee1364c019"},
-    {file = "protobuf-4.25.3-cp37-abi3-manylinux2014_x86_64.whl", hash = "sha256:7c8daa26095f82482307bc717364e7c13f4f1c99659be82890dcfc215194554d"},
-    {file = "protobuf-4.25.3-cp38-cp38-win32.whl", hash = "sha256:f4f118245c4a087776e0a8408be33cf09f6c547442c00395fbfb116fac2f8ac2"},
-    {file = "protobuf-4.25.3-cp38-cp38-win_amd64.whl", hash = "sha256:c053062984e61144385022e53678fbded7aea14ebb3e0305ae3592fb219ccfa4"},
-    {file = "protobuf-4.25.3-cp39-cp39-win32.whl", hash = "sha256:19b270aeaa0099f16d3ca02628546b8baefe2955bbe23224aaf856134eccf1e4"},
-    {file = "protobuf-4.25.3-cp39-cp39-win_amd64.whl", hash = "sha256:e3c97a1555fd6388f857770ff8b9703083de6bf1f9274a002a332d65fbb56c8c"},
-    {file = "protobuf-4.25.3-py3-none-any.whl", hash = "sha256:f0700d54bcf45424477e46a9f0944155b46fb0639d69728739c0e47bab83f2b9"},
-    {file = "protobuf-4.25.3.tar.gz", hash = "sha256:25b5d0b42fd000320bd7830b349e3b696435f3b329810427a6bcce6a5492cc5c"},
+    {file = "protobuf-4.25.4-cp310-abi3-win32.whl", hash = "sha256:db9fd45183e1a67722cafa5c1da3e85c6492a5383f127c86c4c4aa4845867dc4"},
+    {file = "protobuf-4.25.4-cp310-abi3-win_amd64.whl", hash = "sha256:ba3d8504116a921af46499471c63a85260c1a5fc23333154a427a310e015d26d"},
+    {file = "protobuf-4.25.4-cp37-abi3-macosx_10_9_universal2.whl", hash = "sha256:eecd41bfc0e4b1bd3fa7909ed93dd14dd5567b98c941d6c1ad08fdcab3d6884b"},
+    {file = "protobuf-4.25.4-cp37-abi3-manylinux2014_aarch64.whl", hash = "sha256:4c8a70fdcb995dcf6c8966cfa3a29101916f7225e9afe3ced4395359955d3835"},
+    {file = "protobuf-4.25.4-cp37-abi3-manylinux2014_x86_64.whl", hash = "sha256:3319e073562e2515c6ddc643eb92ce20809f5d8f10fead3332f71c63be6a7040"},
+    {file = "protobuf-4.25.4-cp38-cp38-win32.whl", hash = "sha256:7e372cbbda66a63ebca18f8ffaa6948455dfecc4e9c1029312f6c2edcd86c4e1"},
+    {file = "protobuf-4.25.4-cp38-cp38-win_amd64.whl", hash = "sha256:051e97ce9fa6067a4546e75cb14f90cf0232dcb3e3d508c448b8d0e4265b61c1"},
+    {file = "protobuf-4.25.4-cp39-cp39-win32.whl", hash = "sha256:90bf6fd378494eb698805bbbe7afe6c5d12c8e17fca817a646cd6a1818c696ca"},
+    {file = "protobuf-4.25.4-cp39-cp39-win_amd64.whl", hash = "sha256:ac79a48d6b99dfed2729ccccee547b34a1d3d63289c71cef056653a846a2240f"},
+    {file = "protobuf-4.25.4-py3-none-any.whl", hash = "sha256:bfbebc1c8e4793cfd58589acfb8a1026be0003e852b9da7db5a4285bde996978"},
+    {file = "protobuf-4.25.4.tar.gz", hash = "sha256:0dc4a62cc4052a036ee2204d26fe4d835c62827c855c8a03f29fe6da146b380d"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "psutil"
 version = "6.0.0"
 description = "Cross-platform lib for process and system monitoring in Python."
 optional = false
-python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,>=2.7"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*"
 files = [
     {file = "psutil-6.0.0-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:a021da3e881cd935e64a3d0a20983bda0bb4cf80e4f74fa9bfcb1bc5785360c6"},
     {file = "psutil-6.0.0-cp27-cp27m-manylinux2010_i686.whl", hash = "sha256:1287c2b95f1c0a364d23bc6f2ea2365a8d4d9b726a3be7294296ff7ba97c17f0"},
@@ -2574,6 +3079,11 @@ files = [
 [package.extras]
 test = ["enum34", "ipaddress", "mock", "pywin32", "wmi"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "ptyprocess"
 version = "0.7.0"
@@ -2584,6 +3094,11 @@ files = [
     {file = "ptyprocess-0.7.0-py2.py3-none-any.whl", hash = "sha256:4b41f3967fce3af57cc7e94b888626c18bf37a083e3651ca8feeb66d492fef35"},
     {file = "ptyprocess-0.7.0.tar.gz", hash = "sha256:5c5d0a3b48ceee0b48485e0c26037c0acd7d29765ca3fbb5cb3831d347423220"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "publicsuffix2"
@@ -2596,19 +3111,29 @@ files = [
     {file = "publicsuffix2-2.20191221.tar.gz", hash = "sha256:00f8cc31aa8d0d5592a5ced19cccba7de428ebca985db26ac852d920ddd6fe7b"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "pure-eval"
-version = "0.2.2"
+version = "0.2.3"
 description = "Safely evaluate AST nodes without side effects"
 optional = false
 python-versions = "*"
 files = [
-    {file = "pure_eval-0.2.2-py3-none-any.whl", hash = "sha256:01eaab343580944bc56080ebe0a674b39ec44a945e6d09ba7db3cb8cec289350"},
-    {file = "pure_eval-0.2.2.tar.gz", hash = "sha256:2b45320af6dfaa1750f543d714b6d1c520a1688dec6fd24d339063ce0aaa9ac3"},
+    {file = "pure_eval-0.2.3-py3-none-any.whl", hash = "sha256:1db8e35b67b3d218d818ae653e27f06c3aa420901fa7b081ca98cbedc874e0d0"},
+    {file = "pure_eval-0.2.3.tar.gz", hash = "sha256:5f4e983f40564c576c7c8635ae88db5956bb2229d7e9237d03b3c0b0190eaf42"},
 ]
 
 [package.extras]
 tests = ["pytest"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "pyasn1"
@@ -2620,6 +3145,11 @@ files = [
     {file = "pyasn1-0.6.0-py2.py3-none-any.whl", hash = "sha256:cca4bb0f2df5504f02f6f8a775b6e416ff9b0b3b16f7ee80b5a3153d9b804473"},
     {file = "pyasn1-0.6.0.tar.gz", hash = "sha256:3a35ab2c4b5ef98e17dfdec8ab074046fbda76e281c5a706ccd82328cfc8f64c"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "pyasn1-modules"
@@ -2635,6 +3165,11 @@ files = [
 [package.dependencies]
 pyasn1 = ">=0.4.6,<0.7.0"
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "pycparser"
 version = "2.22"
@@ -2645,6 +3180,11 @@ files = [
     {file = "pycparser-2.22-py3-none-any.whl", hash = "sha256:c3702b6d3dd8c7abc1afa565d7e63d53a1d0bd86cdc24edd75470f4de499cfcc"},
     {file = "pycparser-2.22.tar.gz", hash = "sha256:491c8be9c040f5390f5bf44a5b07752bd07f56edf992381b05c701439eec10f6"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "pydivert"
@@ -2660,6 +3200,11 @@ files = [
 [package.extras]
 docs = ["sphinx (>=1.4.8)"]
 test = ["codecov (>=2.0.5)", "hypothesis (>=3.5.3)", "mock (>=1.0.1)", "pytest (>=3.0.3)", "pytest-cov (>=2.2.1)", "pytest-faulthandler (>=1.3.0,<2)", "pytest-timeout (>=1.0.0,<2)", "wheel (>=0.29)"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "pydot"
@@ -2680,6 +3225,11 @@ dev = ["chardet", "parameterized", "ruff"]
 release = ["zest.releaser[recommended]"]
 tests = ["chardet", "parameterized", "ruff", "tox", "unittest-parallel"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "pygments"
 version = "2.18.0"
@@ -2693,6 +3243,11 @@ files = [
 
 [package.extras]
 windows-terminal = ["colorama (>=0.4.6)"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "pylsqpack"
@@ -2721,6 +3276,11 @@ files = [
     {file = "pylsqpack-0.3.18.tar.gz", hash = "sha256:45ae55e721877505f4d5ccd49591d69353f2a548a8673dfafb251d385b3c097f"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "pynacl"
 version = "1.5.0"
@@ -2747,6 +3307,11 @@ cffi = ">=1.4.1"
 docs = ["sphinx (>=1.6.5)", "sphinx-rtd-theme"]
 tests = ["hypothesis (>=3.27.0)", "pytest (>=3.2.1,!=3.3.0)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "pyopenssl"
 version = "23.3.0"
@@ -2765,6 +3330,11 @@ cryptography = ">=41.0.5,<42"
 docs = ["sphinx (!=5.2.0,!=5.2.0.post0,!=7.2.5)", "sphinx-rtd-theme"]
 test = ["flaky", "pretend", "pytest (>=3.0.1)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "pyparsing"
 version = "3.1.2"
@@ -2779,6 +3349,11 @@ files = [
 [package.extras]
 diagrams = ["jinja2", "railroad-diagrams"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "pyperclip"
 version = "1.8.2"
@@ -2788,6 +3363,11 @@ python-versions = "*"
 files = [
     {file = "pyperclip-1.8.2.tar.gz", hash = "sha256:105254a8b04934f0bc84e9c24eb360a591aaf6535c9def5f29d92af107a9bf57"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "pyrsistent"
@@ -2830,6 +3410,11 @@ files = [
     {file = "pyrsistent-0.20.0.tar.gz", hash = "sha256:4c48f78f62ab596c679086084d0dd13254ae4f3d6c72a83ffdf5ebdef8f265a4"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "python-dateutil"
 version = "2.9.0.post0"
@@ -2844,6 +3429,11 @@ files = [
 [package.dependencies]
 six = ">=1.5"
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "python-decouple"
 version = "3.8"
@@ -2854,6 +3444,11 @@ files = [
     {file = "python-decouple-3.8.tar.gz", hash = "sha256:ba6e2657d4f376ecc46f77a3a615e058d93ba5e465c01bbe57289bfb7cce680f"},
     {file = "python_decouple-3.8-py3-none-any.whl", hash = "sha256:d0d45340815b25f4de59c974b855bb38d03151d81b037d9e3f463b0c9f8cbd66"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "python-lsp-jsonrpc"
@@ -2872,6 +3467,11 @@ ujson = ">=3.0.0"
 [package.extras]
 test = ["coverage", "pycodestyle", "pyflakes", "pylint", "pytest", "pytest-cov"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "pytz"
 version = "2024.1"
@@ -2882,6 +3482,11 @@ files = [
     {file = "pytz-2024.1-py2.py3-none-any.whl", hash = "sha256:328171f4e3623139da4983451950b28e95ac706e13f3f2630a879749e7a8b319"},
     {file = "pytz-2024.1.tar.gz", hash = "sha256:2a29735ea9c18baf14b448846bde5a48030ed267578472d8955cd0e7443a9812"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "pyyaml"
@@ -2943,23 +3548,33 @@ files = [
     {file = "PyYAML-6.0.1.tar.gz", hash = "sha256:bfdf460b1736c775f2ba9f6a92bca30bc2095067b8a9d77876d1fad6cc3b4a43"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "redis"
-version = "5.0.7"
+version = "5.0.8"
 description = "Python client for Redis database and key-value store"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "redis-5.0.7-py3-none-any.whl", hash = "sha256:0e479e24da960c690be5d9b96d21f7b918a98c0cf49af3b6fafaa0753f93a0db"},
-    {file = "redis-5.0.7.tar.gz", hash = "sha256:8f611490b93c8109b50adc317b31bfd84fff31def3475b92e7e80bf39f48175b"},
+    {file = "redis-5.0.8-py3-none-any.whl", hash = "sha256:56134ee08ea909106090934adc36f65c9bcbbaecea5b21ba704ba6fb561f8eb4"},
+    {file = "redis-5.0.8.tar.gz", hash = "sha256:0c5b10d387568dfe0698c6fad6615750c24170e548ca2deac10c649d463e9870"},
 ]
 
 [package.dependencies]
 async-timeout = {version = ">=4.0.3", markers = "python_full_version < \"3.11.3\""}
 
 [package.extras]
-hiredis = ["hiredis (>=1.0.0)"]
+hiredis = ["hiredis (>1.0.0)"]
 ocsp = ["cryptography (>=36.0.1)", "pyopenssl (==20.0.1)", "requests (>=2.26.0)"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "requests"
@@ -2982,6 +3597,11 @@ urllib3 = ">=1.21.1,<3"
 socks = ["PySocks (>=1.5.6,!=1.5.7)"]
 use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "requests-file"
 version = "2.1.0"
@@ -2996,6 +3616,11 @@ files = [
 [package.dependencies]
 requests = ">=1.0.0"
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "rsa"
 version = "4.9"
@@ -3009,6 +3634,11 @@ files = [
 
 [package.dependencies]
 pyasn1 = ">=0.1.3"
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "ruamel-yaml"
@@ -3027,6 +3657,11 @@ files = [
 [package.extras]
 docs = ["mercurial (>5.7)", "ryd"]
 jinja2 = ["ruamel.yaml.jinja2 (>=0.2)"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "ruamel-yaml-clib"
@@ -3087,6 +3722,11 @@ files = [
     {file = "ruamel.yaml.clib-0.2.8.tar.gz", hash = "sha256:beb2e0404003de9a4cab9753a8805a8fe9320ee6673136ed7f04255fe60bb512"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "scapy"
 version = "2.5.0"
@@ -3101,6 +3741,11 @@ files = [
 basic = ["ipython"]
 complete = ["cryptography (>=2.0)", "ipython", "matplotlib", "pyx"]
 docs = ["sphinx (>=3.0.0)", "sphinx_rtd_theme (>=0.4.3)", "tox (>=3.0.0)"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "scikit-learn"
@@ -3147,6 +3792,11 @@ install = ["joblib (>=1.2.0)", "numpy (>=1.19.5)", "scipy (>=1.6.0)", "threadpoo
 maintenance = ["conda-lock (==2.5.6)"]
 tests = ["black (>=24.3.0)", "matplotlib (>=3.3.4)", "mypy (>=1.9)", "numpydoc (>=1.2.0)", "pandas (>=1.1.5)", "polars (>=0.20.23)", "pooch (>=1.6.0)", "pyamg (>=4.0.0)", "pyarrow (>=12.0.0)", "pytest (>=7.1.2)", "pytest-cov (>=2.9.0)", "ruff (>=0.2.1)", "scikit-image (>=0.17.2)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "scipy"
 version = "1.14.0"
@@ -3189,6 +3839,11 @@ dev = ["cython-lint (>=0.12.2)", "doit (>=0.36.0)", "mypy (==1.10.0)", "pycodest
 doc = ["jupyterlite-pyodide-kernel", "jupyterlite-sphinx (>=0.13.1)", "jupytext", "matplotlib (>=3.5)", "myst-nb", "numpydoc", "pooch", "pydata-sphinx-theme (>=0.15.2)", "sphinx (>=5.0.0)", "sphinx-design (>=0.4.0)"]
 test = ["Cython", "array-api-strict", "asv", "gmpy2", "hypothesis (>=6.30)", "meson", "mpmath", "ninja", "pooch", "pytest", "pytest-cov", "pytest-timeout", "pytest-xdist", "scikit-umfpack", "threadpoolctl"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "semgrep"
 version = "0.117.0"
@@ -3225,6 +3880,11 @@ wcmatch = ">=8.3,<9.0"
 [package.extras]
 experiments = ["jsonnet (>=0.18,<1.0)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "service-identity"
 version = "24.1.0"
@@ -3249,6 +3909,11 @@ idna = ["idna"]
 mypy = ["idna", "mypy", "types-pyopenssl"]
 tests = ["coverage[toml] (>=5.0.2)", "pytest"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "shelljob"
 version = "0.6.3"
@@ -3258,6 +3923,11 @@ python-versions = ">=3.6"
 files = [
     {file = "shelljob-0.6.3-py3-none-any.whl", hash = "sha256:1a37d1c36631a4839be7424910c293b0163b06bd74eaf3daf6cfcb5eabd95286"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "simplejson"
@@ -3366,6 +4036,11 @@ files = [
     {file = "simplejson-3.19.2.tar.gz", hash = "sha256:9eb442a2442ce417801c912df68e1f6ccfcd41577ae7274953ab3ad24ef7d82c"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "six"
 version = "1.16.0"
@@ -3376,6 +4051,11 @@ files = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
     {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "sortedcontainers"
@@ -3388,6 +4068,11 @@ files = [
     {file = "sortedcontainers-2.4.0.tar.gz", hash = "sha256:25caa5a06cc30b6b83d11423433f65d1f9d76c4c6a0c90e3379eaa43b9bfdb88"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "soupsieve"
 version = "2.5"
@@ -3399,59 +4084,62 @@ files = [
     {file = "soupsieve-2.5.tar.gz", hash = "sha256:5663d5a7b3bfaeee0bc4372e7fc48f9cff4940b3eec54a6451cc5299f1097690"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "sqlalchemy"
-version = "1.4.52"
+version = "1.4.53"
 description = "Database Abstraction Library"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,>=2.7"
 files = [
-    {file = "SQLAlchemy-1.4.52-cp310-cp310-macosx_11_0_x86_64.whl", hash = "sha256:f68016f9a5713684c1507cc37133c28035f29925c75c0df2f9d0f7571e23720a"},
-    {file = "SQLAlchemy-1.4.52-cp310-cp310-manylinux1_x86_64.manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_5_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:24bb0f81fbbb13d737b7f76d1821ec0b117ce8cbb8ee5e8641ad2de41aa916d3"},
-    {file = "SQLAlchemy-1.4.52-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e93983cc0d2edae253b3f2141b0a3fb07e41c76cd79c2ad743fc27eb79c3f6db"},
-    {file = "SQLAlchemy-1.4.52-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:84e10772cfc333eb08d0b7ef808cd76e4a9a30a725fb62a0495877a57ee41d81"},
-    {file = "SQLAlchemy-1.4.52-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:427988398d2902de042093d17f2b9619a5ebc605bf6372f7d70e29bde6736842"},
-    {file = "SQLAlchemy-1.4.52-cp310-cp310-win32.whl", hash = "sha256:1296f2cdd6db09b98ceb3c93025f0da4835303b8ac46c15c2136e27ee4d18d94"},
-    {file = "SQLAlchemy-1.4.52-cp310-cp310-win_amd64.whl", hash = "sha256:80e7f697bccc56ac6eac9e2df5c98b47de57e7006d2e46e1a3c17c546254f6ef"},
-    {file = "SQLAlchemy-1.4.52-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:2f251af4c75a675ea42766880ff430ac33291c8d0057acca79710f9e5a77383d"},
-    {file = "SQLAlchemy-1.4.52-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:cb8f9e4c4718f111d7b530c4e6fb4d28f9f110eb82e7961412955b3875b66de0"},
-    {file = "SQLAlchemy-1.4.52-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:afb1672b57f58c0318ad2cff80b384e816735ffc7e848d8aa51e0b0fc2f4b7bb"},
-    {file = "SQLAlchemy-1.4.52-cp311-cp311-win32.whl", hash = "sha256:6e41cb5cda641f3754568d2ed8962f772a7f2b59403b95c60c89f3e0bd25f15e"},
-    {file = "SQLAlchemy-1.4.52-cp311-cp311-win_amd64.whl", hash = "sha256:5bed4f8c3b69779de9d99eb03fd9ab67a850d74ab0243d1be9d4080e77b6af12"},
-    {file = "SQLAlchemy-1.4.52-cp312-cp312-macosx_10_9_universal2.whl", hash = "sha256:49e3772eb3380ac88d35495843daf3c03f094b713e66c7d017e322144a5c6b7c"},
-    {file = "SQLAlchemy-1.4.52-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:618827c1a1c243d2540314c6e100aee7af09a709bd005bae971686fab6723554"},
-    {file = "SQLAlchemy-1.4.52-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:de9acf369aaadb71a725b7e83a5ef40ca3de1cf4cdc93fa847df6b12d3cd924b"},
-    {file = "SQLAlchemy-1.4.52-cp312-cp312-win32.whl", hash = "sha256:763bd97c4ebc74136ecf3526b34808c58945023a59927b416acebcd68d1fc126"},
-    {file = "SQLAlchemy-1.4.52-cp312-cp312-win_amd64.whl", hash = "sha256:f12aaf94f4d9679ca475975578739e12cc5b461172e04d66f7a3c39dd14ffc64"},
-    {file = "SQLAlchemy-1.4.52-cp36-cp36m-macosx_10_14_x86_64.whl", hash = "sha256:853fcfd1f54224ea7aabcf34b227d2b64a08cbac116ecf376907968b29b8e763"},
-    {file = "SQLAlchemy-1.4.52-cp36-cp36m-manylinux1_x86_64.manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_5_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f98dbb8fcc6d1c03ae8ec735d3c62110949a3b8bc6e215053aa27096857afb45"},
-    {file = "SQLAlchemy-1.4.52-cp36-cp36m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:1e135fff2e84103bc15c07edd8569612ce317d64bdb391f49ce57124a73f45c5"},
-    {file = "SQLAlchemy-1.4.52-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:5b5de6af8852500d01398f5047d62ca3431d1e29a331d0b56c3e14cb03f8094c"},
-    {file = "SQLAlchemy-1.4.52-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3491c85df263a5c2157c594f54a1a9c72265b75d3777e61ee13c556d9e43ffc9"},
-    {file = "SQLAlchemy-1.4.52-cp36-cp36m-win32.whl", hash = "sha256:427c282dd0deba1f07bcbf499cbcc9fe9a626743f5d4989bfdfd3ed3513003dd"},
-    {file = "SQLAlchemy-1.4.52-cp36-cp36m-win_amd64.whl", hash = "sha256:ca5ce82b11731492204cff8845c5e8ca1a4bd1ade85e3b8fcf86e7601bfc6a39"},
-    {file = "SQLAlchemy-1.4.52-cp37-cp37m-macosx_11_0_x86_64.whl", hash = "sha256:29d4247313abb2015f8979137fe65f4eaceead5247d39603cc4b4a610936cd2b"},
-    {file = "SQLAlchemy-1.4.52-cp37-cp37m-manylinux1_x86_64.manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_5_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a752bff4796bf22803d052d4841ebc3c55c26fb65551f2c96e90ac7c62be763a"},
-    {file = "SQLAlchemy-1.4.52-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f7ea11727feb2861deaa293c7971a4df57ef1c90e42cb53f0da40c3468388000"},
-    {file = "SQLAlchemy-1.4.52-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:d913f8953e098ca931ad7f58797f91deed26b435ec3756478b75c608aa80d139"},
-    {file = "SQLAlchemy-1.4.52-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a251146b921725547ea1735b060a11e1be705017b568c9f8067ca61e6ef85f20"},
-    {file = "SQLAlchemy-1.4.52-cp37-cp37m-win32.whl", hash = "sha256:1f8e1c6a6b7f8e9407ad9afc0ea41c1f65225ce505b79bc0342159de9c890782"},
-    {file = "SQLAlchemy-1.4.52-cp37-cp37m-win_amd64.whl", hash = "sha256:346ed50cb2c30f5d7a03d888e25744154ceac6f0e6e1ab3bc7b5b77138d37710"},
-    {file = "SQLAlchemy-1.4.52-cp38-cp38-macosx_11_0_x86_64.whl", hash = "sha256:4dae6001457d4497736e3bc422165f107ecdd70b0d651fab7f731276e8b9e12d"},
-    {file = "SQLAlchemy-1.4.52-cp38-cp38-manylinux1_x86_64.manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_5_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a5d2e08d79f5bf250afb4a61426b41026e448da446b55e4770c2afdc1e200fce"},
-    {file = "SQLAlchemy-1.4.52-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:5bbce5dd7c7735e01d24f5a60177f3e589078f83c8a29e124a6521b76d825b85"},
-    {file = "SQLAlchemy-1.4.52-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:bdb7b4d889631a3b2a81a3347c4c3f031812eb4adeaa3ee4e6b0d028ad1852b5"},
-    {file = "SQLAlchemy-1.4.52-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c294ae4e6bbd060dd79e2bd5bba8b6274d08ffd65b58d106394cb6abbf35cf45"},
-    {file = "SQLAlchemy-1.4.52-cp38-cp38-win32.whl", hash = "sha256:bcdfb4b47fe04967669874fb1ce782a006756fdbebe7263f6a000e1db969120e"},
-    {file = "SQLAlchemy-1.4.52-cp38-cp38-win_amd64.whl", hash = "sha256:7d0dbc56cb6af5088f3658982d3d8c1d6a82691f31f7b0da682c7b98fa914e91"},
-    {file = "SQLAlchemy-1.4.52-cp39-cp39-macosx_11_0_x86_64.whl", hash = "sha256:a551d5f3dc63f096ed41775ceec72fdf91462bb95abdc179010dc95a93957800"},
-    {file = "SQLAlchemy-1.4.52-cp39-cp39-manylinux1_x86_64.manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_5_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6ab773f9ad848118df7a9bbabca53e3f1002387cdbb6ee81693db808b82aaab0"},
-    {file = "SQLAlchemy-1.4.52-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:d2de46f5d5396d5331127cfa71f837cca945f9a2b04f7cb5a01949cf676db7d1"},
-    {file = "SQLAlchemy-1.4.52-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:7027be7930a90d18a386b25ee8af30514c61f3852c7268899f23fdfbd3107181"},
-    {file = "SQLAlchemy-1.4.52-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:99224d621affbb3c1a4f72b631f8393045f4ce647dd3262f12fe3576918f8bf3"},
-    {file = "SQLAlchemy-1.4.52-cp39-cp39-win32.whl", hash = "sha256:c124912fd4e1bb9d1e7dc193ed482a9f812769cb1e69363ab68e01801e859821"},
-    {file = "SQLAlchemy-1.4.52-cp39-cp39-win_amd64.whl", hash = "sha256:2c286fab42e49db23c46ab02479f328b8bdb837d3e281cae546cc4085c83b680"},
-    {file = "SQLAlchemy-1.4.52.tar.gz", hash = "sha256:80e63bbdc5217dad3485059bdf6f65a7d43f33c8bde619df5c220edf03d87296"},
+    {file = "SQLAlchemy-1.4.53-cp310-cp310-macosx_12_0_x86_64.whl", hash = "sha256:b61ac5457d91b5629a3dea2b258deb4cdd35ac8f6fa2031d2b9b2fff5b3396da"},
+    {file = "SQLAlchemy-1.4.53-cp310-cp310-manylinux1_x86_64.manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_5_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1a96aa8d425047551676b0e178ddb0683421e78eda879ab55775128b2e612cae"},
+    {file = "SQLAlchemy-1.4.53-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:4e10ac36f0b994235c13388b39598bf27219ec8bdea5be99bdac612b01cbe525"},
+    {file = "SQLAlchemy-1.4.53-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:437592b341a3229dd0443c9c803b0bf0a466f8f539014fef6cdb9c06b7edb7f9"},
+    {file = "SQLAlchemy-1.4.53-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:784272ceb5eb71421fea9568749bcbe8bd019261a0e2e710a7efa76057af2499"},
+    {file = "SQLAlchemy-1.4.53-cp310-cp310-win32.whl", hash = "sha256:122d7b5722df1a24402c6748bbb04687ef981493bb559d0cc0beffe722e0e6ed"},
+    {file = "SQLAlchemy-1.4.53-cp310-cp310-win_amd64.whl", hash = "sha256:4604d42b2abccba266d3f5bbe883684b5df93e74054024c70d3fbb5eea45e530"},
+    {file = "SQLAlchemy-1.4.53-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:fb8e15dfa47f5de11ab073e12aadd6b502cfb7ac4bafd18bd18cfd1c7d13dbbc"},
+    {file = "SQLAlchemy-1.4.53-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:bc8be4df55e8fde3006d9cb1f6b3df2ba26db613855dc4df2c0fcd5ec15cb3b7"},
+    {file = "SQLAlchemy-1.4.53-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:86b11640251f9a9789fd96cd6e5d176b1c230230c70ad40299bcbcc568451b4c"},
+    {file = "SQLAlchemy-1.4.53-cp311-cp311-win32.whl", hash = "sha256:cd534c716f86bdf95b7b984a34ee278c91d1b1d7d183e7e5ff878600b1696046"},
+    {file = "SQLAlchemy-1.4.53-cp311-cp311-win_amd64.whl", hash = "sha256:6dd06572872ca13ef5a90306a3e5af787498ddaa17fb00109b1243642646cd69"},
+    {file = "SQLAlchemy-1.4.53-cp312-cp312-macosx_10_9_universal2.whl", hash = "sha256:2774c24c405136c3ef472e2352bdca7330659d481fbf2283f996c0ef9eb90f22"},
+    {file = "SQLAlchemy-1.4.53-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:68a614765197b3d13a730d631a78c3bb9b3b72ba58ed7ab295d58d517464e315"},
+    {file = "SQLAlchemy-1.4.53-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d13d4dfbc6e52363886b47cf02cf68c5d2a37c468626694dc210d7e97d4ad330"},
+    {file = "SQLAlchemy-1.4.53-cp312-cp312-win32.whl", hash = "sha256:197065b91456574d70b6459bfa62bc0b52a4960a29ef923c375ec427274a3e05"},
+    {file = "SQLAlchemy-1.4.53-cp312-cp312-win_amd64.whl", hash = "sha256:421306c4b936b0271a3ce2dc074928d5ece4a36f9c482daa5770f44ecfc3a883"},
+    {file = "SQLAlchemy-1.4.53-cp36-cp36m-macosx_10_14_x86_64.whl", hash = "sha256:13fc34b35d8ddb3fbe3f8fcfdf6c2546e676187f0fb20f5774da362ddaf8fa2d"},
+    {file = "SQLAlchemy-1.4.53-cp36-cp36m-manylinux1_x86_64.manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_5_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:626be971ff89541cfd3e70b54be00b57a7f8557204decb6223ce0428fec058f3"},
+    {file = "SQLAlchemy-1.4.53-cp36-cp36m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:991e42fdfec561ebc6a4fae7161a86d129d6069fa14210b96b8dd752afa7059c"},
+    {file = "SQLAlchemy-1.4.53-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:95123f3a1e0e8020848fd32ba751db889a01a44e4e4fef7e58c87ddd0b2fca59"},
+    {file = "SQLAlchemy-1.4.53-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c58e011e9e6373b3a091d83f20601fb335a3b4bace80bfcb914ac168aad3b70d"},
+    {file = "SQLAlchemy-1.4.53-cp37-cp37m-macosx_11_0_x86_64.whl", hash = "sha256:670c7769bf5dcae9aff331247b5d82fe635c63731088a46ce68ba2ba519ef36e"},
+    {file = "SQLAlchemy-1.4.53-cp37-cp37m-manylinux1_x86_64.manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_5_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:07ba54f09033d387ae9df8d62cbe211ed7304e0bfbece1f8c55e21db9fae5c11"},
+    {file = "SQLAlchemy-1.4.53-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:1a38834b4c183c33daf58544281395aad2e985f0b47cca1e88ea5ada88344e63"},
+    {file = "SQLAlchemy-1.4.53-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:616492f5315128a847f293a7c552f3561ac7e996d2aa5dc46bef4fb0d3781f1d"},
+    {file = "SQLAlchemy-1.4.53-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c0cf8c0af9563892c6632f7343bc393dfce6eeef8e4d10c5fadba9c0390520bd"},
+    {file = "SQLAlchemy-1.4.53-cp37-cp37m-win32.whl", hash = "sha256:c05fe05941424c2f3747a8952381b7725e24cba2ca00141380e54789d5b616b6"},
+    {file = "SQLAlchemy-1.4.53-cp37-cp37m-win_amd64.whl", hash = "sha256:93e90aa3e3b2f8e8cbae4d5509f8e0cf82972378d323c740a8df1c1e9f484172"},
+    {file = "SQLAlchemy-1.4.53-cp38-cp38-macosx_12_0_x86_64.whl", hash = "sha256:9d7368df54d3ed45a18955f6cec38ebe075290594ac0d5c87a8ddaff7e10de27"},
+    {file = "SQLAlchemy-1.4.53-cp38-cp38-manylinux1_x86_64.manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_5_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:89d8ac4158ef68eea8bb0f6dd0583127d9aa8720606964ba8eee20b254f9c83a"},
+    {file = "SQLAlchemy-1.4.53-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:16bb9fa4d00b4581b14d9f0e2224dc7745b854aa4687738279af0f48f7056c98"},
+    {file = "SQLAlchemy-1.4.53-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:4fe5168d0249c23f537950b6d75935ff2709365a113e29938a979aec36668ecf"},
+    {file = "SQLAlchemy-1.4.53-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8b8608d162d3bd29d807aab32c3fb6e2f8e225a43d1c54c917fed38513785380"},
+    {file = "SQLAlchemy-1.4.53-cp38-cp38-win32.whl", hash = "sha256:a9d4d132198844bd6828047135ce7b887687c92925049a2468a605fc775c7a1a"},
+    {file = "SQLAlchemy-1.4.53-cp38-cp38-win_amd64.whl", hash = "sha256:c15d1f1fcf1f9bec0499ae1d9132b950fcc7730f2d26d10484c8808b4e077816"},
+    {file = "SQLAlchemy-1.4.53-cp39-cp39-macosx_12_0_x86_64.whl", hash = "sha256:edf094a20a386ff2ec73de65ef18014b250259cb860edc61741e240ca22d6981"},
+    {file = "SQLAlchemy-1.4.53-cp39-cp39-manylinux1_x86_64.manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_5_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:83a9c3514ff19d9d30d8a8d378b24cd1dfa5528d20891481cb5f196117db6a48"},
+    {file = "SQLAlchemy-1.4.53-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:eaaeedbceb4dfd688fff2faf25a9a87a391f548811494f7bff7fa701b639abc3"},
+    {file = "SQLAlchemy-1.4.53-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:d021699b9007deb7aa715629078830c99a5fec2753d9bdd5ff33290d363ef755"},
+    {file = "SQLAlchemy-1.4.53-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0465b8a68f8f4de754c1966c45b187ac784ad97bc9747736f913130f0e1adea0"},
+    {file = "SQLAlchemy-1.4.53-cp39-cp39-win32.whl", hash = "sha256:5f67b9e9dcac3241781e96575468d55a42332157dee04bdbf781df573dff5f85"},
+    {file = "SQLAlchemy-1.4.53-cp39-cp39-win_amd64.whl", hash = "sha256:a8c2f2a0b2c4e3b86eb58c9b6bb98548205eea2fba9dae4edfd29dc6aebbe95a"},
+    {file = "SQLAlchemy-1.4.53.tar.gz", hash = "sha256:5e6ab710c4c064755fd92d1a417bef360228a19bdf0eee32b03aa0f5f8e9fe0d"},
 ]
 
 [package.dependencies]
@@ -3459,24 +4147,29 @@ greenlet = {version = "!=0.4.17", markers = "python_version >= \"3\" and (platfo
 
 [package.extras]
 aiomysql = ["aiomysql (>=0.2.0)", "greenlet (!=0.4.17)"]
-aiosqlite = ["aiosqlite", "greenlet (!=0.4.17)", "typing_extensions (!=3.10.0.1)"]
+aiosqlite = ["aiosqlite", "greenlet (!=0.4.17)", "typing-extensions (!=3.10.0.1)"]
 asyncio = ["greenlet (!=0.4.17)"]
 asyncmy = ["asyncmy (>=0.2.3,!=0.2.4)", "greenlet (!=0.4.17)"]
-mariadb-connector = ["mariadb (>=1.0.1,!=1.1.2)"]
+mariadb-connector = ["mariadb (>=1.0.1,!=1.1.2)", "mariadb (>=1.0.1,!=1.1.2)"]
 mssql = ["pyodbc"]
-mssql-pymssql = ["pymssql"]
-mssql-pyodbc = ["pyodbc"]
+mssql-pymssql = ["pymssql", "pymssql"]
+mssql-pyodbc = ["pyodbc", "pyodbc"]
 mypy = ["mypy (>=0.910)", "sqlalchemy2-stubs"]
 mysql = ["mysqlclient (>=1.4.0)", "mysqlclient (>=1.4.0,<2)"]
-mysql-connector = ["mysql-connector-python"]
-oracle = ["cx_oracle (>=7)", "cx_oracle (>=7,<8)"]
+mysql-connector = ["mysql-connector-python", "mysql-connector-python"]
+oracle = ["cx-oracle (>=7)", "cx-oracle (>=7,<8)"]
 postgresql = ["psycopg2 (>=2.7)"]
-postgresql-asyncpg = ["asyncpg", "greenlet (!=0.4.17)"]
-postgresql-pg8000 = ["pg8000 (>=1.16.6,!=1.29.0)"]
+postgresql-asyncpg = ["asyncpg", "asyncpg", "greenlet (!=0.4.17)", "greenlet (!=0.4.17)"]
+postgresql-pg8000 = ["pg8000 (>=1.16.6,!=1.29.0)", "pg8000 (>=1.16.6,!=1.29.0)"]
 postgresql-psycopg2binary = ["psycopg2-binary"]
 postgresql-psycopg2cffi = ["psycopg2cffi"]
 pymysql = ["pymysql", "pymysql (<1)"]
-sqlcipher = ["sqlcipher3_binary"]
+sqlcipher = ["sqlcipher3-binary"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "sqlparse"
@@ -3492,6 +4185,11 @@ files = [
 [package.extras]
 dev = ["build", "hatch"]
 doc = ["sphinx"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "stack-data"
@@ -3512,6 +4210,11 @@ pure-eval = "*"
 [package.extras]
 tests = ["cython", "littleutils", "pygments", "pytest", "typeguard"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "svgutils"
 version = "0.3.4"
@@ -3526,6 +4229,11 @@ files = [
 [package.dependencies]
 lxml = "*"
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "threadpoolctl"
 version = "3.5.0"
@@ -3536,6 +4244,11 @@ files = [
     {file = "threadpoolctl-3.5.0-py3-none-any.whl", hash = "sha256:56c1e26c150397e58c4926da8eeee87533b1e32bef131bd4bf6a2f45f3185467"},
     {file = "threadpoolctl-3.5.0.tar.gz", hash = "sha256:082433502dd922bf738de0d8bcc4fdcbf0979ff44c42bd40f5af8a282f6fa107"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "tldextract"
@@ -3554,6 +4267,11 @@ idna = "*"
 requests = ">=2.1.0"
 requests-file = ">=1.4"
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "tomli"
 version = "2.0.1"
@@ -3565,12 +4283,17 @@ files = [
     {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "tornado"
 version = "6.4.1"
 description = "Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed."
 optional = false
-python-versions = ">=3.8"
+python-versions = ">= 3.8"
 files = [
     {file = "tornado-6.4.1-cp38-abi3-macosx_10_9_universal2.whl", hash = "sha256:163b0aafc8e23d8cdc3c9dfb24c5368af84a81e3364745ccb4427669bf84aec8"},
     {file = "tornado-6.4.1-cp38-abi3-macosx_10_9_x86_64.whl", hash = "sha256:6d5ce3437e18a2b66fbadb183c1d3364fb03f2be71299e7d10dbeeb69f4b2a14"},
@@ -3584,6 +4307,11 @@ files = [
     {file = "tornado-6.4.1-cp38-abi3-win_amd64.whl", hash = "sha256:b24b8982ed444378d7f21d563f4180a2de31ced9d8d84443907a0a64da2072e7"},
     {file = "tornado-6.4.1.tar.gz", hash = "sha256:92d3ab53183d8c50f8204a51e6f91d18a15d5ef261e84d452800d4ff6fc504e9"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "tqdm"
@@ -3605,6 +4333,11 @@ notebook = ["ipywidgets (>=6)"]
 slack = ["slack-sdk"]
 telegram = ["requests"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "traitlets"
 version = "5.14.3"
@@ -3620,6 +4353,11 @@ files = [
 docs = ["myst-parser", "pydata-sphinx-theme", "sphinx"]
 test = ["argcomplete (>=3.0.3)", "mypy (>=1.7.0)", "pre-commit", "pytest (>=7.0,<8.2)", "pytest-mock", "pytest-mypy-testing"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "typing-extensions"
 version = "4.12.2"
@@ -3631,6 +4369,11 @@ files = [
     {file = "typing_extensions-4.12.2.tar.gz", hash = "sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "tzdata"
 version = "2023.4"
@@ -3641,6 +4384,11 @@ files = [
     {file = "tzdata-2023.4-py2.py3-none-any.whl", hash = "sha256:aa3ace4329eeacda5b7beb7ea08ece826c28d761cda36e747cfbf97996d39bf3"},
     {file = "tzdata-2023.4.tar.gz", hash = "sha256:dd54c94f294765522c77399649b4fefd95522479a664a0cec87f41bebc6148c9"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "ujson"
@@ -3729,12 +4477,17 @@ files = [
     {file = "ujson-5.10.0.tar.gz", hash = "sha256:b3cd8f3c5d8c7738257f1018880444f7b7d9b66232c64649f562d7ba86ad4bc1"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "urllib3"
 version = "1.26.19"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 optional = false
-python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,>=2.7"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*"
 files = [
     {file = "urllib3-1.26.19-py2.py3-none-any.whl", hash = "sha256:37a0344459b199fce0e80b0d3569837ec6b6937435c5244e7fd73fa6006830f3"},
     {file = "urllib3-1.26.19.tar.gz", hash = "sha256:3e3d753a8618b86d7de333b4223005f68720bcd6a7d2bcb9fbd2229ec7c1e429"},
@@ -3744,6 +4497,11 @@ files = [
 brotli = ["brotli (==1.0.9)", "brotli (>=1.0.9)", "brotlicffi (>=0.8.0)", "brotlipy (>=0.6.0)"]
 secure = ["certifi", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "ipaddress", "pyOpenSSL (>=0.14)", "urllib3-secure-extra"]
 socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "urwid-mitmproxy"
@@ -3761,6 +4519,11 @@ files = [
     {file = "urwid_mitmproxy-2.1.2.1-cp39-cp39-win_amd64.whl", hash = "sha256:d2d536ad412022365b5e1974cde9029b86cfc30f3960ae073f959630f0c27c21"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "waitress"
 version = "3.0.0"
@@ -3776,6 +4539,11 @@ files = [
 docs = ["Sphinx (>=1.8.1)", "docutils", "pylons-sphinx-themes (>=1.0.9)"]
 testing = ["coverage (>=5.0)", "pytest", "pytest-cov"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "wcmatch"
 version = "8.5.2"
@@ -3790,6 +4558,11 @@ files = [
 [package.dependencies]
 bracex = ">=2.1.1"
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "wcwidth"
 version = "0.2.13"
@@ -3800,6 +4573,11 @@ files = [
     {file = "wcwidth-0.2.13-py2.py3-none-any.whl", hash = "sha256:3da69048e4540d84af32131829ff948f1e022c1c6bdb8d6102117aac784f6859"},
     {file = "wcwidth-0.2.13.tar.gz", hash = "sha256:72ea0c06399eb286d978fdedb6923a9eb47e1c486ce63e9b4e64fc18303972b5"},
 ]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "werkzeug"
@@ -3818,6 +4596,11 @@ MarkupSafe = ">=2.1.1"
 [package.extras]
 watchdog = ["watchdog (>=2.3)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "whitenoise"
 version = "6.7.0"
@@ -3831,6 +4614,11 @@ files = [
 
 [package.extras]
 brotli = ["brotli"]
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "win32-setctime"
@@ -3846,6 +4634,11 @@ files = [
 [package.extras]
 dev = ["black (>=19.3b0)", "pytest (>=4.6.2)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "wsproto"
 version = "1.2.0"
@@ -3859,6 +4652,11 @@ files = [
 
 [package.dependencies]
 h11 = ">=0.9.0,<1"
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
 
 [[package]]
 name = "yara-python-dex"
@@ -3944,6 +4742,11 @@ files = [
     {file = "yara_python_dex-1.0.6-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:da45cbc03c347f310cbcb9d262ec2d938fb55304c2eec36b779a0e8b9052fbb3"},
 ]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [[package]]
 name = "zstandard"
 version = "0.22.0"
@@ -4005,7 +4808,12 @@ cffi = {version = ">=1.11", markers = "platform_python_implementation == \"PyPy\
 [package.extras]
 cffi = ["cffi (>=1.11)"]
 
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "ee6970bd11d7b2978cce2df0b391e9b55e629c7ca74c8c96793ceb449e58b9bc"
+content-hash = "65baf7722e3c273735c5b7987e7c759ceec3eedbb69f4205c5dfb96cba48d56c"

@@ -28,6 +28,7 @@ from mobsf.MobSF.views.DAO import (
     save_whitelist,
     load_blacklist,
     save_blacklist,
+    delete_md5,
 )
 from mobsf.StaticAnalyzer.views.common.pdf import pdf
 from mobsf.StaticAnalyzer.views.common.appsec import appsec_dashboard
@@ -300,6 +301,66 @@ def api_delete_suppression(request):
         response = make_api_response(resp, 200)
     return response
 
+# @csrf_exempt
+# def import_whitelist(request):
+#     if request.method == 'POST':
+#         if 'file' not in request.FILES:
+#             return make_api_response({'error': "未找到上传的文件"}, status=400)
+
+#         file = request.FILES['file']
+#         save_path = config('FILE_SAVE_PATH', default='/tmp')
+#         file_path = os.path.join(save_path, file.name)
+
+#         with open(file_path, 'wb+') as destination:
+#             for chunk in file.chunks():
+#                 destination.write(chunk)
+
+#         try:
+#             df = pd.read_excel(file_path)
+#             required_columns = ['packageName', 'apkName', 'md5', 'result']
+#             if not all(column in df.columns for column in required_columns):
+#                 return make_api_response({'error': "Excel文件缺少必要的列: packageName, apkName, md5, result"}, status=400)
+
+#             new_data = df[required_columns].to_dict('records')
+#             save_whitelist(new_data)
+
+#             return make_api_response({'message': "添加成功"}, status=200)
+#         finally:
+#             if os.path.exists(file_path):
+#                 os.remove(file_path)
+
+#     return make_api_response({'error': "不允许GET请求"}, status=400)
+
+# @csrf_exempt
+# def import_blacklist(request):
+#     if request.method == 'POST':
+#         if 'file' not in request.FILES:
+#             return make_api_response({'error': "未找到上传的文件", 'code': "400"}, status=400)
+
+#         file = request.FILES['file']
+#         save_path = config('FILE_SAVE_PATH', default='/tmp')
+#         file_path = os.path.join(save_path, file.name)
+
+#         with open(file_path, 'wb+') as destination:
+#             for chunk in file.chunks():
+#                 destination.write(chunk)
+
+#         try:
+#             df = pd.read_excel(file_path)
+#             required_columns = ['packageName', 'apkName', 'md5', 'result']
+#             if not all(column in df.columns for column in required_columns):
+#                 return make_api_response({'error': "Excel文件缺少必要的列: packageName, apkName, md5, result"}, 400)
+
+#             new_data = df[required_columns].to_dict('records')
+#             save_blacklist(new_data)
+
+#             return make_api_response({'message': "添加成功", 'code': "200"}, status=200)
+#         finally:
+#             if os.path.exists(file_path):
+#                 os.remove(file_path)
+
+#     return make_api_response({'error': "不允许GET请求", 'code': "400"}, status=400)
+
 @csrf_exempt
 def import_whitelist(request):
     if request.method == 'POST':
@@ -320,8 +381,20 @@ def import_whitelist(request):
             if not all(column in df.columns for column in required_columns):
                 return make_api_response({'error': "Excel文件缺少必要的列: packageName, apkName, md5, result"}, status=400)
 
-            new_data = df[required_columns].to_dict('records')
-            save_whitelist(new_data)
+            whitelist_data = []
+            blacklist_data = []
+
+            for _, row in df.iterrows():
+                record = row[required_columns].to_dict()
+                if 'black' in record['result'] or '黑' in record['result']:
+                    blacklist_data.append(record)
+                else:
+                    whitelist_data.append(record)
+
+            if whitelist_data:
+                save_whitelist(whitelist_data)
+            if blacklist_data:
+                save_blacklist(blacklist_data)
 
             return make_api_response({'message': "添加成功"}, status=200)
         finally:
@@ -348,10 +421,22 @@ def import_blacklist(request):
             df = pd.read_excel(file_path)
             required_columns = ['packageName', 'apkName', 'md5', 'result']
             if not all(column in df.columns for column in required_columns):
-                return make_api_response({'error': "Excel文件缺少必要的列: packageName, apkName, md5, result"}, 400)
+                return make_api_response({'error': "Excel文件缺少必要的列: packageName, apkName, md5, result"}, status=400)
 
-            new_data = df[required_columns].to_dict('records')
-            save_blacklist(new_data)
+            blacklist_data = []
+            whitelist_data = []
+
+            for _, row in df.iterrows():
+                record = row[required_columns].to_dict()
+                if 'white' in record['result'] or '白' in record['result']:
+                    whitelist_data.append(record)
+                else:
+                    blacklist_data.append(record)
+
+            if blacklist_data:
+                save_blacklist(blacklist_data)
+            if whitelist_data:
+                save_whitelist(whitelist_data)
 
             return make_api_response({'message': "添加成功", 'code': "200"}, status=200)
         finally:
@@ -359,6 +444,7 @@ def import_blacklist(request):
                 os.remove(file_path)
 
     return make_api_response({'error': "不允许GET请求", 'code': "400"}, status=400)
+
 
 @request_method(['POST'])
 @csrf_exempt
@@ -386,3 +472,13 @@ def get_whitelist(request):
         return make_api_response(data, 200)
     except Exception as e:
         return make_api_response({'error': '查询错误', 'details': str(e)}, 400)
+    
+@request_method(['POST'])
+@csrf_exempt
+def delete_list(request):
+    md5 = request.POST.get('MD5')
+    try:
+        data = delete_md5(md5)
+        return make_api_response(data, 200)
+    except Exception as e:
+        return make_api_response({'error': '操作错误', 'details': str(e)}, 400)

@@ -44,7 +44,7 @@ def save_whitelist(data):
             defaults={
                 'packageName': item['packageName'],
                 'apkName': item['apkName'],
-                'result': item.get('result', '未知')
+                'result': item.get('result', 'white')
             }
         )
 
@@ -56,9 +56,19 @@ def save_blacklist(data):
             defaults={
                 'packageName': item['packageName'],
                 'apkName': item['apkName'],
-                'result': item.get('result', '未知')
+                'result': item.get('result', 'black')
             }
         )
+
+def delete_md5(md5):
+    if Blacklist.objects.filter(md5=md5).exists():
+        Blacklist.objects.filter(md5=md5).delete()
+        return(f"从黑名单删除MD5:{md5}")
+    elif Whitelist.objects.filter(md5=md5).exists():
+        Whitelist.objects.filter(md5=md5).delete()
+        return(f"从白名单删除MD5:{md5} ")
+    else:
+        return(f"不存在MD5{md5}")
 
 def check_hash_exists(md5_hash):
     if Whitelist.objects.filter(md5=md5_hash).exists():

@@ -65,6 +65,27 @@ server {
         access_log /var/log/nginx/api_access.log;
         error_log /var/log/nginx/api_error.log debug;
     }
+
+     location /media/ {
+        proxy_pass $BACKEND_URL;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+        add_header Access-Control-Allow-Origin *;
+	 add_header Access-Control-Allow-Methods "GET, POST, OPTIONS";
+	 add_header Access-Control-Allow-Headers "Authorization, Content-Type";
+	    if ($request_method = 'OPTIONS') {
+	        return 204;
+	    }
+		
+	 proxy_read_timeout 300;
+        proxy_connect_timeout 300;
+        proxy_send_timeout 300;
+        # Logging all requests for debugging
+        access_log /var/log/nginx/api_access.log;
+        error_log /var/log/nginx/api_error.log debug;
+    }
 }
 EOL
 

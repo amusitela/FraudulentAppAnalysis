@@ -22,6 +22,13 @@ module.exports = {
           '^/api': ''
         }
       },
+      '/media': {
+        target: 'http://192.168.100.143:8000',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/media': ''
+        }
+      }
     }
   },
   configureWebpack: {

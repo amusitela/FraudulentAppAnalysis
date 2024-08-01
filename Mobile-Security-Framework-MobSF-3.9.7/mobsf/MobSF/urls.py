@@ -45,7 +45,8 @@ from mobsf.StaticAnalyzer.views.ios import static_analyzer as ios_sa
 from mobsf.StaticAnalyzer.views.ios import view_source as io_view_source
 
 from . import settings
-
+from django.conf.urls.static import static
+from decouple import config
 
 urlpatterns = [
     # REST API
@@ -53,6 +54,7 @@ urlpatterns = [
     re_path(r'^api/v1/get_whitelist$', api_sz.get_whitelist),
     re_path(r'^api/v1/import_blacklist$', api_sz.import_blacklist),
     re_path(r'^api/v1/import_whitelist$', api_sz.import_whitelist),
+    re_path(r'^api/v1/delete_list$', api_sz.delete_list),
     # Static Analysis
     re_path(r'^api/v1/upload$', api_sz.api_upload),
     re_path(r'^api/v1/scan$', api_sz.api_scan),
@@ -153,7 +155,8 @@ urlpatterns = [
     # Frida
     re_path(r'^api/v1/frida/ios_instrument$', api_idz.api_ios_instrument),
     re_path(r'^api/v1/dynamic/ios_report_json$', api_idz.api_ios_view_report),
-]
+
+] + static('/media', document_root=config('SCREEN'))
 if settings.API_ONLY == '0':
     urlpatterns.extend([
         # General

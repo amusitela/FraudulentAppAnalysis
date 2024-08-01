@@ -19,7 +19,7 @@ from mobsf.DynamicAnalyzer.views.common import (
     device,
     frida,
 )
-from mobsf.MobSF.views.ai_model import(
+from mobsf.MobSF.views.ai_model import (
     chatGPT
 )
 from mobsf.MobSF.views.DAO import (
@@ -29,6 +29,7 @@ from mobsf.MobSF.utils import (
     get_android_dm_exception_msg,
     get_config_loc,
     get_device,
+    get_adb,
     get_proxy_ip,
     is_md5,
     print_n_send_error_response,
@@ -42,7 +43,7 @@ from decouple import config
 from datetime import datetime
 from django.conf import settings
 from mobsf.StaticAnalyzer.models import RecentScansDB
-from mobsf.MobSF.views.make_ips import(
+from mobsf.MobSF.views.make_ips import (
     extract_and_save_ips_from_pcap,
     load_common_ips,
 )
@@ -57,6 +58,8 @@ from mobsf.MobSF.utils import (
 )
 from mobsf.StaticAnalyzer.models import StaticAnalyzerAndroid
 import logging
+import subprocess
+from multiprocessing import Process, Queue
 
 logger = logging.getLogger(__name__)
 screen = config('SCREEN')
@@ -64,6 +67,8 @@ tcp_path = config('TCPDUMP')
 save_file = config('FILE_SAVE_PATH')
 save_path = config('SAVE_FILE_PATH')
 config_ip_file = config('CONFIG_IP_FILE')
+
+
 # 动态分析 API
 @request_method(['GET'])
 @csrf_exempt
@@ -347,6 +352,7 @@ def api_dynamic_view_file(request):
         return make_api_response(resp, 500)
     return make_api_response(resp, 200)
 
+
 @request_method(['POST'])
 @csrf_exempt
 def my_analysis(request):
@@ -363,7 +369,7 @@ def my_analysis(request):
         return make_api_response({'error': '缺少参数'}, 422)
 
     sta_resp = get_activity(request.POST['hash'])
-    max_attempts =int(request.POST['maxAttempts']) 
+    max_attempts = int(request.POST['maxAttempts'])
 
     if isinstance(sta_resp, dict) and 'error' in sta_resp:
         return make_api_response(sta_resp, 500)
@@ -376,7 +382,7 @@ def my_analysis(request):
 
             act_resp = tests_common.start_activity(request, True)
             if 'error' in act_resp:
-                return make_api_response({'error':act_resp['error']})
+                return make_api_response({'error': act_resp['error']})
             if act_resp['status'] == 'ok':
                 # 尝试多次截屏
                 screenshot_success = False
@@ -412,32 +418,28 @@ def my_analysis(request):
                         res = '安全'
                     elif selfList == '黑名单':
                         res = '黑产'
-                    else: 
+                    else:
                         res = chatGPT(file_path)
                     update_recent_scan_dynamic(request.POST['hash'], res)
                     return make_api_response({'message': res})
-        
+
         res = ''
         selfList = check_hash_exists(request.POST['hash'])
         if selfList == '白名单':
             res = '安全'
         elif selfList == '黑名单':
             res = '黑产'
-        else: 
+        else:
             res = chatGPT(file_path)
         update_recent_scan_dynamic(request.POST['hash'], res)
         return make_api_response({'message': res})
-        
+
     else:
-         logger.error('该APK无法使用自动模式，请手动处理')
-         return make_api_response({'error':'该APK无法使用自动模式，请手动处理'})
+        logger.error('该APK无法使用自动模式，请手动处理')
+        return make_api_response({'error': '该APK无法使用自动模式，请手动处理'})
 
     # 如果没有成功返回任何响应，则返回一个默认响应
     return make_api_response({'error': '动态分析失败'}, 500)
-
-
-
-
 
     # """POST - 开始动态分析。"""
     # error = ''
@@ -501,7 +503,7 @@ def my_analysis(request):
     #     error = sta_resp['error']
     #     print(error)
     #     return make_api_response({'error': error}, 400)
-   
+
 
 # @request_method(['POST'])
 # @csrf_exempt
@@ -568,15 +570,15 @@ def my_analysis(request):
 #                         else: 
 #                             res = chatGPT(file_path)
 #                         update_recent_scan_dynamic(request.POST['hash'],res)
-                        
+
 #                         # 停止抓包
 #                         stop_packet_capture(request)
-                        
+
 #                         # 拉取抓包文件
 #                         local_capture_file, cmd_resp = pull_capture_file(request)
 #                         if cmd_resp['status'] != 'ok':
 #                             return make_api_response({'error': '抓包文件拉取失败'}, 500)
-                        
+
 #                         # 提取URL
 #                         # urls = extract_urls_from_pcap(local_capture_file)
 
@@ -588,7 +590,7 @@ def my_analysis(request):
 #                 return make_api_response(act_resp, 500)
 #     else:
 #         error = sta_resp['error']
-    
+
 #     # 发生错误时也停止抓包
 #     stop_packet_capture(request)
 
@@ -601,20 +603,20 @@ def hand_analysis(request):
     if 'hash' not in request.POST:
         logger.error('缺少参数')
         return make_api_response({'error': '缺少参数'}, 422)
-    
+
     try:
-            identifier = get_device()
+        identifier = get_device()
     except Exception:
-            return make_api_response({'error':'没有获取到设备'},400)
+        return make_api_response({'error': '没有获取到设备'}, 400)
 
     try:
         checksum = request.POST['hash']
         apk_path = Path(settings.UPLD_DIR) / checksum / f'{checksum}.apk'
-        
+
         mutable_post = request.POST.copy()
         mutable_post['cmd'] = f'install -r {apk_path}'
         request.POST = mutable_post
-        
+
         cmd_resp = operations.execute_adb(request, True)
         if 'success' in cmd_resp.get('message', '').lower():
             return make_api_response({'message': '安装apk成功'}, 200)
@@ -622,27 +624,28 @@ def hand_analysis(request):
             return make_api_response({'error': '此 APK 无法安装。该 APK 是否与 Android VM/模拟器兼容？'}, 400)
     except Exception as e:
         logger.error('安装apk时发生错误: %s', str(e))
-        return make_api_response({'error': '安装apk失败'+e}, 400)
+        return make_api_response({'error': '安装apk失败' + e}, 400)
     # Install APK
-        # reinstall = '1'
+    # reinstall = '1'
 
-        # package = get_package_name(checksum)
-        # if not package:
-        #     return make_api_response({'error':'没有这个apk'},400)
-        
-        # env = Environment(identifier)
-        # status, output = env.install_apk(
-        #     apk_path.as_posix(),
-        #     package,
-        #     reinstall)
-        # if not status:
-        #     # Unset Proxy
-        #     env.unset_global_proxy()
-        #     msg = (f'此 APK 无法安装。该 APK 是否与 Android VM/模拟器兼容？\n{output}')
-        #     return make_api_response({'error': '此 APK 无法安装。该 APK 是否与 Android VM/模拟器兼容？'}, 400)
+    # package = get_package_name(checksum)
+    # if not package:
+    #     return make_api_response({'error':'没有这个apk'},400)
+
+    # env = Environment(identifier)
+    # status, output = env.install_apk(
+    #     apk_path.as_posix(),
+    #     package,
+    #     reinstall)
+    # if not status:
+    #     # Unset Proxy
+    #     env.unset_global_proxy()
+    #     msg = (f'此 APK 无法安装。该 APK 是否与 Android VM/模拟器兼容？\n{output}')
+    #     return make_api_response({'error': '此 APK 无法安装。该 APK 是否与 Android VM/模拟器兼容？'}, 400)
     # except Exception as e:
     #     logger.error('安装apk时发生错误: %s', str(e))
     #     return make_api_response({'error': '安装apk失败'+e}, 400)
+
 
 @request_method(['POST'])
 @csrf_exempt
@@ -686,7 +689,7 @@ def take_screen(request):
         return make_api_response({'error': error}, 400)
 
     if attempts == maxAttempts:
-        for i in range(1, maxAttempts+1):
+        for i in range(1, maxAttempts + 1):
             screenshot_filename = f'{screen}/{request.POST["hash"]}_{i}.png'
             file_path.append(screenshot_filename)
         res = ''
@@ -695,35 +698,43 @@ def take_screen(request):
             res = '安全'
         elif selfList == '黑名单':
             res = '黑产'
-        else: 
+        else:
             res = chatGPT(file_path)
         update_recent_scan_dynamic(request.POST['hash'], res)
         logger.info(f'Result: {res}')
         return make_api_response({'message': res}, 200)
     else:
-        return make_api_response({'message': '截图成功'}, 200)
+        try:
+            file_path = os.path.join(config('SCREEN'), f'{request.POST["hash"]}_{attempts}.png')
+            if os.path.exists(file_path):
+                return make_api_response({'url':f'/media/{request.POST["hash"]}_{attempts}.png'})
+            else:
+                return make_api_response({'error':'图片没有找到'})
+        except json.JSONDecodeError:
+            return make_api_response({'error': '无效JSON'}, status=400)
+
+
 
 @request_method(['POST'])
-@csrf_exempt    
+@csrf_exempt
 def start_capture(request):
     if 'hash' not in request.POST:
         logger.error('缺少参数')
         return make_api_response({'error': '缺少参数'}, 422)
-    
+
     mutable_post = request.POST.copy()
     mutable_post['action'] = 'unset'
-    request.POST = mutable_post 
+    request.POST = mutable_post
     resp_proxy = operations.global_proxy(request, True)
     if resp_proxy['status'] != 'ok':
-        return make_api_response({'error':'关闭代理失败'})
-    
+        return make_api_response({'error': '关闭代理失败'})
+
     mutable_post = request.POST.copy()
     mutable_post['action'] = 'install'
-    request.POST = mutable_post 
+    request.POST = mutable_post
     resp_ca = operations.mobsf_ca(request, True)
     if resp_ca['status'] != 'ok':
-        return make_api_response({'error':'安装证书失败'})
-
+        return make_api_response({'error': '安装证书失败'})
 
     # 检测/sdcard目录下是否有tcpdump
     mutable_post = request.POST.copy()
@@ -741,7 +752,7 @@ def start_capture(request):
             error = '推送 tcpdump 时发生未知错误'
             logger.error(f'Error pushing tcpdump: {error}')
             return make_api_response({'error': error}, 400)
-    
+
     # 使用tcpdump进行抓包
     capture_post = request.POST.copy()
     capture_post['cmd'] = 'shell tcpdump -i any -p -s 0 -w /sdcard/capture.pcap'
@@ -755,14 +766,13 @@ def start_capture(request):
         logger.error(f'Error starting capture: {error}')
         return make_api_response({'error': error}, 400)
 
+
 @request_method(['POST'])
 @csrf_exempt
 def end_capture(request):
-
     if 'hash' not in request.POST:
         logger.error('缺少参数')
         return make_api_response({'error': '缺少参数'}, 422)
-    
     # 结束抓包
     find_pid_post = request.POST.copy()
     find_pid_post['cmd'] = 'shell pgrep tcpdump'
@@ -772,7 +782,7 @@ def end_capture(request):
     if find_pid_resp['status'] == 'ok' and find_pid_resp.get('message'):
         pid = find_pid_resp['message'].strip()
         stop_capture_post = request.POST.copy()
-        stop_capture_post['cmd'] = f'shell kill -2 {pid}'  
+        stop_capture_post['cmd'] = f'shell kill -2 {pid}'
         request.POST = stop_capture_post
         stop_capture_resp = operations.execute_adb(request, True)
 
@@ -786,7 +796,7 @@ def end_capture(request):
         error = find_pid_resp.get('error', '未找到 tcpdump 进程')
         logger.error(f'Error finding tcpdump PID: {error}')
         return make_api_response({'error': error}, 400)
-    
+
     # 拉取抓包文件到本地
     save_pacp_path = f'{save_file}/{request.POST["hash"]}.pcap'
     pull_capture_post = request.POST.copy()
@@ -797,81 +807,136 @@ def end_capture(request):
     if pull_capture_resp['status'] == 'ok':
         logger.info('成功拉取抓包文件到本地')
         common_ips = load_common_ips(config_ip_file)
-        res = extract_and_save_ips_from_pcap(save_pacp_path,common_ips,f'{save_path}/{request.POST["hash"]}.txt')
+        res = extract_and_save_ips_from_pcap(save_pacp_path, common_ips, f'{save_path}/{request.POST["hash"]}.txt')
         mutable_post = request.POST.copy()
         mutable_post['action'] = 'set'
-        request.POST = mutable_post 
+        request.POST = mutable_post
         resp_proxy = operations.global_proxy(request, True)
         if resp_proxy['status'] != 'ok':
-            return make_api_response({'error':'开启代理失败'})
-        return make_api_response({'message': res},200)
+            return make_api_response({'error': '开启代理失败'})
+        return make_api_response({'message': res}, 200)
     else:
         error = pull_capture_resp.get('error', '在拉取抓包文件时发生未知错误')
         logger.error(f'Error pulling capture file: {error}')
         return make_api_response({'error': error}, 400)
-    
+
 
 @request_method(['POST'])
 @csrf_exempt
 def auto_capture(request):
-    if 'hash' not in request.POST:
-        logger.error('缺少参数')
-        return make_api_response({'error': '缺少参数'}, 422)
-    
-    mutable_post = request.POST.copy()
-    mutable_post['action'] = 'unset'
-    request.POST = mutable_post 
-    resp_proxy = operations.global_proxy(request, True)
-    if resp_proxy['status'] != 'ok':
-        return make_api_response({'error':'关闭代理失败'})
-    
-    mutable_post = request.POST.copy()
-    mutable_post['action'] = 'install'
-    request.POST = mutable_post 
-    resp_ca = operations.mobsf_ca(request, True)
-    if resp_ca['status'] != 'ok':
-        return make_api_response({'error':'安装证书失败'})
-
-
-    # 检测/sdcard目录下是否有tcpdump
-    mutable_post = request.POST.copy()
-    mutable_post['cmd'] = 'shell ls /sdcard/tcpdump'
-    request.POST = mutable_post
-    cmd_resp = operations.execute_adb(request, True)
-
-    if cmd_resp['status'] != 'ok' or '/sdcard/tcpdump' not in cmd_resp.get('message', ''):
-        logger.info('tcpdump 不存在，推送文件...')
-        push_post = request.POST.copy()
-        push_post['cmd'] = f'push {tcp_path} /sdcard/'
-        request.POST = push_post
-        push_resp = operations.execute_adb(request, True)
-        if push_resp['status'] != 'ok':
-            error = '推送 tcpdump 时发生未知错误'
-            logger.error(f'Error pushing tcpdump: {error}')
-            return make_api_response({'error': error}, 400)
-    
-    # 使用tcpdump进行抓包
-    capture_post = request.POST.copy()
-    capture_post['cmd'] = 'shell tcpdump -i any -p -s 0 -w /sdcard/capture.pcap'
-    request.POST = capture_post
-    capture_resp = operations.execute_capture(request, True)
-    if 'error' in capture_resp:
-        return make_api_response({'error':'启动抓包失败，请检查tcpdump位置是否正确。'},400)
-    
     try:
+        if 'hash' not in request.POST:
+            logger.error('缺少参数 hash')
+            return make_api_response({'error': '缺少参数 hash'}, 422)
+
+        mutable_post = request.POST.copy()
+        mutable_post['action'] = 'unset'
+        request.POST = mutable_post
+        resp_proxy = operations.global_proxy(request, True)
+        if resp_proxy['status'] != 'ok':
+            logger.error('关闭代理失败')
+            return make_api_response({'error': '关闭代理失败'}, 400)
+
+        mutable_post['action'] = 'install'
+        request.POST = mutable_post
+        resp_ca = operations.mobsf_ca(request, True)
+        if resp_ca['status'] != 'ok':
+            logger.error('安装证书失败')
+            return make_api_response({'error': '安装证书失败'}, 400)
+
+        # 检测/sdcard目录下是否有tcpdump
+        mutable_post['cmd'] = 'shell ls /sdcard/tcpdump'
+        request.POST = mutable_post
+        cmd_resp = operations.execute_adb(request, True)
+
+        if cmd_resp['status'] != 'ok' or '/sdcard/tcpdump' not in cmd_resp.get('message', ''):
+            logger.info('tcpdump 不存在，推送文件...')
+            if not tcp_path:
+                logger.error('tcp_path 未定义或为空')
+                return make_api_response({'error': 'tcp_path 未定义或为空'}, 400)
+
+            push_post = request.POST.copy()
+            push_post['cmd'] = f'push {tcp_path} /sdcard/'
+            request.POST = push_post
+            push_resp = operations.execute_adb(request, True)
+            if push_resp['status'] != 'ok':
+                error = '推送 tcpdump 时发生未知错误'
+                logger.error(f'Error pushing tcpdump: {error}')
+                return make_api_response({'error': error}, 400)
+
         sta_resp = get_activity(request.POST['hash'])
+        # 使用tcpdump进行抓包（在子进程中执行）
+        cmd = 'shell tcpdump -i any -p -s 0 -w /sdcard/capture.pcap'
+        args = [get_adb(), '-s', get_device()]
+
+        try:
+            process = subprocess.Popen(
+                args + cmd.split(' '),
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL
+            )
+            logger.info('tcpdump 进程启动，PID: %s', process.pid)
+        except Exception as e:
+            logger.exception('执行 ADB 命令时出错: %s', e)
+            return make_api_response({'error': '执行 ADB 命令时出错'}, 500)
         if 'error' not in sta_resp:
             for activity in sta_resp['activities']:
-                mutable_post = request.POST.copy()
                 mutable_post['activity'] = activity
                 request.POST = mutable_post
                 tests_common.start_activity(request, True)
-        end_capture(request)
-        return make_api_response({'message':'抓包成功'},200)
+
+        find_pid_post = request.POST.copy()
+        find_pid_post['cmd'] = 'shell pgrep tcpdump'
+        request.POST = find_pid_post
+        find_pid_resp = operations.execute_adb(request, True)
+
+        if find_pid_resp['status'] == 'ok' and find_pid_resp.get('message'):
+            pid = find_pid_resp['message'].strip()
+            stop_capture_post = request.POST.copy()
+            stop_capture_post['cmd'] = f'shell kill -2 {pid}'
+            request.POST = stop_capture_post
+            stop_capture_resp = operations.execute_adb(request, True)
+
+            if stop_capture_resp['status'] == 'ok':
+                logger.info('抓包结束成功')
+            else:
+                error = '在结束抓包时发生未知错误'
+                logger.error(f'Error stopping capture: {error}')
+                return make_api_response({'error': error}, 400)
+        else:
+            error = find_pid_resp.get('error', '未找到 tcpdump 进程')
+            logger.error(f'Error finding tcpdump PID: {error}')
+            return make_api_response({'error': error}, 400)
+        # 拉取抓包文件到本地
+        save_pacp_path = f'{save_file}/{request.POST["hash"]}.pcap'
+        pull_capture_post = request.POST.copy()
+        pull_capture_post['cmd'] = f'pull /sdcard/capture.pcap {save_pacp_path}'
+        request.POST = pull_capture_post
+        pull_capture_resp = operations.execute_adb(request, True)
+
+        if pull_capture_resp['status'] == 'ok':
+            logger.info('成功拉取抓包文件到本地')
+            common_ips = load_common_ips(config_ip_file)
+            res = extract_and_save_ips_from_pcap(save_pacp_path, common_ips,
+                                                 f'{save_path}/{request.POST["hash"]}.txt')
+            mutable_post = request.POST.copy()
+            mutable_post['action'] = 'set'
+            request.POST = mutable_post
+            resp_proxy = operations.global_proxy(request, True)
+            if resp_proxy['status'] != 'ok':
+                return make_api_response({'error': '开启代理失败'})
+            return make_api_response({'message': res}, 200)
+        else:
+            error = pull_capture_resp.get('error', '在拉取抓包文件时发生未知错误')
+            logger.error(f'Error pulling capture file: {error}')
+            return make_api_response({'error': error}, 400)
+    except KeyError as e:
+        logger.error(f'请求中缺少关键参数: {str(e)}')
+        return make_api_response({'error': f'请求中缺少关键参数: {str(e)}'}, 400)
     except Exception as e:
-        end_capture(request)
-        return make_api_response({'error':'先检查apk是否和VM兼容或者使用手动抓包'},400)
-       
+        logger.error(f'意外错误: {str(e)}')
+        return make_api_response({'error': '先检查apk是否和VM兼容或者使用手动抓包'}, 400)
+
 
 @request_method(['POST'])
 @csrf_exempt
@@ -888,18 +953,20 @@ def send_txt_file(request):
     else:
         raise Http404("File not found")
 
+
 def update_recent_scan_dynamic(hash_value, data):
     try:
         db_obj = RecentScansDB.objects.get(MD5=hash_value)
-        db_obj.DYNAMIC = data  
-        db_obj.save()  
-        return True  
+        db_obj.DYNAMIC = data
+        db_obj.save()
+        return True
     except RecentScansDB.DoesNotExist:
-        return False  
+        return False
     except Exception as e:
         print(f"更新数据库失败: {e}")
-        return False  
-    
+        return False
+
+
 def get_activity(checksum):
     """Android 动态分析环境。"""
     try:
@@ -907,11 +974,11 @@ def get_activity(checksum):
         activities = None
         exported_activities = None
         package = get_package_name(checksum)
-        
+
         try:
             identifier = get_device()
         except Exception:
-            return {'error':'获取设备错误'}
+            return {'error': '获取设备错误'}
 
         # 从静态分析结果中获取活动信息
         try:
@@ -924,7 +991,7 @@ def get_activity(checksum):
         env = Environment(identifier)
         if not env.connect_n_mount():
             msg = f'不能连接到设备 {identifier}'
-            return {'error'+msg}
+            return {'error' + msg}
 
         version = env.get_android_version()
         logger.info('检测到的 Android 版本为 %s', version)
@@ -935,7 +1002,7 @@ def get_activity(checksum):
                    '正在对 Android 运行环境进行 MobSFy')
             logger.warning(msg)
             if not env.mobsfy_init():
-                return {'error':'MobSFy 失败'}
+                return {'error': 'MobSFy 失败'}
             if version < 5:
                 # 启动剪贴板监控器
                 env.start_clipmon()
@@ -945,7 +1012,7 @@ def get_activity(checksum):
             msg = ('在进行动态分析之前，您是否已对实例进行了 MobSFy？'
                    '请为 Xposed 安装框架。'
                    '重启设备并启用所有 Xposed 模块。最后再次重启设备。')
-            return {'error'+msg}
+            return {'error' + msg}
 
         # 安装 APK
         apk_path = Path(settings.UPLD_DIR) / checksum / f'{checksum}.apk'
@@ -953,7 +1020,7 @@ def get_activity(checksum):
         if not status:
             # 取消设置代理
             env.unset_global_proxy()
-            msg = (f'无法安装此 APK。此 APK 是否与 Android 虚拟机/模拟器兼容？\n{output}')
+            msg = f'无法安装此 APK。此 APK 是否与 Android 虚拟机/模拟器兼容？\n{output}'
             return {'error': msg}
 
         logger.info('测试环境已准备就绪！')
@@ -968,3 +1035,5 @@ def get_activity(checksum):
 
     except Exception:
         logger.warning('获取活动失败。未完成应用的静态分析。')
+
+    
