@@ -386,8 +386,10 @@ def import_whitelist(request):
 
             for _, row in df.iterrows():
                 record = row[required_columns].to_dict()
-                if 'black' in record['result'] or '黑' in record['result']:
+                if isinstance(record['result'], str) and record['result'] and ('black' in record['result'] or '黑' in record['result']):
                     blacklist_data.append(record)
+                elif record['result'] == '' or not record['result']:
+                    whitelist_data.append(record)
                 else:
                     whitelist_data.append(record)
 
@@ -428,8 +430,10 @@ def import_blacklist(request):
 
             for _, row in df.iterrows():
                 record = row[required_columns].to_dict()
-                if 'white' in record['result'] or '白' in record['result']:
+                if isinstance(record['result'], str) and record['result'] and ('white' in record['result'] or '白' in record['result']):
                     whitelist_data.append(record)
+                elif record['result'] == '' or not record['result']:
+                    blacklist_data.append(record)
                 else:
                     blacklist_data.append(record)
 
@@ -453,9 +457,15 @@ def get_blacklist(request):
     apkName = request.POST.get('App')
     md5 = request.POST.get('MD5')
     result = request.POST.get('Result')
+    page = int(request.POST.get('page'), 1)
+    size = int(request.POST.get('size', 10))
     try:
-        data = load_blacklist(packageName, apkName, md5, result)
-        return make_api_response(data, 200)
+        data, total = load_blacklist(packageName, apkName, md5, result, page, size)
+        response_data = {
+            'items': data,
+            'totalItems': total
+        }
+        return make_api_response(response_data, 200)
     except Exception as e:
         return make_api_response({'error': '查询错误', 'details': str(e)}, 400)
 
@@ -466,10 +476,15 @@ def get_whitelist(request):
     apkName = request.POST.get('App')
     md5 = request.POST.get('MD5')
     result = request.POST.get('Result')
-    print(packageName,apkName,md5,result)
+    page = int(request.POST.get('page', 1))
+    size = int(request.POST.get('size', 10))
     try:
-        data = load_whitelist(packageName, apkName, md5, result)
-        return make_api_response(data, 200)
+        data, total = load_whitelist(packageName, apkName, md5, result, page, size)
+        response_data = {
+            'items': data,
+            'totalItems': total
+        }
+        return make_api_response(response_data, 200)
     except Exception as e:
         return make_api_response({'error': '查询错误', 'details': str(e)}, 400)
     

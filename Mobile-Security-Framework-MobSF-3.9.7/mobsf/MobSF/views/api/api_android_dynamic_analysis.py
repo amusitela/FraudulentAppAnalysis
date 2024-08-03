@@ -20,7 +20,8 @@ from mobsf.DynamicAnalyzer.views.common import (
     frida,
 )
 from mobsf.MobSF.views.ai_model import (
-    chatGPT
+    chatGPT,
+    combine_images
 )
 from mobsf.MobSF.views.DAO import (
     check_hash_exists,
@@ -413,33 +414,63 @@ def my_analysis(request):
                 attempts += 1
                 if attempts >= max_attempts:
                     res = ''
+                    high_confidence_entry = ''
                     selfList = check_hash_exists(request.POST['hash'])
                     if selfList == '白名单':
                         res = '安全'
                     elif selfList == '黑名单':
                         res = '黑产'
                     else:
-                        res = chatGPT(file_path)
-                    update_recent_scan_dynamic(request.POST['hash'], res)
+                        image_path = combine_images(file_path)
+                        res = chatGPT(image_path)
+                        categories = res.split('@')
+                        for category in categories:
+                            parts = category.split('$')  # 按 '$' 分割
+                            entry = {}
+                            for part in parts:
+                                key, value = part.split(':')
+                                key = key.strip()
+                                value = value.strip()
+                                entry[key] = value
+                            # 检查是否置信度为“高”
+                            if entry.get("置信度") == "高":
+                                high_confidence_entry = entry.get("类别")
+                                break  # 找到第一个“高”置信度的条目后退出循环
+                    update_recent_scan_dynamic(request.POST['hash'], high_confidence_entry)
+                    update_recent_scan_dynamic_confidence(request.POST['hash'], res)
                     return make_api_response({'message': res})
 
         res = ''
+        high_confidence_entry = ''
         selfList = check_hash_exists(request.POST['hash'])
         if selfList == '白名单':
             res = '安全'
         elif selfList == '黑名单':
             res = '黑产'
         else:
-            res = chatGPT(file_path)
-        update_recent_scan_dynamic(request.POST['hash'], res)
+            image_path = combine_images(file_path)
+            res = chatGPT(image_path)
+            categories = res.split('@')
+            for category in categories:
+                parts = category.split('$')  # 按 '$' 分割
+                entry = {}
+                for part in parts:
+                    key, value = part.split(':')
+                    key = key.strip()
+                    value = value.strip()
+                    entry[key] = value
+                # 检查是否置信度为“高”
+                if entry.get("置信度") == "高":
+                    high_confidence_entry = entry.get("类别")
+                    break  # 找到第一个“高”置信度的条目后退出循环
+        update_recent_scan_dynamic(request.POST['hash'], high_confidence_entry)
+        update_recent_scan_dynamic_confidence(request.POST['hash'], res)
         return make_api_response({'message': res})
 
     else:
         logger.error('该APK无法使用自动模式，请手动处理')
         return make_api_response({'error': '该APK无法使用自动模式，请手动处理'})
 
-    # 如果没有成功返回任何响应，则返回一个默认响应
-    return make_api_response({'error': '动态分析失败'}, 500)
 
     # """POST - 开始动态分析。"""
     # error = ''
@@ -689,6 +720,7 @@ def take_screen(request):
         return make_api_response({'error': error}, 400)
 
     if attempts == maxAttempts:
+        high_confidence_entry = ''
         for i in range(1, maxAttempts + 1):
             screenshot_filename = f'{screen}/{request.POST["hash"]}_{i}.png'
             file_path.append(screenshot_filename)
@@ -699,8 +731,23 @@ def take_screen(request):
         elif selfList == '黑名单':
             res = '黑产'
         else:
-            res = chatGPT(file_path)
-        update_recent_scan_dynamic(request.POST['hash'], res)
+            image_path = combine_images(file_path)
+            res = chatGPT(image_path)
+            categories = res.split('@')
+            for category in categories:
+                parts = category.split('$')  # 按 '$' 分割
+                entry = {}
+                for part in parts:
+                    key, value = part.split(':')
+                    key = key.strip()
+                    value = value.strip()
+                    entry[key] = value
+                # 检查是否置信度为“高”
+                if entry.get("置信度") == "高":
+                    high_confidence_entry = entry.get("类别")
+                    break  # 找到第一个“高”置信度的条目后退出循环
+        update_recent_scan_dynamic(request.POST['hash'], high_confidence_entry)
+        update_recent_scan_dynamic_confidence(request.POST['hash'], res)
         logger.info(f'Result: {res}')
         return make_api_response({'message': res}, 200)
     else:
@@ -809,11 +856,11 @@ def end_capture(request):
         common_ips = load_common_ips(config_ip_file)
         res = extract_and_save_ips_from_pcap(save_pacp_path, common_ips, f'{save_path}/{request.POST["hash"]}.txt')
         mutable_post = request.POST.copy()
-        mutable_post['action'] = 'set'
+        mutable_post['action'] = 'unset'
         request.POST = mutable_post
         resp_proxy = operations.global_proxy(request, True)
         if resp_proxy['status'] != 'ok':
-            return make_api_response({'error': '开启代理失败'})
+            return make_api_response({'error': '关闭代理失败'})
         return make_api_response({'message': res}, 200)
     else:
         error = pull_capture_resp.get('error', '在拉取抓包文件时发生未知错误')
@@ -920,11 +967,11 @@ def auto_capture(request):
             res = extract_and_save_ips_from_pcap(save_pacp_path, common_ips,
                                                  f'{save_path}/{request.POST["hash"]}.txt')
             mutable_post = request.POST.copy()
-            mutable_post['action'] = 'set'
+            mutable_post['action'] = 'unset'
             request.POST = mutable_post
             resp_proxy = operations.global_proxy(request, True)
             if resp_proxy['status'] != 'ok':
-                return make_api_response({'error': '开启代理失败'})
+                return make_api_response({'error': '关闭代理失败'})
             return make_api_response({'message': res}, 200)
         else:
             error = pull_capture_resp.get('error', '在拉取抓包文件时发生未知错误')
@@ -967,6 +1014,18 @@ def update_recent_scan_dynamic(hash_value, data):
         return False
 
 
+def update_recent_scan_dynamic_confidence(hash_value, data):
+    try:
+        db_obj = RecentScansDB.objects.get(MD5=hash_value)
+        db_obj.DYNAMIC_CONFIDENCE = data
+        db_obj.save()
+        return True
+    except RecentScansDB.DoesNotExist:
+        return False
+    except Exception as e:
+        print(f"更新数据库失败: {e}")
+        return False
+
 def get_activity(checksum):
     """Android 动态分析环境。"""
     try:
@@ -989,6 +1048,7 @@ def get_activity(checksum):
             logger.warning('获取活动失败。未完成应用的静态分析。')
 
         env = Environment(identifier)
+        env.unset_global_proxy()
         if not env.connect_n_mount():
             msg = f'不能连接到设备 {identifier}'
             return {'error' + msg}

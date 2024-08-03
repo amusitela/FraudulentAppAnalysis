@@ -70,7 +70,7 @@ def pdf(request, checksum, api=False, jsonres=False):
             MD5=checksum)
 
         if android_static_db.exists():
-            context, template = handle_pdf_android(android_static_db,checksum)
+            context, template = handle_pdf_android(android_static_db, checksum)
         elif ios_static_db.exists():
             context, template = handle_pdf_ios(ios_static_db)
         elif win_static_db.exists():
@@ -158,12 +158,16 @@ def pdf(request, checksum, api=False, jsonres=False):
             return print_n_send_error_response(request, msg, False, exp)
 
 
-def handle_pdf_android(static_db,md5):
+def handle_pdf_android(static_db, md5):
+    res = {'scam': '涉诈', 'sex': '涉黄', 'gamble': '涉赌', '安全': '安全', '黑产': '黑产'}
     logger.info(
         'Fetching data from DB for '
         'PDF Report Generation (Android)')
     context = adb(static_db)
     context['static_type'] = get_static_by_md5(md5)
+    static_confidence = get_static_confidence_by_md5(md5)
+    confidence_items = [{"label": res[item.split('$')[0]], "confidence": item.split('$')[1]} for item in static_confidence.split('@')]
+    context['confidence_items'] = confidence_items
     # context['average_cvss'] = get_avg_cvss(
     #     context['code_analysis'])
     context['appsec'] = get_android_dashboard(static_db)
@@ -203,5 +207,13 @@ def get_static_by_md5(md5):
     try:
         scan_record = RecentScansDB.objects.get(MD5=md5)
         return scan_record.STATIC
+    except RecentScansDB.DoesNotExist:
+        return None
+
+
+def get_static_confidence_by_md5(md5):
+    try:
+        scan_record = RecentScansDB.objects.get(MD5=md5)
+        return scan_record.STATIC_CONFIDENCE
     except RecentScansDB.DoesNotExist:
         return None

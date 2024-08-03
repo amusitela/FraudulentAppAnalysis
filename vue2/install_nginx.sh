@@ -58,9 +58,9 @@ server {
 	    }
 	 rewrite ^/api/(.*)$ /$1 break;
 		
-	 proxy_read_timeout 300;
-        proxy_connect_timeout 300;
-        proxy_send_timeout 300;
+	 proxy_read_timeout 3000;
+        proxy_connect_timeout 3000;
+        proxy_send_timeout 3000;
         # Logging all requests for debugging
         access_log /var/log/nginx/api_access.log;
         error_log /var/log/nginx/api_error.log debug;
@@ -79,9 +79,9 @@ server {
 	        return 204;
 	    }
 		
-	 proxy_read_timeout 300;
-        proxy_connect_timeout 300;
-        proxy_send_timeout 300;
+	 proxy_read_timeout 3000;
+        proxy_connect_timeout 3000;
+        proxy_send_timeout 3000;
         # Logging all requests for debugging
         access_log /var/log/nginx/api_access.log;
         error_log /var/log/nginx/api_error.log debug;

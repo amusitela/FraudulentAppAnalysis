@@ -138,9 +138,9 @@ def send_response(data, api=False):
     """Return JSON Response."""
     if api:
         return data
-    return HttpResponse(
-        json.dumps(data),
-        content_type='application/json')
+    # return HttpResponse(
+    #     json.dumps(data),
+    #     content_type='application/json')
 
 
 def invalid_params(api=True):

@@ -1,6 +1,8 @@
 from datetime import datetime
 
 from django.db import models
+
+
 # Create your models here.
 
 
@@ -11,11 +13,14 @@ class RecentScansDB(models.Model):
     APP_NAME = models.CharField(max_length=260, default='')
     LIST = models.CharField(max_length=260, default='未知')
     STATIC = models.CharField(max_length=260, default='未分析')
+    STATIC_CONFIDENCE = models.CharField(max_length=260, default='未分析')
+    DYNAMIC_CONFIDENCE = models.CharField(max_length=260, default='未分析')
     DYNAMIC = models.CharField(max_length=260, default='未分析')
     PACKAGE_NAME = models.CharField(max_length=260, default='')
     VERSION_NAME = models.CharField(max_length=50, default='')
     MD5 = models.CharField(max_length=32, default='', primary_key=True)
     TIMESTAMP = models.DateTimeField(default=datetime.now)
+
 
 class Whitelist(models.Model):
     packageName = models.CharField(max_length=260, null=False, blank=False)
@@ -23,11 +28,13 @@ class Whitelist(models.Model):
     md5 = models.CharField(max_length=32, null=False, blank=False)
     result = models.CharField(max_length=260, default='未知')
 
+
 class Blacklist(models.Model):
     packageName = models.CharField(max_length=260, null=False, blank=False)
     apkName = models.CharField(max_length=260, null=False, blank=False)
     md5 = models.CharField(max_length=32, null=False, blank=False)
     result = models.CharField(max_length=260, default='未知')
+
 
 class StaticAnalyzerAndroid(models.Model):
     FILE_NAME = models.CharField(max_length=260, default='')

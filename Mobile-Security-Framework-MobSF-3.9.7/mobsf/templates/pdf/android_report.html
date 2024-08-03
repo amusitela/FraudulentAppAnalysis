@@ -9,39 +9,42 @@
     {% if host_os == 'windows' %}
         <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-    {% else %}
+    {% endif %}
     <style>
-        @media print {
-            body {
-                width: 100%;
-                margin: 0;
-                padding: 0;
-            }
-
-            .page-break {
-                page-break-before: always;
-            }
-
-            .page-break-avoid {
-                page-break-inside: avoid;
-            }
-            
-            .content {
-                width: 100%;
-                overflow: visible;
-            }
+         .no_border {
+            border: none;
+            vertical-align: top;
         }
-
-        .content {
-            max-width: 100%;
-            word-wrap: break-word;
+        .confidence-container {
+            margin-top: 10px;
         }
-
-        .avoid-page-break {
-            page-break-inside: avoid;
+        .confidence-item {
+            margin: 10px 0;
+            font-size: 1.0em; /* 设置字体大小 */
+        }
+        .label {
+            font-weight: bold;
+            color: #569cd6;
+        }
+        .confidence {
+            color: #9cdcfe;
+        }
+        .danger {
+            color: #ff0000;
+            font-size: 2em; /* 设置更大的字体大小 */
+            font-weight: bold; /* 加粗字体 */
+        }
+        .warning {
+            color: #ffcc00;
+            font-size: 2em; /* 设置更大的字体大小 */
+            font-weight: bold; /* 加粗字体 */
+        }
+        .success {
+            color: #00ff00;
+            font-size: 2em; /* 设置更大的字体大小 */
+            font-weight: bold; /* 加粗字体 */
         }
     </style>
-    {% endif %}
     <link rel="stylesheet" href="{{base_url}}{% static 'others/css/pdf_report.css' %}">
     <link rel="stylesheet" href="{{base_url}}{% static 'adminlte/plugins/fontawesome-free/css/all.min.css' %}">
   </head>
@@ -79,6 +82,7 @@
             <tr>
               <td class="no_border"><h3>分析结果:</h3></td>
               <td class="no_border"><h3>
+               <div class="confidence-container">
                   {% if static_type == '涉诈' %}
                       <span class="danger">{{ static_type }}</span>
                   {% elif static_type == '涉黄' %}
@@ -90,9 +94,14 @@
                   {% elif static_type == '安全' %}
                       <span class="success">{{ static_type }}</span>
                   {% endif %}
+              {% for item in confidence_items %}
+                        <div class="confidence-item">
+                            类别: <span class="label">{{ item.label }}</span>, 置信度: <span class="confidence">{{ item.confidence }}</span>
+                        </div>
+                    {% endfor %}
+               </div>
               </h3></td>
           </tr>
-          
             {% endif %}
             {% endif %}
             {% if trackers|key:"trackers" %}

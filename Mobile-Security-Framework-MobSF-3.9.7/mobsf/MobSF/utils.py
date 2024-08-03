@@ -199,7 +199,7 @@ def print_n_send_error_response(request,
             'version': settings.MOBSF_VER,
         }
         template = 'general/error.html'
-        return render(request, template, context, status=200)
+        return render(request, template, context, status=500)
 
 
 def filename_from_path(path):

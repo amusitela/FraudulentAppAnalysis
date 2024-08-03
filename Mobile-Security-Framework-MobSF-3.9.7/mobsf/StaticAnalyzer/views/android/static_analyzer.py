@@ -91,7 +91,7 @@ from mobsf.StaticAnalyzer.views.common.shared_func import (
 from mobsf.StaticAnalyzer.views.common.appsec import (
     get_android_dashboard,
 )
-from mobsf.MobSF.views.ai_model import(
+from mobsf.MobSF.views.ai_model import (
     analyze_apk
 )
 from mobsf.MobSF.views.DAO import (
@@ -106,17 +106,31 @@ register.filter('relative_path', relative_path)
 
 
 def update_recent_scan_static(hash_value, static_data):
-    res = {'scam':'涉诈','sex':'涉黄','gamble':'涉毒','安全':'安全','黑产':'黑产'}
+    res = {'scam': '涉诈', 'sex': '涉黄', 'gamble': '涉赌', '安全': '安全', '黑产': '黑产'}
     try:
         db_obj = RecentScansDB.objects.get(MD5=hash_value)
-        db_obj.STATIC = res[static_data]  
-        db_obj.save()  
-        return True  
+        db_obj.STATIC = res[static_data]
+        db_obj.save()
+        return True
     except RecentScansDB.DoesNotExist:
-        return False  
+        return False
     except Exception as e:
         print(f"更新数据库失败: {e}")
-        return False  
+        return False
+
+
+def update_recent_scan_static_confidence(hash_value, static_data):
+    try:
+        db_obj = RecentScansDB.objects.get(MD5=hash_value)
+        db_obj.STATIC_CONFIDENCE = static_data
+        db_obj.save()
+        return True
+    except RecentScansDB.DoesNotExist:
+        return False
+    except Exception as e:
+        print(f"更新数据库失败: {e}")
+        return False
+
 
 def static_analyzer(request, checksum, api=False):
     """Do static analysis on an request and save to db."""
@@ -178,7 +192,7 @@ def static_analyzer(request, checksum, api=False):
         if typ == 'apk':
             app_dic['app_file'] = app_dic['md5'] + '.apk'  # NEW FILENAME
             app_dic['app_path'] = (
-                app_dic['app_dir'] / app_dic['app_file']).as_posix()
+                    app_dic['app_dir'] / app_dic['app_file']).as_posix()
             app_dic['app_dir'] = app_dic['app_dir'].as_posix() + '/'
             # Check if in DB
             # pylint: disable=E1101
@@ -202,7 +216,7 @@ def static_analyzer(request, checksum, api=False):
                         'APK file is invalid or corrupt',
                         api)
                 app_dic['certz'] = get_hardcoded_cert_keystore(app_dic[
-                                                               'files'])
+                                                                   'files'])
                 # Manifest XML
                 mani_file, ns, mani_xml = get_manifest(
                     app_dic['app_path'],
@@ -262,7 +276,7 @@ def static_analyzer(request, checksum, api=False):
                     app_dic,
                     man_data_dic)
                 apkid_results = apkid.apkid_analysis(app_dic[
-                    'app_dir'], app_dic['app_path'], app_dic['app_name'])
+                                                         'app_dir'], app_dic['app_path'], app_dic['app_name'])
                 tracker = Trackers.Trackers(
                     app_dic['app_dir'], app_dic['tools_dir'])
                 tracker_res = tracker.get_trackers()
@@ -327,16 +341,23 @@ def static_analyzer(request, checksum, api=False):
                     app_dic['md5'])
             template = 'static_analysis/android_binary_analysis.html'
             if check_hash_exists(checksum) == '白名单':
-                context['prediction'] ='安全'
-                update_recent_scan_static(checksum,'安全')
+                context['prediction'] = '安全'
+                update_recent_scan_static(checksum, '安全')
             elif check_hash_exists(checksum) == '黑名单':
-                context['prediction'] ='黑产'
-                update_recent_scan_static(checksum,'黑产')
+                context['prediction'] = '黑产'
+                update_recent_scan_static(checksum, '黑产')
             else:
                 file_path = Path(settings.UPLD_DIR) / checksum / f'{checksum}.apk'
                 new_app_prediction = analyze_apk(file_path)
-                context['prediction'] = new_app_prediction
-                update_recent_scan_static(checksum,new_app_prediction)
+
+                split_by_at = new_app_prediction.split("@")
+                # 获取第一个元素并按照 $ 进行第二次切割，获取第一个元素
+                app_prediction = split_by_at[0].split("$")[0]
+                app_confidence = split_by_at[0].split("$")[1]
+                context['prediction'] = app_prediction
+                context['confidence'] = app_confidence
+                update_recent_scan_static(checksum, app_prediction)
+                update_recent_scan_static_confidence(checksum, new_app_prediction)
             if api:
                 return context
             else:
@@ -362,7 +383,7 @@ def static_analyzer(request, checksum, api=False):
             # Above fields are only available for APK and not ZIP
             app_dic['app_file'] = app_dic['md5'] + '.zip'  # NEW FILENAME
             app_dic['app_path'] = (
-                app_dic['app_dir'] / app_dic['app_file']).as_posix()
+                    app_dic['app_dir'] / app_dic['app_file']).as_posix()
             app_dic['app_dir'] = app_dic['app_dir'].as_posix() + '/'
             db_entry = StaticAnalyzerAndroid.objects.filter(
                 MD5=app_dic['md5'])
@@ -509,7 +530,7 @@ def static_analyzer(request, checksum, api=False):
             context['average_cvss'] = get_avg_cvss(
                 context['code_analysis'])
             template = 'static_analysis/android_source_analysis.html'
-            file_path = config('SAVE_FILE_PATH') + checksum +'.apk'
+            file_path = config('SAVE_FILE_PATH') + checksum + '.apk'
             new_app_prediction = analyze_apk(file_path)
             context['prediction'] = new_app_prediction
             # print(context['prediction'])

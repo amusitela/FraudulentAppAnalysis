@@ -5,25 +5,12 @@ from decouple import config
 from mobsf.MobSF.views.api.api_middleware import make_api_response
 from django.http import JsonResponse
 from django.core.files.storage import default_storage
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from mobsf.StaticAnalyzer.models import Whitelist, Blacklist
 
-def load_whitelist(packageName=None, apkName=None, md5=None, result=None):
-    filters = {}
-    if packageName:
-        filters['packageName'] = packageName
-    if apkName:
-        filters['apkName'] = apkName
-    if md5:
-        filters['md5'] = md5
-    if result:
-        filters['result'] = result
-    
-    data = Whitelist.objects.filter(**filters).values('packageName', 'apkName', 'md5', 'result')
-    print(list(data))
-    return list(data)
 
-def load_blacklist(packageName=None, apkName=None, md5=None, result=None):
+def load_whitelist(packageName=None, apkName=None, md5=None, result=None, page=1, size=10):
     filters = {}
     if packageName:
         filters['packageName'] = packageName
@@ -33,9 +20,40 @@ def load_blacklist(packageName=None, apkName=None, md5=None, result=None):
         filters['md5'] = md5
     if result:
         filters['result'] = result
-    
-    data = Blacklist.objects.filter(**filters).values('packageName', 'apkName', 'md5', 'result')
-    return list(data)
+
+    data = Whitelist.objects.filter(**filters).order_by('md5').values('packageName', 'apkName', 'md5', 'result')
+    paginator = Paginator(data, size)
+    try:
+        paginated_data = paginator.page(page)
+    except PageNotAnInteger:
+        paginated_data = paginator.page(1)
+    except EmptyPage:
+        paginated_data = paginator.page(paginator.num_pages)
+
+    return list(paginated_data), paginator.count
+
+
+def load_blacklist(packageName=None, apkName=None, md5=None, result=None, page=1, size=10):
+    filters = {}
+    if packageName:
+        filters['packageName'] = packageName
+    if apkName:
+        filters['apkName'] = apkName
+    if md5:
+        filters['md5'] = md5
+    if result:
+        filters['result'] = result
+
+    data = Blacklist.objects.filter(**filters).order_by('md5').values('packageName', 'apkName', 'md5', 'result')
+    paginator = Paginator(data, size)
+    try:
+        paginated_data = paginator.page(page)
+    except PageNotAnInteger:
+        paginated_data = paginator.page(1)
+    except EmptyPage:
+        paginated_data = paginator.page(paginator.num_pages)
+
+    return list(paginated_data), paginator.count
 
 def save_whitelist(data):
     for item in data:

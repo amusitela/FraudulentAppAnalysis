@@ -407,8 +407,8 @@ else:
     # ==============================================
 
     # ================HTTPS PROXY ===============
-    PROXY_IP = os.getenv('MOBSF_PROXY_IP', '127.0.0.1')
-    PROXY_PORT = int(os.getenv('MOBSF_PROXY_PORT', '1337'))
+    PROXY_IP = os.getenv('MOBSF_PROXY_IP', '')
+    PROXY_PORT = int(os.getenv('MOBSF_PROXY_PORT', ''))
     # ===================================================
 
     # ========UPSTREAM PROXY SETTINGS ==============

@@ -133,7 +133,7 @@
               <el-input v-model="querryInput" style="width: 700px;" placeholder="请输入查询条件，格式：白名单:MD5=111&Result=black&PackageName=1231&App=12"></el-input>
               <el-button style="width: 200px;" type="primary" @click="querryList" plain>查询</el-button>
             </el-row>
-          <div ref="tableScroll" @scroll="handleScrollList" style="height: 150px; overflow: auto; margin-left: 50px">
+          <div id = "sparam" ref="tableScroll" @scroll="handleScrollList" style="height: 150px; overflow: auto; margin-left: 50px">
             <el-table :data="listData" >
       <el-table-column label="APP" width="200px">
         <template slot-scope="scope">
@@ -227,8 +227,8 @@
           <el-table-column label="APP" width="150px">
             <template slot-scope="scope">
               <el-popover trigger="hover" placement="top">
-                <el-button type="primary" @click="getStaticReport(scope.row)">Static Report</el-button>
-                <el-button type="success" @click="getDynamicReport(scope.row)">Dynamic Report</el-button>
+                <el-button type="primary" @click="getStaticReport(scope.row)"> 静态分析报告 </el-button>
+                <el-button type="success" @click="getDynamicReport(scope.row)"> 动态抓包报告 </el-button>
                 <div slot="reference" class="name-wrapper">
                   <el-tag size="medium">{{ scope.row.APP_NAME }}</el-tag>
                 </div>
@@ -238,8 +238,19 @@
 
           <el-table-column label="分析结果" width="150">
             <template slot-scope="scope">
-              <div>静态结果:{{ scope.row.STATIC }}</div>
-              <div>动态结果:{{ scope.row.DYNAMIC }}</div>
+              <el-popover trigger="hover" placement="top">
+                <div v-html="formatData(scope.row.STATIC_CONFIDENCE)"></div>
+                <div slot="reference" class="name-wrapper">
+                  <el-tag size="medium">静态结果:{{ scope.row.STATIC }}</el-tag>
+                </div>
+              </el-popover>
+              <br>
+              <el-popover trigger="hover" placement="top">
+                <div v-html="formatDataDynamic(scope.row.DYNAMIC_CONFIDENCE)"></div>
+                <div slot="reference" class="name-wrapper">
+                  <el-tag size="medium">动态结果:{{ scope.row.DYNAMIC }}</el-tag>
+                </div>
+              </el-popover>
             </template>
           </el-table-column>
 
@@ -322,13 +333,40 @@ export default {
       currentPage:1,
       totalItems:3,
       pageSize:3,
-      uploadApkReturnData : {}
+      listCurrentPage: 1, // 当前页码
+      listPageSize: 10, // 每页条数
+      listTotalItems: 0, // 总条数
+      isLoading: false, // 加载状态，防止多次请求
+      queryParams: {}, // 保存查询参数以便后续分页请求使用
+      previousScrollHeight: 0, // 保存上一次加载前的滚动高度
+      uploadApkReturnData : {},
     };
   },
   created() {
     this.getList(1); 
   },
   methods: {
+    formatData(data) {
+      if (!data) {
+        return '无数据';
+      }
+      const res = {'scam': '涉诈', 'sex': '涉黄', 'gamble': '涉赌', '安全': '安全', '黑产': '黑产'}
+      const items = data.split('@');
+      return items.map(item => {
+        const [label, confidence] = item.split('$');
+        return `类别: ${res[label]}, 置信度: ${parseFloat(confidence).toFixed(4)}`;
+      }).join('<br>');
+    },
+    formatDataDynamic(data) {
+      if (!data) {
+        return '无数据';
+      }
+      const items = data.split('@');
+      return items.map(item => {
+        const [label, confidence,reason] = item.split('$');
+        return ` ${label},  ${confidence}, ${reason}`;
+      }).join('<br>');
+    },
     jump() {
       this.$router.push('/test');
     },
@@ -497,14 +535,6 @@ export default {
     //         this.getList();  
     //     }  
     // },
-    handleScrollList(event) {  
-        const target = event.target;  
-        const scrollDistance = target.scrollHeight - target.scrollTop - target.clientHeight;  
-  
-        if (scrollDistance < 5) { // 接近底部10px时加载数据 
-          //懒得写了 
-        }  
-    },
     getStaticReport(row) {
       let downloadLoadingInstance;
       downloadLoadingInstance = Loading.service({ text: "正在生成报告，请稍候", spinner: "el-icon-loading", background: "rgba(0, 0, 0, 0.7)", })
@@ -584,40 +614,7 @@ export default {
           type: 'error'
         });
       });
-    },
-    querryList() {
-    let select_list = this.querryInput.split(/:|：/);
-    if (select_list.length > 1 && select_list[1] != null) {
-      let condition_list = select_list[1].split('&');
-      const formData = new FormData();
-      for (let i = 0; i < condition_list.length; i++) {
-        let condition = condition_list[i].split('=');
-        if (condition.length === 2) {
-          formData.append(condition[0], condition[1]);
-        } else {
-          this.$message({
-            message: '条件格式不正确，请使用 key=value 形式',
-            type: 'error'
-          });
-        }
-      }
-      if (select_list[0] === '白名单') {
-        this.getWhite(formData);
-      } else if (select_list[0] === '黑名单') {
-        this.getBlack(formData);
-      } else {
-        this.$message({
-          message: '请按照格式: 白名单:MD5=111&Result=black&PackageName=1231&App=12',
-          type: 'error'
-        });
-      }
-    } else {
-      this.$message({
-        message: '请至少添加一个条件',
-        type: 'error'
-      });
-    }
-  },
+    }, 
   deleteList(index, row) {
     let downloadLoadingInstance;
     downloadLoadingInstance = Loading.service({ text: "正在删除，请稍候", spinner: "el-icon-loading", background: "rgba(0, 0, 0, 0.7)", })
@@ -646,9 +643,74 @@ export default {
         });
       });
     },
-  getWhite(formData) {
-    let downloadLoadingInstance;
-    downloadLoadingInstance = Loading.service({ text: "正在查询，请稍候", spinner: "el-icon-loading", background: "rgba(0, 0, 0, 0.7)", })
+  querryList() {
+    let select_list = this.querryInput.split(/:|：/);
+    if (select_list.length > 1 && select_list[1] != null) {
+      let condition_list = select_list[1].split('&');
+      const formData = new FormData();
+      for (let i = 0; i < condition_list.length; i++) {
+        let condition = condition_list[i].split('=');
+        if (condition.length === 2) {
+          formData.append(condition[0], condition[1]);
+        } else {
+          this.$message({
+            message: '条件格式不正确，请使用 key=value 形式',
+            type: 'error'
+          });
+        }
+      }
+      const formDataObject = {};
+      formData.forEach((value, key) => {
+          formDataObject[key] = value;
+      });
+
+      const formDataJSON = JSON.stringify(formDataObject);
+
+      // 将 JSON 字符串存储在 localStorage 中
+      localStorage.setItem('formData', formDataJSON);
+
+      this.listCurrentPage = 1; // 重置页码
+      this.listData = []; // 清空当前数据
+
+      if (select_list[0] === '白名单') {
+        this.getWhite();
+      } else if (select_list[0] === '黑名单') {
+        this.getBlack();
+      } else {
+        this.$message({
+          message: '请按照格式: 白名单:MD5=111&Result=black&PackageName=1231&App=12',
+          type: 'error'
+        });
+      }
+    } else {
+      this.$message({
+        message: '请至少添加一个条件',
+        type: 'error'
+      });
+    }
+  },
+  getWhite() {
+    if (this.isLoading) return;
+    this.isLoading = true;
+
+    let formData = new FormData();
+    const storedFormDataJSON = localStorage.getItem('formData');
+
+    if (storedFormDataJSON) {
+        const storedFormDataObject = JSON.parse(storedFormDataJSON);
+        for (const key in storedFormDataObject) {
+            formData.append(key, storedFormDataObject[key]);
+        }
+    }
+
+    formData.append('page', this.listCurrentPage);
+    formData.append('size', this.listPageSize);
+
+    let downloadLoadingInstance = Loading.service({ 
+      text: "正在查询，请稍候", 
+      spinner: "el-icon-loading", 
+      background: "rgba(0, 0, 0, 0.7)", 
+    });
     axios.post('/api/v1/get_whitelist', formData, {
       headers: {
         'Authorization': process.env.VUE_APP_APIKEY,
@@ -656,11 +718,16 @@ export default {
     })
     .then(response => {
       downloadLoadingInstance.close();
-      console.log(response);
-      this.listData = response.data;
+      console.log(response.data);
+      this.listData.push(...response.data.items);
+      this.listTotalItems = response.data.totalItems;
+      this.listCurrentPage += 1;
       this.$message({
         message: '查询成功',
         type: 'success'
+      });
+      this.$nextTick(() => {
+        this.scrollToNewData();
       });
     })
     .catch(error => {
@@ -670,11 +737,28 @@ export default {
         message: '查询失败' + error,
         type: 'error'
       });
+      this.isLoading = false;
     });
   },
-  getBlack(formData) {
-    let downloadLoadingInstance;
-    downloadLoadingInstance = Loading.service({ text: "正在查询，请稍候", spinner: "el-icon-loading", background: "rgba(0, 0, 0, 0.7)", })
+  getBlack() {
+    if (this.isLoading) return;
+    this.isLoading = true;
+    let formData = new FormData();
+    const storedFormDataJSON = localStorage.getItem('formData');
+    if (storedFormDataJSON) {
+        const storedFormDataObject = JSON.parse(storedFormDataJSON);
+        for (const key in storedFormDataObject) {
+            formData.append(key, storedFormDataObject[key]);
+        }
+    }
+
+    formData.append('page', this.listCurrentPage);
+    formData.append('size', this.listPageSize);
+    let downloadLoadingInstance = Loading.service({ 
+      text: "正在查询，请稍候", 
+      spinner: "el-icon-loading", 
+      background: "rgba(0, 0, 0, 0.7)", 
+    });
     axios.post('/api/v1/get_blacklist', formData, {
       headers: {
         'Authorization': process.env.VUE_APP_APIKEY,
@@ -683,10 +767,15 @@ export default {
     .then(response => {
       downloadLoadingInstance.close();
       console.log(response.data);
-      this.listData = response.data;
+      this.listData.push(...response.data.items);
+      this.listTotalItems = response.data.totalItems;
+      this.listCurrentPage += 1;
       this.$message({
         message: '查询成功',
         type: 'success'
+      });
+      this.$nextTick(() => {
+        this.scrollToNewData();
       });
     })
     .catch(error => {
@@ -696,8 +785,30 @@ export default {
         message: '查询失败: ' + error,
         type: 'error'
       });
+      this.isLoading = false;
     });
-  }
+  },
+  handleScrollList(event) {
+    const bottomReached = event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight;
+    if (bottomReached && !this.isLoading && this.listData.length < this.listTotalItems) {
+      if (this.querryInput.includes('白名单')) {
+        this.getWhite(); // 再次调用获取白名单方法
+      } else if (this.querryInput.includes('黑名单')) {
+        this.getBlack(); // 再次调用获取黑名单方法
+      }
+    }
+  },
+  scrollToNewData() {
+    const element = document.getElementById("sparam");
+    if (element) {
+      let position = element.scrollHeight * (this.listCurrentPage - 1) / this.listCurrentPage;
+      if (this.listCurrentPage == 2){
+        position = 1;
+      }
+      element.scrollTo({ top: position, behavior: "instant" });
+    }
+    this.isLoading = false;
+  },
  }
 };
 </script>

@@ -64,7 +64,7 @@ where python >nul 2>&1 && (
 
   echo [INSTALL] Installing Requirements
   python -m pip install --no-cache-dir wheel poetry==1.6.1
-  python -m poetry add pandas python-decouple openpyxl numpy joblib androguard scikit-learn==1.5.0 scapy 
+  python -m poetry add pandas python-decouple openpyxl numpy joblib androguard scikit-learn==1.5.0 scapy channels channels_redis redis 
   python -m poetry lock
   python -m poetry install --only main --no-root --no-interaction --no-ansi || python -m poetry install --only main --no-root --no-interaction --no-ansi || python -m poetry install --only main --no-root --no-interaction --no-ansi
 

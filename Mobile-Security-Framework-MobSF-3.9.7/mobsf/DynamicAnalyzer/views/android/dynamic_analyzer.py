@@ -197,8 +197,9 @@ def dynamic_analyzer(request, checksum, api=True):
                 msg = (f'此 APK 无法安装。该 APK 是否与 Android VM/模拟器兼容？\n{output}')
                 return {'error':msg}
         logger.info('Testing Environment is Ready!')
-        context = {
+        context = {'package': package,
                    'hash': checksum,
+                   'android_version': version,
                    'activities': activities,
                    'exported_activities': exported_activities,
                    'title': 'Dynamic Analyzer'}

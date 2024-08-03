@@ -26,7 +26,7 @@ module.exports = {
         target: 'http://192.168.100.143:8000',
         changeOrigin: true,
         pathRewrite: {
-          '^/media': ''
+          //'^/media': ''
         }
       }
     }

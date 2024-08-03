@@ -21,7 +21,7 @@ fi
 # 检查并升级 Pip
 if python3 -m pip -V &> /dev/null; then
     echo '[安装] 找到 pip'
-    upgrade_command="python3 -m pip install --no-cache-dir --upgrade pip -i https://mirrors.aliyun.com/pypi/simple/"
+    upgrade_command="python3 -m pip install --no-cache-dir --upgrade pip -i http://mirrors.aliyun.com/pypi/simple/"
     if [[ $unamestr != 'Darwin' ]]; then
         upgrade_command+=" --user"
     fi
@@ -43,9 +43,12 @@ if [[ $unamestr == 'Darwin' ]]; then
 fi
 
 echo '[安装] 安装必要组件'
-python3 -m pip install --no-cache-dir wheel poetry==1.6.1 
+python3 -m pip install --no-cache-dir wheel poetry==1.6.1 -i http://mirrors.aliyun.com/pypi/simple/
+echo '[安装] poetry'
 python3 -m poetry add pandas python-decouple openpyxl numpy joblib androguard scapy scikit-learn==1.5.0
+echo '[安装] lock'
 python3 -m poetry lock
+echo '[安装] main'
 python3 -m poetry install --no-root --only main --no-interaction --no-ansi
 
 # 安装额外的Python依赖
